@@ -18,5 +18,8 @@
   ],
   "author": "Almir Filho",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/almirfilho/gnocchi#readme"
+  "homepage": "https://bitbucket.org/almirfilho/gnocchi#readme",
+  "devDependencies": {
+    "grunt": "^0.4.5"
+  }
 }
