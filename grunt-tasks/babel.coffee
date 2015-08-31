@@ -1,5 +1,10 @@
 module.exports = (grunt) ->
   grunt.config 'babel',
     dist:
-      files:
-        'dist/gnocchi.js': 'src/scripts/gnocchi.jsx'
+      files: [
+        expand: true
+        cwd: 'src/scripts'
+        dest: 'dist/scripts'
+        src: '**/*.jsx'
+        ext: '.js'
+      ]
