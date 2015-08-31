@@ -3,5 +3,5 @@ module.exports = (grunt) ->
     dev:
       options:
         port: 8888
-        base: 'dist'
+        base: ['dist', 'docs']
         keepalive: true
