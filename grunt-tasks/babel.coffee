@@ -1,6 +1,6 @@
 module.exports = (grunt) ->
   grunt.config 'babel',
-    dist:
+    react:
       files: [
         expand: true
         cwd: 'src/scripts'
