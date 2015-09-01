@@ -3,8 +3,7 @@
 var GnocchiTextarea = React.createClass({
   render: function(){
     return (
-      <div class="gnocchi">
-        <div class="field">placeholder textarea</div>
+      <div className="gnocchi-textarea">
         <textarea></textarea>
       </div>
     );
