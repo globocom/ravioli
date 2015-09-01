@@ -1,7 +1,9 @@
 React.render(
-  React.createElement('div', null,
-    React.createElement(GnocchiText, null),
-    React.createElement(GnocchiTextarea, null)
-  ),
-  document.getElementsByTagName('main')[0]
+  React.createElement(GnocchiText, null),
+  document.querySelectorAll('#section-text')[0]
+);
+
+React.render(
+  React.createElement(GnocchiTextarea, null),
+  document.querySelectorAll('#section-textarea')[0]
 );
