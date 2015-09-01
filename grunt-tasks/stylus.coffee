@@ -4,9 +4,6 @@ module.exports = (grunt) ->
       options:
         compress: false
       files: [
-        expand: true
-        cwd: 'src/styles'
-        dest: 'dist/styles'
-        src: '**/*.styl'
-        ext: '.css'
+        src: 'src/styles/main.styl'
+        dest: 'dist/styles/gnocchi.css'
       ]

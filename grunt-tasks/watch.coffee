@@ -5,4 +5,4 @@ module.exports = (grunt) ->
       tasks: ['newer:babel:react', 'concat']
     styles:
       files: 'src/styles/**/*.styl'
-      tasks: 'newer:stylus:dev'
+      tasks: 'stylus:dev'
