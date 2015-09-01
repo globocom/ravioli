@@ -2,13 +2,7 @@
 
 var GnocchiText = React.createClass({
 
-  focus: function(event){
-    this.getDOMNode().classList.add('gnocchi-focus');
-  },
-
-  blur: function(event){
-    this.getDOMNode().classList.remove('gnocchi-focus');
-  },
+  mixins: [FocusMixin],
 
   render: function(){
     return (
