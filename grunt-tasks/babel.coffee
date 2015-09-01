@@ -1,10 +1,10 @@
 module.exports = (grunt) ->
   grunt.config 'babel',
-    react:
+    transform:
       files: [
         expand: true
         cwd: 'src/scripts'
         dest: 'dist/scripts'
-        src: '**/*.jsx'
+        src: '**/*.{js,jsx}'
         ext: '.js'
       ]

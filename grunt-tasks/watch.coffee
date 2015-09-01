@@ -1,8 +1,8 @@
 module.exports = (grunt) ->
   grunt.config 'watch',
     scripts:
-      files: 'src/scripts/**/*.jsx'
-      tasks: ['newer:babel:react', 'concat']
+      files: 'src/scripts/**/*.{js,jsx}'
+      tasks: ['newer:babel', 'concat']
     styles:
       files: 'src/styles/**/*.styl'
       tasks: ['stylus:dev', 'postcss']
