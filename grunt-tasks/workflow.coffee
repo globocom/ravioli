@@ -21,11 +21,13 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'scripts:dev', [
     'newer:babel'
-    'concat'
+    'newer:concat'
   ]
 
   grunt.registerTask 'scripts:dist', [
     'babel'
+    'concat'
+    'uglify'
   ]
 
   # styles ---------------------------------------------------------------------
