@@ -2,7 +2,7 @@ module.exports = (grunt) ->
   grunt.config 'watch',
     scripts:
       files: 'src/scripts/**/*.{js,jsx}'
-      tasks: ['newer:babel', 'concat']
+      tasks: 'scripts:dev'
     styles:
       files: 'src/styles/**/*.styl'
-      tasks: ['stylus:dev', 'postcss']
+      tasks: 'styles:dev'
