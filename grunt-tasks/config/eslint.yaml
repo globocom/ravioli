@@ -1,0 +1,41 @@
+ecmaFeatures:
+  jsx: true
+
+rules:
+  # best practices rules
+  eqeqeq: 2
+  no-undef: 2
+  semi: 2
+  no-extra-semi: 2
+  no-lonely-if: 2
+  no-dupe-args: 2
+  no-loop-func: 2
+  wrap-iife:
+    - 2
+    - inside
+
+  # styling rules
+  no-mixed-spaces-and-tabs: 2
+  quotes:
+    - 2
+    - single
+  indent:
+    - 2
+    - 2
+  no-trailing-spaces: 2
+  space-after-keywords:
+    - 2
+    - never
+  space-before-blocks:
+    - 2
+    - never
+  space-before-function-paren:
+    - 2
+    - never
+  space-in-parens:
+    - 2
+    - never
+  space-infix-ops: 2
+  space-return-throw-case: 2
+  space-unary-ops: 2
+  no-spaced-func: 2
