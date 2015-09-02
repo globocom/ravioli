@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>reactjs</title>
+  <meta name="viewport" content="width=device-width" />
   <link rel="stylesheet" type="text/css" href="styles/gnocchi.css" />
   <style type="text/css">
     * {
@@ -14,8 +15,15 @@
     }
 
     main {
-      width: 800px;
       margin: 30px auto;
+      padding: 0 15px;
+    }
+
+    @media (min-width: 801px){
+      main {
+        width: 800px;
+        padding: 0;
+      }
     }
 
     section {
