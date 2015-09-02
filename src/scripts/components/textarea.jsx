@@ -1,3 +1,4 @@
+/* global React, FocusMixin */
 'use strict';
 
 var GnocchiTextarea = React.createClass({

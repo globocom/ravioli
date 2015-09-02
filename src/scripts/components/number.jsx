@@ -1,3 +1,4 @@
+/* global React, FocusMixin */
 'use strict';
 
 var GnocchiNumber = React.createClass({
@@ -40,7 +41,7 @@ var GnocchiNumber = React.createClass({
     return {
       placeholder: '#',
       value: ''
-    }
+    };
   },
 
   render: function(){
