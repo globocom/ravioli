@@ -10,22 +10,33 @@
   position absolute
   top 0
   right 0
-  width 40px
+  width 36px
   height 100%
-  font-size 10px
+  font-size 14px
+
+  .gnocchi-focus &
+    width @width - 2
 
 $number-button
   @extends $reset
+  position relative
   height 50%
+  color #333
+
+  &:hover
+    color #666
+
+  .fa
+    position absolute
+    top 50%
+    left 50%
+    transform translate(-50%, -50%)
 
 .gnocchi-number-up
   @extends $number-button
 
-  &::before
-    content '^'
-
 .gnocchi-number-down
   @extends $number-button
 
-  &::before
-    content 'v'
+  .fa
+    height 18px

@@ -28,12 +28,10 @@ var GnocchiNumber = React.createClass({
   },
 
   increment: function(){
-    this.focus();
     this.setValue(this.props.value + 1);
   },
 
   decrement: function(){
-    this.focus();
     this.setValue(this.props.value - 1);
   },
 
@@ -57,8 +55,12 @@ var GnocchiNumber = React.createClass({
           onKeyDown={this.keydown}
           onInput={this.input} />
         <div className='gnocchi-number-buttons'>
-          <button className='gnocchi-number-up' onClick={this.increment} />
-          <button className='gnocchi-number-down' onClick={this.decrement} />
+          <button className='gnocchi-number-up' onClick={this.increment}>
+            <i className='fa fa-chevron-up'></i>
+          </button>
+          <button className='gnocchi-number-down' onClick={this.decrement}>
+            <i className='fa fa-chevron-down'></i>
+          </button>
         </div>
       </div>
     );
