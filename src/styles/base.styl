@@ -18,7 +18,7 @@ $container
   box-sizing border-box
   display block
   width 100%
-  height 38px
+  height 40px
 
 $box
   background white
@@ -37,5 +37,14 @@ $typography
     color white
     background-color #333
 
-.gnocchi-focus
-  border-color currentColor
+$focus
+  &:focus
+    border-color currentColor
+
+$hover
+  &:hover
+    color #666
+
+$click
+  &:active
+    color #999

@@ -11,15 +11,15 @@
   width 36px
   height 100%
   font-size 14px
+  user-select none
 
 $number-button
+  @extends $hover
+  @extends $click
   width 100%
   height 50%
   text-align center
   color #333
-
-  &:hover
-    color #666
 
 .gnocchi-number-up
   @extends $number-button
