@@ -22,24 +22,27 @@ module.exports = (grunt) ->
   grunt.registerTask 'scripts:dev', [
     'newer:eslint'
     'newer:babel'
-    'newer:concat'
+    'newer:concat:scripts'
   ]
 
   grunt.registerTask 'scripts:dist', [
     'eslint'
     'babel'
-    'concat'
+    'concat:scripts'
     'uglify'
   ]
 
   # styles ---------------------------------------------------------------------
 
   grunt.registerTask 'styles:dev', [
-    'stylus:dev'
+    'stylus'
+    'concat:styles'
     'newer:postcss'
   ]
 
   grunt.registerTask 'styles:dist', [
-    'stylus:dist'
+    'stylus'
+    'concat:styles'
     'postcss'
+    'cssmin'
   ]
