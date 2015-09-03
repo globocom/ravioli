@@ -12,3 +12,8 @@ React.render(
   React.createElement(GnocchiNumber, null),
   document.querySelectorAll('#section-number')[0]
 );
+
+React.render(
+  React.createElement(GnocchiButton, {type: 'teste'}),
+  document.querySelectorAll('#section-button')[0]
+);
