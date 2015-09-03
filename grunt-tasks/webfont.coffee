@@ -7,7 +7,7 @@ module.exports = (grunt) ->
       options:
         types: 'woff'
         hashes: false
-        htmlDemo: false
+        descent: 0
         embed: true
         templateOptions:
           baseClass: 'gnocchi-icon'
