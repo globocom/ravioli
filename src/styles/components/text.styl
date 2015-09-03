@@ -1,5 +1,12 @@
 .gnocchi-text
-  @extends $field-box
+  @extends $reset
+  @extends $container
+  @extends $box
+  @extends $space
+  @extends $typography
 
-.gnocchi-text-input
-  @extends $input
+  &:focus
+    @extends .gnocchi-focus
+
+  &::placeholder
+    color #b9b9b9

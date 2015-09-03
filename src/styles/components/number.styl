@@ -1,10 +1,8 @@
 .gnocchi-number
-  @extends $field-box
   position relative
 
-.gnocchi-number-input
-  @extends $input
-  padding-right 40px
+  .gnocchi-text
+    padding-right 40px
 
 .gnocchi-number-buttons
   position absolute
@@ -15,10 +13,9 @@
   font-size 14px
 
 $number-button
-  @extends $reset
-  position relative
   width 100%
   height 50%
+  text-align center
   color #333
 
   &:hover
@@ -27,8 +24,9 @@ $number-button
 .gnocchi-number-up
   @extends $number-button
 
+  .gnocchi-icon
+    position relative
+    top 2px
+
 .gnocchi-number-down
   @extends $number-button
-
-  .gnocchi-icon
-    vertical-align 0
