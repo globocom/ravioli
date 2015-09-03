@@ -14,6 +14,11 @@ React.render(
 );
 
 React.render(
-  React.createElement(GnocchiButton, {type: 'teste'}),
+  React.createElement('div', null,
+    React.createElement(GnocchiButton, {label: 'Default'}),
+    React.createElement(GnocchiButton, {label: 'Action', type: 'action'}),
+    React.createElement(GnocchiButton, {label: 'Highlight', type: 'highlight'}),
+    React.createElement(GnocchiButton, {label: 'Lowlight', type: 'lowlight'})
+  ),
   document.querySelectorAll('#section-button')[0]
 );
