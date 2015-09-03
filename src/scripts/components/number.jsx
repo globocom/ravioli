@@ -1,9 +1,7 @@
-/* global React, FocusMixin */
+/* global React */
 'use strict';
 
 var GnocchiNumber = React.createClass({
-  mixins: [FocusMixin],
-
   keydown: function(event){
     if(event.which === 38){
       this.increment();
@@ -45,22 +43,20 @@ var GnocchiNumber = React.createClass({
   render: function(){
     return (
       <div className='gnocchi-number'>
-        <input className='gnocchi-number-input'
+        <input className='gnocchi-text'
           type='text'
           placeholder={this.props.placeholder}
           value={this.props.value}
-          onFocus={this.focus}
-          onBlur={this.blur}
           onKeyPress={this.keypress}
           onKeyDown={this.keydown}
           onInput={this.input} />
         <div className='gnocchi-number-buttons'>
-          <button className='gnocchi-number-up' onClick={this.increment}>
+          <div className='gnocchi-number-up' onClick={this.increment}>
             <i className='gnocchi-icon gnocchi-icon-arrow-up'></i>
-          </button>
-          <button className='gnocchi-number-down' onClick={this.decrement}>
+          </div>
+          <div className='gnocchi-number-down' onClick={this.decrement}>
             <i className='gnocchi-icon gnocchi-icon-arrow-down'></i>
-          </button>
+          </div>
         </div>
       </div>
     );
