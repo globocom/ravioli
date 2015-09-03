@@ -1,18 +1,3 @@
-.gnocchi-number
-  position relative
-
-  .gnocchi-text
-    padding-right 40px
-
-.gnocchi-number-buttons
-  position absolute
-  top 0
-  right 0
-  width 36px
-  height 100%
-  font-size 14px
-  user-select none
-
 $number-button
   @extends $hover
   @extends $click
@@ -21,12 +6,27 @@ $number-button
   text-align center
   color #333
 
-.gnocchi-number-up
-  @extends $number-button
+.gnocchi-number
+  position relative
 
-  .gnocchi-icon
-    position relative
-    top 2px
+  .gnocchi-text
+    padding-right 40px
 
-.gnocchi-number-down
-  @extends $number-button
+  &-buttons
+    position absolute
+    top 0
+    right 0
+    width 36px
+    height 100%
+    font-size 14px
+    user-select none
+
+  &-up
+    @extends $number-button
+
+    .gnocchi-icon
+      position relative
+      top 2px
+
+  &-down
+    @extends $number-button
