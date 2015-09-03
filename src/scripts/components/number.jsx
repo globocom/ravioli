@@ -56,10 +56,10 @@ var GnocchiNumber = React.createClass({
           onInput={this.input} />
         <div className='gnocchi-number-buttons'>
           <button className='gnocchi-number-up' onClick={this.increment}>
-            <i className='fa fa-chevron-up'></i>
+            <i className='gnocchi-icon gnocchi-icon-arrow-up'></i>
           </button>
           <button className='gnocchi-number-down' onClick={this.decrement}>
-            <i className='fa fa-chevron-down'></i>
+            <i className='gnocchi-icon gnocchi-icon-arrow-down'></i>
           </button>
         </div>
       </div>
