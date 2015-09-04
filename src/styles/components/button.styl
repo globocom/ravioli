@@ -9,6 +9,7 @@
   font-size 13px
   line-height 100%
   font-weight bold
+  user-select none
 
   &-action
     color white
@@ -18,6 +19,11 @@
     &:hover
       color @color
       background-color #666
+      border-color @background-color
+
+    &:active
+      color @color
+      background-color #999
       border-color @background-color
 
   &-highlight
