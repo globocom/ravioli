@@ -17,8 +17,7 @@ React.render(
   <div>
     <GnocchiButton>Default</GnocchiButton>
     <GnocchiButton>
-      With icon
-      <i className='gnocchi-icon gnocchi-icon-arrow-right'></i>
+      With icon <i className='gnocchi-icon gnocchi-icon-arrow-right'></i>
     </GnocchiButton>
     <GnocchiButton classes={['action']}>Action</GnocchiButton>
     <GnocchiButton classes={['highlight']}>Highlight</GnocchiButton>
