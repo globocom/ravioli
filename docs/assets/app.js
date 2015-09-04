@@ -15,10 +15,10 @@ React.render(
 
 React.render(
   React.createElement('div', null,
-    React.createElement(GnocchiButton, {label: 'Default'}),
-    React.createElement(GnocchiButton, {label: 'Action', type: 'action'}),
-    React.createElement(GnocchiButton, {label: 'Highlight', type: 'highlight'}),
-    React.createElement(GnocchiButton, {label: 'Lowlight', type: 'lowlight'})
+    React.createElement(GnocchiButton, null, 'Default'),
+    React.createElement(GnocchiButton, {classes: ['action']}, 'Action'),
+    React.createElement(GnocchiButton, {classes: ['highlight']}, 'Highlight'),
+    React.createElement(GnocchiButton, {classes: ['lowlight']}, 'Lowlight')
   ),
   document.querySelectorAll('#section-button')[0]
 );

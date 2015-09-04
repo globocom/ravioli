@@ -4,21 +4,20 @@
 var GnocchiButton = React.createClass({
   getDefaultProps: function(){
     return {
-      label: 'Button',
-      type: null
+      classes: []
     };
   },
 
   render: function(){
     var className = 'gnocchi-button';
 
-    if(this.props.type){
-      className += ' gnocchi-button-' + this.props.type;
-    }
+    this.props.classes.forEach(function(c){
+      className += ' gnocchi-button-' + c;
+    });
 
     return (
       <button className={className}>
-        {this.props.label}
+        {this.props.children}
       </button>
     );
   }
