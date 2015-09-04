@@ -43,10 +43,9 @@ var GnocchiNumber = React.createClass({
   render: function(){
     return (
       <div className='gnocchi-number'>
-        <input className='gnocchi-text'
-          type='text'
-          placeholder={this.props.placeholder}
+        <GnocchiText
           value={this.props.value}
+          placeholder={this.props.placeholder}
           onKeyPress={this.keypress}
           onKeyDown={this.keydown}
           onInput={this.input} />

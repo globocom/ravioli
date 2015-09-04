@@ -11,9 +11,13 @@ var GnocchiText = React.createClass({
   render: function(){
     return (
       <input
-        type='text'
         className='gnocchi-text'
-        placeholder={this.props.placeholder} />
+        type='text'
+        value={this.props.value}
+        placeholder={this.props.placeholder}
+        onKeyPress={this.props.onKeyPress}
+        onKeyDown={this.props.onKeyDown}
+        onInput={this.props.onInput} />
     );
   }
 });
