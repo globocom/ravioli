@@ -4,27 +4,38 @@
 var GnocchiSelect = React.createClass({
   getInitialState: function(){
     return {
-      open: false
+      open: false,
+      selectedOption: null
     };
   },
 
   keydown: function(event){
     if(this.state.open){
-      if(event.which === 27){ // esc
-        this.toggle();
-      } else{
-        // select
+      switch(event.which){
+        case 27: this.toggle(); break; // esc
+        case 38: this.up();     break; // up arrow
+        case 40: this.down();   break; // down arrow
+        case 13:                       // enter
+        case 32: this.select(); break; // space
       }
-    } else if(event.which === 40 || event.which === 13 || event.which === 32){
+    } else if([40, 13, 32].indexOf(event.which) !== -1){ // down, enter, space
       this.toggle();
     }
 
-    event.preventDefault();
+    if([27, 38, 40, 13, 32].indexOf(event.which) !== -1){
+      event.preventDefault();
+    }
   },
 
   toggle: function(){
     this.setState({open: !this.state.open});
   },
+
+  up: function(){},
+
+  down: function(){},
+
+  select: function(){},
 
   render: function(){
     var className = 'gnocchi-select';
@@ -36,7 +47,7 @@ var GnocchiSelect = React.createClass({
     return (
       <div className={className} tabIndex='0' onKeyDown={this.keydown}>
         <div className='gnocchi-text' onClick={this.toggle}>
-          <div className='gnocchi-select-display'>placeholder / value</div>
+          <div className='gnocchi-select-display'>{this.state.selectedOption}</div>
           <div className='gnocchi-select-button'>
             <i className={iconClassName}></i>
           </div>
