@@ -1,0 +1,55 @@
+.gnocchi-select
+  @extends $container
+  @extends $typography
+  @extends $focus
+  position relative
+  height auto
+  user-select none
+
+  // &-display
+
+  &-button
+    @extends $hover
+    @extends $click
+    position absolute
+    top 0
+    right 0
+    width 36px
+    height 100%
+    text-align center
+
+    .gnocchi-icon
+      position relative
+      top 50%
+      transform translateY(-65%)
+
+  &-options
+    display none
+    list-style none
+
+    .gnocchi--is-open &
+      display block
+
+  &-option
+    @extends $box
+    @extends $space
+    background-color white
+    border-top-width 0
+    border-bottom-width 0
+    border-radius 0
+
+    &:last-child
+      border-bottom-width 1px
+      border-radius 0 0 4px 4px
+
+    &:hover
+      color white
+      background-color #333
+
+  .gnocchi-text
+    position relative
+
+  &.gnocchi--is-open
+    .gnocchi-text
+      border-radius 4px 4px 0 0
+      border-bottom none
