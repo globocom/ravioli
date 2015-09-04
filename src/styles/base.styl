@@ -1,4 +1,22 @@
+$focus
+  &:focus
+    border-color currentColor
+
+$no-focus
+  &:focus
+    outline none
+    outline-offset 0
+
+$hover
+  &:hover
+    color #666
+
+$click
+  &:active
+    color #999
+
 $reset
+  @extends $no-focus
   appearance none
   display block
   box-sizing border-box
@@ -9,10 +27,6 @@ $reset
   line-height inherit
   font-size inherit
   color inherit
-
-  &:focus
-    outline none
-    outline-offset 0
 
 $container
   box-sizing border-box
@@ -37,15 +51,3 @@ $typography
   &::selection
     color white
     background-color #333
-
-$focus
-  &:focus
-    border-color currentColor
-
-$hover
-  &:hover
-    color #666
-
-$click
-  &:active
-    color #999

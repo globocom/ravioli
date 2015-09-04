@@ -1,10 +1,22 @@
 .gnocchi-select
   @extends $container
   @extends $typography
-  @extends $focus
+  @extends $no-focus
   position relative
   height auto
   user-select none
+
+  &:focus
+    .gnocchi-text
+      border-color #333
+
+  &.gnocchi--is-open
+    .gnocchi-text
+      border-radius 4px 4px 0 0
+      border-bottom-color white
+
+  .gnocchi-text
+    position relative
 
   // &-display
 
@@ -24,7 +36,9 @@
       transform translateY(-65%)
 
   &-options
+    position absolute
     display none
+    width 100%
     list-style none
 
     .gnocchi--is-open &
@@ -46,10 +60,5 @@
       color white
       background-color #333
 
-  .gnocchi-text
-    position relative
-
-  &.gnocchi--is-open
-    .gnocchi-text
-      border-radius 4px 4px 0 0
-      border-bottom none
+    :focus &
+      border-color #333
