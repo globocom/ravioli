@@ -14,6 +14,15 @@ React.render(
 );
 
 React.render(
+  <GnocchiSelect options={[
+    {value: 'sss', label: 'dasdsadsadasdsa'},
+    {value: 'sswws', label: 'daswwwwdsadsadasdsa'},
+    'sffffffff'
+  ]} />,
+  document.querySelectorAll('#section-select')[0]
+);
+
+React.render(
   <div>
     <GnocchiButton>Default</GnocchiButton>
     <GnocchiButton>
