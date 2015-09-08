@@ -1,12 +1,9 @@
-'use strict';
-
 var expect = require('chai').expect;
 var React = require('react/addons');
-var render = require('../utils.js').render;
-var GnocchiText = require('../../dist/scripts/components/text.js');
+var render = require('../utils').render;
+var GnocchiText = require('../../dist/scripts/components/text');
 
 describe('GnocchiText', function(){
-
   var component;
 
   before(function(){
