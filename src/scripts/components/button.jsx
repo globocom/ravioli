@@ -1,5 +1,5 @@
-/* global React */
-'use strict';
+/* global require, module */
+var React = require('react');
 
 var GnocchiButton = React.createClass({
   getDefaultProps: function(){
@@ -22,3 +22,5 @@ var GnocchiButton = React.createClass({
     );
   }
 });
+
+module.exports = GnocchiButton;

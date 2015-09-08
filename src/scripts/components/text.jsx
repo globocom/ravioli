@@ -1,5 +1,5 @@
-/* global React */
-'use strict';
+/* global module, require */
+var React = require('react');
 
 var GnocchiText = React.createClass({
   getDefaultProps: function(){
@@ -21,3 +21,5 @@ var GnocchiText = React.createClass({
     );
   }
 });
+
+module.exports = GnocchiText;

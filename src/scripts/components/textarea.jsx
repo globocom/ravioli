@@ -1,5 +1,5 @@
-/* global React */
-'use strict';
+/* global require, module */
+var React = require('react');
 
 var GnocchiTextarea = React.createClass({
   getDefaultProps: function(){
@@ -19,3 +19,5 @@ var GnocchiTextarea = React.createClass({
     );
   }
 });
+
+module.exports = GnocchiTextarea;

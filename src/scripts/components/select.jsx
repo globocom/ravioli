@@ -1,5 +1,5 @@
-/* global React, console */
-'use strict';
+/* global require, module */
+var React = require('react');
 
 var GnocchiSelect = React.createClass({
   getInitialState: function(){
@@ -88,3 +88,5 @@ var GnocchiSelect = React.createClass({
     );
   }
 });
+
+module.exports = GnocchiSelect;

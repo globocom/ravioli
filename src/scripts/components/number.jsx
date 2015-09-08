@@ -1,5 +1,6 @@
-/* global React */
-'use strict';
+/* global require, module */
+var React = require('react');
+var GnocchiText = require('./text');
 
 var GnocchiNumber = React.createClass({
   keydown: function(event){
@@ -61,3 +62,5 @@ var GnocchiNumber = React.createClass({
     );
   }
 });
+
+module.exports = GnocchiNumber;
