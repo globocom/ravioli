@@ -20,14 +20,16 @@ module.exports = (grunt) ->
   # scripts --------------------------------------------------------------------
 
   grunt.registerTask 'scripts:dev', [
-    'newer:eslint'
-    'newer:babel'
-    'newer:concat:scripts'
+    'eslint'
+    'babel'
+    'mochaTest'
+    'concat:scripts'
   ]
 
   grunt.registerTask 'scripts:dist', [
     'eslint'
     'babel'
+    'mochaTest'
     'concat:scripts'
     'uglify'
   ]
