@@ -1,7 +1,7 @@
 module.exports = (grunt) ->
   grunt.config 'mochaTest',
     test:
-      src: 'test/specs/*.js'
+      src: 'test/components/*.js'
       options:
         reporter: 'nyan'
         # clearRequireCache: true
