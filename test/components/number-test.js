@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
 var utils = require('../utils');
-var GnocchiNumber = require('../../dist/scripts/components/number');
+var GnocchiNumber = require('../../src/scripts/components/number.jsx');
 
 describe('GnocchiNumber', function(){
   var component;

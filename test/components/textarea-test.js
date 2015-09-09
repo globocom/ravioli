@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
 var utils = require('../utils');
-var GnocchiTextarea = require('../../dist/scripts/components/textarea');
+var GnocchiTextarea = require('../../src/scripts/components/textarea.jsx');
 
 describe('GnocchiTextarea', function(){
   var component;
