@@ -2,6 +2,12 @@
 var React = require('react');
 
 var GnocchiSelect = React.createClass({
+  getDefaultProps: function(){
+    return {
+      options: []
+    };
+  },
+
   getInitialState: function(){
     return {
       open: false,
