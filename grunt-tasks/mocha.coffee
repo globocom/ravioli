@@ -1,7 +1,7 @@
 module.exports = (grunt) ->
   grunt.config 'mochaTest',
     test:
-      src: 'test/components/*.js'
+      src: 'test/**/*-test.js'
       options:
         reporter: 'nyan'
-        # clearRequireCache: true
+        require: 'grunt-babel/node_modules/babel-core/register'
