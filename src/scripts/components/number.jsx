@@ -3,7 +3,7 @@ var React = require('react');
 var GnocchiText = require('./text');
 
 var GnocchiNumber = React.createClass({
-  keydown: function(event){
+  onkeydown: function(event){
     if(event.which === 38){
       this.increment();
     } else if(event.which === 40){
@@ -11,13 +11,13 @@ var GnocchiNumber = React.createClass({
     }
   },
 
-  keypress: function(event){
+  onkeypress: function(event){
     if(event.which < 48 || event.which > 57){
       event.preventDefault();
     }
   },
 
-  input: function(event){
+  oninput: function(event){
     this.setValue(event.target.value);
   },
 
@@ -47,9 +47,10 @@ var GnocchiNumber = React.createClass({
         <GnocchiText
           value={this.props.value}
           placeholder={this.props.placeholder}
-          onKeyPress={this.keypress}
-          onKeyDown={this.keydown}
-          onInput={this.input} />
+          onKeyPress={this.onkeypress}
+          onKeyDown={this.onkeydown}
+          onInput={this.oninput}
+          onChange={function(){}} />
         <div className='gnocchi-number-buttons'>
           <div className='gnocchi-number-up' onClick={this.increment}>
             <i className='gnocchi-icon gnocchi-icon-arrow-up'></i>

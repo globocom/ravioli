@@ -17,7 +17,8 @@ var GnocchiText = React.createClass({
         placeholder={this.props.placeholder}
         onKeyPress={this.props.onKeyPress}
         onKeyDown={this.props.onKeyDown}
-        onInput={this.props.onInput} />
+        onInput={this.props.onInput}
+        onChange={this.props.onChange} />
     );
   }
 });
