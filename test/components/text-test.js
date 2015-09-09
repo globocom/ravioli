@@ -1,12 +1,13 @@
 var expect = require('chai').expect;
-var render = require('../utils').render;
+var utils = require('../utils');
 var GnocchiText = require('../../dist/scripts/components/text');
 
 describe('GnocchiText', function(){
   var component;
 
   before(function(){
-    this.component = render(GnocchiText, {placeholder: 'pink floyd'});
+    utils.mockDOM();
+    this.component = utils.render(GnocchiText, {placeholder: 'pink floyd'});
   });
 
   it('should set placeholder', function(){

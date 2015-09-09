@@ -1,8 +1,4 @@
 var React = require('react/addons');
-var jsdom = require('jsdom').jsdom;
-
-global.document = jsdom();
-global.window = document.parentWindow;
 
 module.exports = {
   findByClass: React.addons.TestUtils.findRenderedDOMComponentWithClass,
@@ -22,5 +18,12 @@ module.exports = {
     return React.addons.TestUtils.renderIntoDocument(
       React.createElement(element, props, child)
     );
+  },
+
+  mockDOM: function(){
+    if(!global.document){
+      global.document = require('jsdom').jsdom();
+      global.window = document.parentWindow;
+    }
   }
 };

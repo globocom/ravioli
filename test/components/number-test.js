@@ -6,6 +6,10 @@ describe('GnocchiNumber', function(){
   var component;
   var textinput;
 
+  before(function(){
+    utils.mockDOM();
+  });
+
   describe('Initialization', function(){
     before(function(){
       this.component = utils.render(GnocchiNumber, {

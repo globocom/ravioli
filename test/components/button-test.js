@@ -1,12 +1,13 @@
 var expect = require('chai').expect;
-var render = require('../utils').render;
+var utils = require('../utils');
 var GnocchiButton = require('../../dist/scripts/components/button');
 
 describe('GnocchiButton', function(){
   var component;
 
   before(function(){
-    this.component = render(GnocchiButton, {
+    utils.mockDOM();
+    this.component = utils.render(GnocchiButton, {
       classes: ['john', 'paul']
     }, 'the beatles');
   });

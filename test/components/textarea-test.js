@@ -1,12 +1,13 @@
 var expect = require('chai').expect;
-var render = require('../utils').render;
+var utils = require('../utils');
 var GnocchiTextarea = require('../../dist/scripts/components/textarea');
 
 describe('GnocchiTextarea', function(){
   var component;
 
   before(function(){
-    this.component = render(GnocchiTextarea, {
+    utils.mockDOM();
+    this.component = utils.render(GnocchiTextarea, {
       placeholder: 'led zeppelin',
       lines: 10
     });
