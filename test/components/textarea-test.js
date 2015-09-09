@@ -1,5 +1,4 @@
 var expect = require('chai').expect;
-var React = require('react/addons');
 var render = require('../utils').render;
 var GnocchiTextarea = require('../../dist/scripts/components/textarea');
 
@@ -7,17 +6,19 @@ describe('GnocchiTextarea', function(){
   var component;
 
   before(function(){
-    this.component = render(React.createElement(GnocchiTextarea, {
+    this.component = render(GnocchiTextarea, {
       placeholder: 'led zeppelin',
       lines: 10
-    }));
+    });
   });
 
   it('should set placeholder', function(){
-    expect(this.component.props.placeholder).to.equal('led zeppelin');
+    var placeholder = this.component.getDOMNode().getAttribute('placeholder');
+    expect(placeholder).to.equal('led zeppelin');
   });
 
   it('should set lines quantity', function(){
-    expect(this.component.props.rows).to.equal(10);
+    var rows = this.component.getDOMNode().getAttribute('rows');
+    expect(rows).to.equal('10');
   });
 });

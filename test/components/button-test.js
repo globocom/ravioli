@@ -1,5 +1,4 @@
 var expect = require('chai').expect;
-var React = require('react/addons');
 var render = require('../utils').render;
 var GnocchiButton = require('../../dist/scripts/components/button');
 
@@ -7,9 +6,9 @@ describe('GnocchiButton', function(){
   var component;
 
   before(function(){
-    this.component = render(React.createElement(GnocchiButton, {
+    this.component = render(GnocchiButton, {
       classes: ['john', 'paul']
-    }, 'the beatles'));
+    }, 'the beatles');
   });
 
   it('should set label', function(){
@@ -17,7 +16,8 @@ describe('GnocchiButton', function(){
   });
 
   it('should set modifier classes', function(){
-    expect(this.component.props.className).to.contains('gnocchi-button-john');
-    expect(this.component.props.className).to.contains('gnocchi-button-paul');
+    var elementClasses = this.component.getDOMNode().getAttribute('class');
+    expect(elementClasses).to.contains('gnocchi-button-john');
+    expect(elementClasses).to.contains('gnocchi-button-paul');
   });
 });
