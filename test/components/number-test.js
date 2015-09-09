@@ -99,6 +99,54 @@ describe('GnocchiNumber', function(){
   });
 
   describe('Behaviors', function(){
+    before(function(){
+      this.component = utils.render(GnocchiNumber);
+    });
 
+    after(function(){
+      this.component = null;
+    });
+
+    it('should increment when click on up button', function(){
+      var button = utils.findByClass(this.component, 'gnocchi-number-up');
+      this.component.setValue('');
+      utils.click(button);
+      expect(this.component.props.value).to.equal(1);
+    });
+
+    it('should decrement when click on down button', function(){
+      var button = utils.findByClass(this.component, 'gnocchi-number-down');
+      this.component.setValue('');
+      utils.click(button);
+      expect(this.component.props.value).to.equal(-1);
+    });
+
+    it('should increment when press up key', function(){
+      var textinput = utils.findByClass(this.component, 'gnocchi-text');
+      this.component.setValue('');
+      utils.keydown(textinput, 38);
+      expect(this.component.props.value).to.equal(1);
+    });
+
+    it('should decrement when press down key', function(){
+      var textinput = utils.findByClass(this.component, 'gnocchi-text');
+      this.component.setValue('');
+      utils.keydown(textinput, 40);
+      expect(this.component.props.value).to.equal(-1);
+    });
+
+    it('should update when input numbers on field', function(){
+      var textinput = utils.findByClass(this.component, 'gnocchi-text');
+      this.component.setValue('');
+      utils.input(textinput, 1);
+      expect(this.component.props.value).to.equal(1);
+    });
+
+    it('should do nothing when input non numbers on field', function(){
+      var textinput = utils.findByClass(this.component, 'gnocchi-text');
+      this.component.setValue('');
+      utils.input(textinput, 'not a number');
+      expect(this.component.props.value).to.equal('');
+    });
   });
 });
