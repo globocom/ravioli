@@ -3,9 +3,9 @@ module.exports = (grunt) ->
     scripts:
       files: 'src/scripts/**/*.{js,jsx}'
       tasks: 'scripts:dev'
-    scripts_tests:
+    tests:
       files: 'test/**/*.js'
-      tasks: 'mochaTest'
+      tasks: 'scripts:test'
     styles:
       files: 'src/styles/**/*.styl'
       tasks: 'styles:dev'
