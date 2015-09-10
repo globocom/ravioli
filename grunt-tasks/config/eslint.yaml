@@ -1,5 +1,15 @@
 ecmaFeatures:
   jsx: true
+  arrowFunctions: true
+  blockBindings: true
+  classes: true
+  defaultParams: true
+  forOf: true
+  modules: true
+  objectLiteralShorthandMethods: true
+  objectLiteralShorthandProperties: true
+  spread: true
+  experimentalObjectRestSpread: true
 
 rules:
   # best practices rules
