@@ -6,8 +6,10 @@ module.exports = (grunt) ->
         dest: 'dist/scripts/gnocchi.js'
       ]
       options:
-        require: (->
-          ['./dist/scripts/components/text.js:lusac', './dist/scripts/components/textarea.js:lusac2']
-        )()
         external: ['react']
         transform: ['browserify-shim']
+        require: (->
+          require('glob').sync('dist/scripts/components/*.js').map (file) ->
+            component = file.split('/').pop().replace '.js', ''
+            "./#{file}:gnocchi-#{component}"
+        )()
