@@ -1,11 +1,12 @@
 module.exports = (grunt) ->
   # aliases
   grunt.registerTask 'server', 'run'
-  grunt.registerTask 'build', ['dev', 'dist']
+  grunt.registerTask 'build', 'dist'
 
   # general --------------------------------------------------------------------
 
-  grunt.registerTask 'run', 'concurrent'
+  grunt.registerTask 'run', 'watch'
+  grunt.registerTask 'server', 'concurrent'
 
   grunt.registerTask 'dev', [
     'scripts:dev'
@@ -20,16 +21,21 @@ module.exports = (grunt) ->
   # scripts --------------------------------------------------------------------
 
   grunt.registerTask 'scripts:dev', [
-    'eslint'
-    'babel'
+    'eslint:source'
     'mochaTest'
-    'concat:scripts'
+    # 'babel'
+    # 'concat:scripts'
+  ]
+
+  grunt.registerTask 'scripts:test', [
+    'eslint:test'
+    'mochaTest'
   ]
 
   grunt.registerTask 'scripts:dist', [
     'eslint'
-    'babel'
     'mochaTest'
+    'babel'
     'concat:scripts'
     'uglify'
   ]
