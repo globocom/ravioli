@@ -23,8 +23,6 @@ module.exports = (grunt) ->
   grunt.registerTask 'scripts:dev', [
     'eslint:source'
     'mochaTest'
-    # 'babel'
-    # 'concat:scripts'
   ]
 
   grunt.registerTask 'scripts:test', [
@@ -36,7 +34,7 @@ module.exports = (grunt) ->
     'eslint'
     'mochaTest'
     'babel'
-    'concat:scripts'
+    'browserify'
     'uglify'
   ]
 

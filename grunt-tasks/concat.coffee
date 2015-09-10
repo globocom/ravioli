@@ -1,14 +1,5 @@
 module.exports = (grunt) ->
   grunt.config 'concat',
-    scripts:
-      files: [
-        src: [
-          'dist/scripts/mixins/**/*.js'
-          'dist/scripts/components/**/*.js'
-        ]
-        dest: 'dist/scripts/gnocchi.js'
-      ]
-
     styles:
       files: [
         src: [
