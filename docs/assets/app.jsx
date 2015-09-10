@@ -1,3 +1,9 @@
+var GnocchiText = require('gnocchi-text');
+var GnocchiTextarea = require('gnocchi-textarea');
+var GnocchiNumber = require('gnocchi-number');
+var GnocchiSelect = require('gnocchi-select');
+var GnocchiButton = require('gnocchi-button');
+
 React.render(
   <GnocchiText />,
   document.querySelectorAll('#section-text')[0]
