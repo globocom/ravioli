@@ -1,12 +1,10 @@
 module.exports = (grunt) ->
   # aliases
-  grunt.registerTask 'server', 'run'
+  grunt.registerTask 'run', 'watch'
   grunt.registerTask 'build', 'dist'
+  grunt.registerTask 'server', 'concurrent'
 
   # general --------------------------------------------------------------------
-
-  grunt.registerTask 'run', 'watch'
-  grunt.registerTask 'server', 'concurrent'
 
   grunt.registerTask 'dev', [
     'scripts:dev'
@@ -36,6 +34,7 @@ module.exports = (grunt) ->
     'babel'
     'browserify'
     'uglify'
+    'clean'
   ]
 
   # styles ---------------------------------------------------------------------
