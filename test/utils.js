@@ -1,3 +1,5 @@
+/* global require, module, global, document */
+
 var React = require('react/addons');
 
 module.exports = {

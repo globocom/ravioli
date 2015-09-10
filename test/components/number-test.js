@@ -1,3 +1,5 @@
+/* global require, describe, before, after, it, context */
+
 var expect = require('chai').expect;
 var utils = require('../utils');
 var GnocchiNumber = require('../../src/scripts/components/number.jsx');
