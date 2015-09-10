@@ -1,5 +1,6 @@
 module.exports = (grunt) ->
   grunt.config 'eslint',
-    scripts: 'src/scripts/**/*.{js,jsx}'
+    source: 'src/scripts/**/*.{js,jsx}'
+    test: 'test/**/*.js'
     options:
       configFile: 'grunt-tasks/config/eslint.yaml'
