@@ -2,6 +2,7 @@ var GnocchiText = Gnocchi.Text;
 var GnocchiTextarea = Gnocchi.Textarea;
 var GnocchiNumber = Gnocchi.Number;
 var GnocchiSelect = Gnocchi.Select;
+var GnocchiCheck = Gnocchi.Check;
 var GnocchiButton = Gnocchi.Button;
 
 React.render(
@@ -23,9 +24,14 @@ React.render(
   <GnocchiSelect options={[
     {value: 'sss', label: 'dasdsadsadasdsa'},
     {value: 'sswws', label: 'daswwwwdsadsadasdsa'},
-    'sffffffff'
-  ]} />,
+    'sffffffff']}
+  />,
   document.querySelectorAll('#section-select')[0]
+);
+
+React.render(
+  <GnocchiCheck />,
+  document.querySelectorAll('#section-check')[0]
 );
 
 React.render(
