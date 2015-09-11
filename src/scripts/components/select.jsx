@@ -47,6 +47,10 @@ var GnocchiSelect = React.createClass({
     }
   },
 
+  toggle: function(){
+    this.state.open ? this.close() : this.open();
+  },
+
   focusPrev: function(){
     if(this.state.focusedOption > 0){
       this.focusOption(this.state.focusedOption - 1);
@@ -88,7 +92,7 @@ var GnocchiSelect = React.createClass({
         onKeyDown={this.onkeydown}
         onMouseLeave={this.focusOption.bind(this, null)}
         onBlur={this.close}>
-        <div className='gnocchi-text' onClick={this.open}>
+        <div className='gnocchi-text' onClick={this.toggle}>
           <div className='gnocchi-select-display'>
             {this.renderDisplay(this.state.selectedOption)}
           </div>
