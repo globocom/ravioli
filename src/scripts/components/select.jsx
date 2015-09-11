@@ -20,11 +20,11 @@ var GnocchiSelect = React.createClass({
   onkeydown: function(event){
     if(this.state.open){
       switch(event.which){
-        case 27: this.close();  break; // esc
-        case 38: this.up();     break; // up arrow
-        case 40: this.down();   break; // down arrow
-        case 13:                       // enter
-        case 32: this.select(this.state.focusedOption); break; // space
+        case 27: this.close();      break; // esc
+        case 38: this.focusPrev();  break; // up arrow
+        case 40: this.focusNext();  break; // down arrow
+        case 13:                           // enter
+        case 32: this.selectOption(this.state.focusedOption); break; // space
       }
     } else if([40, 13, 32].indexOf(event.which) !== -1){ // down, enter, space
       this.open();
@@ -42,17 +42,17 @@ var GnocchiSelect = React.createClass({
   close: function(){
     if(this.state.open){
       this.setState({open: false});
-      this.focus(null);
+      this.focusOption(null);
     }
   },
 
-  up: function(){
+  focusPrev: function(){
     if(this.state.focusedOption > 0){
-      this.focus(this.state.focusedOption - 1);
+      this.focusOption(this.state.focusedOption - 1);
     }
   },
 
-  down: function(){
+  focusNext: function(){
     var newFocusedOption = this.state.focusedOption;
 
     if(this.state.focusedOption === null){
@@ -61,14 +61,14 @@ var GnocchiSelect = React.createClass({
       newFocusedOption++;
     }
 
-    this.focus(newFocusedOption);
+    this.focusOption(newFocusedOption);
   },
 
-  focus: function(optionIndex){
+  focusOption: function(optionIndex){
     this.setState({focusedOption: optionIndex});
   },
 
-  select: function(optionIndex){
+  selectOption: function(optionIndex){
     this.setState({selectedOption: optionIndex});
     this.close();
   },
@@ -85,7 +85,7 @@ var GnocchiSelect = React.createClass({
         className={className}
         tabIndex='0'
         onKeyDown={this.onkeydown}
-        onMouseLeave={this.focus.bind(this, null)}
+        onMouseLeave={this.focusOption.bind(this, null)}
         onBlur={this.close}>
         <div className='gnocchi-text' onClick={this.open}>
           <div className='gnocchi-select-display'>
@@ -122,8 +122,8 @@ var GnocchiSelect = React.createClass({
       <li
         className={className}
         data-value={option.value || option}
-        onMouseEnter={this.focus.bind(this, i)}
-        onClick={this.select.bind(this, i)}>
+        onMouseEnter={this.focusOption.bind(this, i)}
+        onClick={this.selectOption.bind(this, i)}>
         {checkIcon}
         {option.label || option}
       </li>
