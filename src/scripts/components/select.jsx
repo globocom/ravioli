@@ -5,7 +5,8 @@ var React = require('react');
 var GnocchiSelect = React.createClass({
   getDefaultProps: function(){
     return {
-      options: []
+      options: [],
+      placeholder: 'Select something'
     };
   },
 
@@ -104,7 +105,8 @@ var GnocchiSelect = React.createClass({
 
   renderDisplay: function(optionIndex){
     var selected = this.props.options[optionIndex];
-    return selected ? (selected.label || selected) : <span>placeholder</span>;
+    if(selected) return selected.label || selected;
+    return <span className='gnocchi-placeholder'>{this.props.placeholder}</span>;
   },
 
   renderOption: function(option, i){
