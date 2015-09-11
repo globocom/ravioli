@@ -59,5 +59,11 @@
     :focus &
       border-color #333
 
-.gnocchi--is-focused
-  background red
+    &.gnocchi--is-focused
+      background red
+
+    &.gnocchi--is-selected
+      font-weight bold
+
+      &::before
+        content '# '
