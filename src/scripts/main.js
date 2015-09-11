@@ -2,6 +2,7 @@
 
 var Gnocchi = {
   Button: require('./components/button'),
+  Check: require('./components/check'),
   Number: require('./components/number'),
   Select: require('./components/select'),
   Text: require('./components/text'),
