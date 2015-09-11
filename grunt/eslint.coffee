@@ -3,4 +3,4 @@ module.exports = (grunt) ->
     source: 'src/scripts/**/*.{js,jsx}'
     test: 'test/**/*.js'
     options:
-      configFile: 'grunt-tasks/config/eslint.yaml'
+      configFile: 'grunt/config/eslint.yaml'
