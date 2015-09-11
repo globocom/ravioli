@@ -47,10 +47,12 @@
   &-option
     @extends $box
     @extends $space
+    position relative
     background-color white
     border-top-width 0
     border-bottom-width 0
     border-radius 0
+    padding-left 36px
 
     &:last-child
       border-bottom-width 1px
@@ -65,5 +67,9 @@
     &.gnocchi--is-selected
       font-weight bold
 
-      &::before
-        content '# '
+    .gnocchi-icon
+      position absolute
+      left 10px
+      top 50%
+      transform translateY(-50%)
+      font-size 16px

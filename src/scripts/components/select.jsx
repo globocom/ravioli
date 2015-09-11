@@ -109,9 +109,14 @@ var GnocchiSelect = React.createClass({
 
   renderOption: function(option, i){
     var className = 'gnocchi-select-option';
+    var checkIcon = '';
 
     if(i === this.state.focusedOption) className += ' gnocchi--is-focused';
-    if(i === this.state.selectedOption) className += ' gnocchi--is-selected';
+
+    if(i === this.state.selectedOption){
+      className += ' gnocchi--is-selected';
+      checkIcon = <i className='gnocchi-icon gnocchi-icon-check'></i>;
+    }
 
     return (
       <li
@@ -119,6 +124,7 @@ var GnocchiSelect = React.createClass({
         data-value={option.value || option}
         onMouseEnter={this.focus.bind(this, i)}
         onClick={this.select.bind(this, i)}>
+        {checkIcon}
         {option.label || option}
       </li>
     );
