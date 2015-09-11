@@ -1,4 +1,5 @@
-/* global require, module */
+/* global require, module, console */
+
 var React = require('react');
 
 var GnocchiSelect = React.createClass({
@@ -16,7 +17,7 @@ var GnocchiSelect = React.createClass({
     };
   },
 
-  keydown: function(event){
+  onkeydown: function(event){
     if(this.state.open){
       switch(event.which){
         case 27: this.toggle(); break; // esc
@@ -36,11 +37,12 @@ var GnocchiSelect = React.createClass({
 
   toggle: function(){
     this.setState({open: !this.state.open});
+    if(!this.state.open) this.focus(null);
   },
 
   up: function(){
     if(this.state.focusedOption > 0){
-      this.setState({focusedOption: this.state.focusedOption - 1});
+      this.focus(this.state.focusedOption - 1);
     }
   },
 
@@ -53,7 +55,11 @@ var GnocchiSelect = React.createClass({
       newFocusedOption++;
     }
 
-    this.setState({focusedOption: newFocusedOption});
+    this.focus(newFocusedOption);
+  },
+
+  focus: function(optionIndex){
+    this.setState({focusedOption: optionIndex});
   },
 
   select: function(){},
@@ -66,7 +72,11 @@ var GnocchiSelect = React.createClass({
     iconClassName += this.state.open ? 'up' : 'down';
 
     return (
-      <div className={className} tabIndex='0' onKeyDown={this.keydown}>
+      <div
+        className={className}
+        tabIndex='0'
+        onKeyDown={this.onkeydown}
+        onMouseLeave={this.focus.bind(this, null)}>
         <div className='gnocchi-text' onClick={this.toggle}>
           <div className='gnocchi-select-display'>
             - selected: {this.state.selectedOption}
@@ -88,7 +98,10 @@ var GnocchiSelect = React.createClass({
     if(i === this.state.focusedOption) className += ' gnocchi--is-focused';
 
     return (
-      <li className={className} data-value={option.value || option}>
+      <li
+        className={className}
+        data-value={option.value || option}
+        onMouseEnter={this.focus.bind(this, i)}>
         {option.label || option}
       </li>
     );
