@@ -21,6 +21,8 @@ module.exports = (grunt) ->
   grunt.registerTask 'scripts:dev', [
     'eslint:source'
     'mochaTest'
+    'newer:babel'
+    'browserify'
   ]
 
   grunt.registerTask 'scripts:test', [
