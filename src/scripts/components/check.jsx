@@ -10,6 +10,10 @@ var GnocchiCheck = React.createClass({
     };
   },
 
+  preventFocusOnClick: function(event){
+    event.preventDefault();
+  },
+
   toggle: function(){
     this.setProps({checked: !this.props.checked});
   },
@@ -20,7 +24,11 @@ var GnocchiCheck = React.createClass({
 
     return (
       <div className='gnocchi-check'>
-        <div className={className} tabIndex='0' onClick={this.toggle}>
+        <div
+          className={className}
+          tabIndex='0'
+          onClick={this.toggle}
+          onMouseDown={this.preventFocusOnClick}>
           <i className='gnocchi-icon gnocchi-icon-check'></i>
         </div>
         <span className='gnocchi-check-label' onClick={this.toggle}>
