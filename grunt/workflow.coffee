@@ -4,7 +4,8 @@ module.exports = (grunt) ->
   grunt.registerTask 'test',    'scripts:test'
   grunt.registerTask 'dev',     'watch'
   grunt.registerTask 'run',     'concurrent'
-  grunt.registerTask 'default', 'build'
+  grunt.registerTask 'help',    'availabletasks'
+  grunt.registerTask 'default', 'help'
 
   # general --------------------------------------------------------------------
 
