@@ -36,14 +36,12 @@ React.render(
 
 React.render(
   <div>
-    <GnocchiButton>Default</GnocchiButton>
-    <GnocchiButton>
-      With icon <i className='gnocchi-icon gnocchi-icon-arrow-right'></i>
-    </GnocchiButton>
-    <GnocchiButton classes={['action']}>Action</GnocchiButton>
-    <GnocchiButton classes={['highlight']}>Highlight</GnocchiButton>
-    <GnocchiButton classes={['lowlight']}>Lowlight</GnocchiButton>
-    <GnocchiButton classes={['block']}>Block</GnocchiButton>
+    <GnocchiButton label='Default'></GnocchiButton>
+    <GnocchiButton label='With icon' icon='arrow-right'></GnocchiButton>
+    <GnocchiButton label='Action' classes='action' />
+    <GnocchiButton label='Highlight' classes='highlight' />
+    <GnocchiButton label='Lowlight' classes='lowlight' />
+    <GnocchiButton label='Fit' classes='fit' />
   </div>,
   document.querySelectorAll('#section-button')[0]
 );
