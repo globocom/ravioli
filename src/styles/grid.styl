@@ -6,11 +6,18 @@
   max-width 1000px
   margin auto
 
+  .gg-subtitle + &
+    margin-top 6px
+
+  .gg-description + &
+    margin-top 12px
+
   + .gg-row
     margin-top 10px
 
   + .gg-row-space
     margin-top 18px
+
 
 // Columns ---------------------------------------------------------------------
 
@@ -55,3 +62,25 @@ col(n)
   border 1px solid #e7e7e7
   border-radius 2px
   background #f8f8f8
+
+// Text ------------------------------------------------------------------------
+
+.gg-title
+  font-size 20px
+  font-weight bold
+  text-transform uppercase
+  letter-spacing -0.03em
+  color #333
+
+.gg-subtitle
+  font-size 16px
+  font-weight 400
+  text-transform uppercase
+  letter-spacing -0.04em
+  color #484848
+
+.gg-description
+  display block
+  font-size 13px
+  font-weight lighter
+  color #818181
