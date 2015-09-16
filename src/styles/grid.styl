@@ -15,16 +15,13 @@
 // Columns ---------------------------------------------------------------------
 
 col(n)
-  @extends .gg-col
   flex 0
   flex-basis 100% * n
+  box-sizing border-box
 
 .gg-col
   flex 1
   box-sizing border-box
-
-  + [class^="gg-col"]
-    margin-left 10px
 
   &-{'1\/4'}
     col(1 / 4)
@@ -37,3 +34,24 @@ col(n)
 
   &-{'2\/3'}
     col(2 / 3)
+
+  &--is-aligned
+    display flex
+    flex-direction column
+    justify-content center
+
+[class^="gg-col"] + [class^="gg-col"]
+  margin-left 10px
+
+// Sections --------------------------------------------------------------------
+
+.gg-header
+  padding 15px 30px
+  border-radius 2px
+  background-color #e7e7e7
+
+.gg-section
+  padding 20px 30px
+  border 1px solid #e7e7e7
+  border-radius 2px
+  background #f8f8f8
