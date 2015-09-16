@@ -2,7 +2,7 @@ module.exports = (grunt) ->
   # aliases
   grunt.registerTask 'server',  'connect'
   grunt.registerTask 'test',    'scripts:test'
-  grunt.registerTask 'dev',     'watch'
+  grunt.registerTask 'dev',     ['compile', 'watch']
   grunt.registerTask 'run',     'concurrent'
   grunt.registerTask 'help',    'availabletasks'
   grunt.registerTask 'default', 'help'
