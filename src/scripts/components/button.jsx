@@ -1,8 +1,12 @@
 /* global require, module, console */
 var React = require('react');
+var ClassListMixin = require('../mixins/classlist');
 
 var GnocchiButton = React.createClass({
+  mixins: [ClassListMixin],
+
   propTypes: {
+    icon: React.PropTypes.string,
     classes: React.PropTypes.string
   },
 
@@ -13,14 +17,8 @@ var GnocchiButton = React.createClass({
   },
 
   render: function(){
-    var className = 'gnocchi-button';
-
-    this.props.classes.split(',').forEach(function(classs){
-      className += ' gnocchi-button-' + classs.trim();
-    });
-
     return (
-      <button className={className}>
+      <button className={this.renderClassNames('gnocchi-button', this.props.classes)}>
         {this.props.label}
         {this.renderIcon()}
       </button>
@@ -29,8 +27,7 @@ var GnocchiButton = React.createClass({
 
   renderIcon: function(){
     if(this.props.icon){
-      let className = 'gnocchi-icon gnocchi-icon-' + this.props.icon;
-      return <i className={className}></i>;
+      return <i className={this.renderClassNames('gnocchi-icon', this.props.icon)}></i>;
     }
   }
 });
