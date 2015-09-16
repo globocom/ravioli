@@ -21,12 +21,17 @@ $number-button
     font-size 14px
     user-select none
 
-  &-up
+  &-up,
+  &-down
     @extends $number-button
 
     .gnocchi-icon
       position relative
+
+  &-up
+    .gnocchi-icon
       top 2px
 
   &-down
-    @extends $number-button
+    .gnocchi-icon
+      bottom 1px
