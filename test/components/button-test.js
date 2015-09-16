@@ -1,4 +1,4 @@
-/* global require, describe, before, it */
+/* global require, describe, before, it, console */
 
 var expect = require('chai').expect;
 var utils = require('../utils');
@@ -10,17 +10,27 @@ describe('GnocchiButton', function(){
   before(function(){
     utils.mockDOM();
     this.component = utils.render(GnocchiButton, {
-      classes: ['john', 'paul']
-    }, 'the beatles');
+      label: 'the beatles',
+      icon: 'arrow-right',
+      classes: 'john, paul, george, ringo'
+    });
   });
 
   it('should set label', function(){
-    expect(this.component.props.children).to.equal('the beatles');
+    var label = this.component.getDOMNode().textContent;
+    expect(label).to.contains('the beatles');
+  });
+
+  it('should add icon', function(){
+    var icon = utils.findByClass(this.component, 'gnocchi-icon-arrow-right');
+    expect(icon).to.exist;
   });
 
   it('should set modifier classes', function(){
-    var elementClasses = this.component.getDOMNode().getAttribute('class');
-    expect(elementClasses).to.contains('gnocchi-button-john');
-    expect(elementClasses).to.contains('gnocchi-button-paul');
+    var classes = this.component.getDOMNode().getAttribute('class');
+    expect(classes).to.contains('gnocchi-button-john');
+    expect(classes).to.contains('gnocchi-button-paul');
+    expect(classes).to.contains('gnocchi-button-george');
+    expect(classes).to.contains('gnocchi-button-ringo');
   });
 });
