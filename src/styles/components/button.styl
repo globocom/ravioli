@@ -1,21 +1,25 @@
 .gnocchi-button
   @extends $reset
+  @extends $container
   @extends $box
   @extends $space
   @extends $hover
   @extends $click
   @extends $focus
-  display inline-block
-  height 40px
-  font-size 14px
+  @extends $typography
+  // font-size 14px
   line-height 100%
   letter-spacing -0.02em
+  // color #333
   user-select none
 
   .gnocchi-icon
     position relative
     top 1px
     vertical-align bottom
+
+  span + .gnocchi-icon
+    margin-left 4px
 
   &-action
     color white
@@ -38,6 +42,6 @@
   &-lowlight
     color #ccc
 
-  &-block
-    display block
-    width 100%
+  &-fit
+    display inline-block
+    width auto
