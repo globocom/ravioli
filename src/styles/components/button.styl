@@ -7,19 +7,20 @@
   @extends $click
   @extends $focus
   @extends $typography
-  // font-size 14px
   line-height 100%
   letter-spacing -0.02em
-  // color #333
   user-select none
 
+  > *
+    vertical-align middle
+
   .gnocchi-icon
+    font-size 18px
     position relative
     top 1px
-    vertical-align bottom
 
-  span + .gnocchi-icon
-    margin-left 4px
+  * + .gnocchi-icon
+    margin-left 6px
 
   &-action
     color white
