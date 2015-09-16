@@ -43,7 +43,6 @@ React.render(
     <GnocchiButton classes={['action']}>Action</GnocchiButton>
     <GnocchiButton classes={['highlight']}>Highlight</GnocchiButton>
     <GnocchiButton classes={['lowlight']}>Lowlight</GnocchiButton>
-    <GnocchiButton classes={['big']}>Big</GnocchiButton>
     <GnocchiButton classes={['block']}>Block</GnocchiButton>
   </div>,
   document.querySelectorAll('#section-button')[0]

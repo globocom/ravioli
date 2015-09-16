@@ -6,12 +6,16 @@
   @extends $click
   @extends $focus
   display inline-block
-  height 33px
+  height 40px
   font-size 14px
   line-height 100%
-  font-weight bold
   letter-spacing -0.02em
   user-select none
+
+  .gnocchi-icon
+    position relative
+    top 1px
+    vertical-align bottom
 
   &-action
     color white
@@ -33,11 +37,6 @@
 
   &-lowlight
     color #ccc
-
-  &-big
-    padding-left 20px
-    padding-right @padding-left
-    height 42px
 
   &-block
     display block
