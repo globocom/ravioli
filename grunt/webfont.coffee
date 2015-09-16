@@ -9,6 +9,7 @@ module.exports = (grunt) ->
         hashes: false
         descent: 0
         embed: true
+        htmlDemo: false
         templateOptions:
           baseClass: 'gnocchi-icon'
           classPrefix: 'gnocchi-icon-'
