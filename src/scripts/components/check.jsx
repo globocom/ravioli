@@ -1,5 +1,6 @@
 /* global require, module */
 var React = require('react');
+var GnocchiIcon = require('./icon');
 
 module.exports = React.createClass({
   displayName: 'Gnocchi.Check',
@@ -33,7 +34,7 @@ module.exports = React.createClass({
           tabIndex='0'
           onClick={this.toggle}
           onMouseDown={this.preventFocusOnClick}>
-          <i className='gnocchi-icon gnocchi-icon-check'></i>
+          {this.props.checked ? <GnocchiIcon type='check'/> : ''}
         </div>
         <span className='gnocchi-check-label' onClick={this.toggle}>
           {this.props.label}

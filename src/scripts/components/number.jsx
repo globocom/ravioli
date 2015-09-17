@@ -1,6 +1,7 @@
 /* global require, module */
 var React = require('react');
 var GnocchiText = require('./text');
+var GnocchiIcon = require('./icon');
 
 module.exports = React.createClass({
   displayName: 'Gnocchi.Number',
@@ -58,10 +59,10 @@ module.exports = React.createClass({
           onChange={function(){}} />
         <div className='gnocchi-number-buttons'>
           <div className='gnocchi-number-up' onClick={this.increment}>
-            <i className='gnocchi-icon gnocchi-icon-arrow-up'></i>
+            <GnocchiIcon type='arrow-up'/>
           </div>
           <div className='gnocchi-number-down' onClick={this.decrement}>
-            <i className='gnocchi-icon gnocchi-icon-arrow-down'></i>
+            <GnocchiIcon type='arrow-down'/>
           </div>
         </div>
       </div>

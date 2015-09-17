@@ -1,5 +1,6 @@
 /* global require, module, console */
 var React = require('react');
+var GnocchiIcon = require('./icon');
 
 module.exports = React.createClass({
   displayName: 'Gnocchi.Select',
@@ -87,9 +88,6 @@ module.exports = React.createClass({
     var className = 'gnocchi-select';
     if(this.state.open) className += ' gnocchi--is-open';
 
-    var iconClassName = 'gnocchi-icon gnocchi-icon-arrow-';
-    iconClassName += this.state.open ? 'up' : 'down';
-
     return (
       <div
         className={className}
@@ -103,7 +101,7 @@ module.exports = React.createClass({
             {this.renderDisplay(this.state.selectedOption)}
           </div>
           <div className='gnocchi-select-button'>
-            <i className={iconClassName}></i>
+            <GnocchiIcon type={this.state.open ? 'arrow-up' : 'arrow-down'}/>
           </div>
         </div>
         <ul className='gnocchi-select-list'>
@@ -121,14 +119,9 @@ module.exports = React.createClass({
 
   renderOption: function(option, i){
     var className = 'gnocchi-select-option';
-    var checkIcon = '';
 
     if(i === this.state.focusedOption) className += ' gnocchi--is-focused';
-
-    if(i === this.state.selectedOption){
-      className += ' gnocchi--is-selected';
-      checkIcon = <i className='gnocchi-icon gnocchi-icon-check'></i>;
-    }
+    if(i === this.state.selectedOption) className += ' gnocchi--is-selected';
 
     return (
       <li
@@ -136,8 +129,8 @@ module.exports = React.createClass({
         data-value={option.value || option}
         onMouseEnter={this.focusOption.bind(this, i)}
         onClick={this.selectOption.bind(this, i)}>
-        {checkIcon}
         {option.label || option}
+        {i === this.state.selectedOption ? <GnocchiIcon type='check'/> : ''}
       </li>
     );
   }

@@ -1,27 +1,24 @@
 /* global require, module, console */
 var React = require('react');
-var ClassListMixin = require('../mixins/classlist');
+var GnocchiIcon = require('./icon');
+var ClassList = require('../mixins/classlist');
 
 module.exports = React.createClass({
   displayName: 'Gnocchi.Button',
-  mixins: [ClassListMixin],
+  mixins: [ClassList],
 
   propTypes: {
     icon: React.PropTypes.string,
+    label: React.PropTypes.string,
     classes: React.PropTypes.string
   },
 
   render: function(){
     return (
-      <button className={this.renderClassNames('gnocchi-button', this.props.classes)}>
+      <button className={this.classList('gnocchi-button', this.props.classes)}>
         {this.props.label}
-        {this.renderIcon()}
+        {this.props.icon ? <GnocchiIcon type={this.props.icon}/> : ''}
       </button>
     );
-  },
-
-  renderIcon: function(){
-    if(this.props.icon)
-      return <i className={this.renderClassNames('gnocchi-icon', this.props.icon)}></i>;
   }
 });
