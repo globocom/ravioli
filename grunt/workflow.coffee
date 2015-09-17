@@ -39,7 +39,6 @@ module.exports = (grunt) ->
     'babel'
     'browserify'
     'uglify'
-    'clean'
   ]
 
   # styles ---------------------------------------------------------------------
