@@ -7,7 +7,7 @@ module.exports = {
 
     if(otherClasses){
       let classlist = otherClasses.split(',')
-        .filter(c => !!c)
+        .filter(c => !!c.trim())
         .map(c => `${baseClass}-${c.trim()}`)
         .join(' ');
 
