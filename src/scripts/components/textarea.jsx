@@ -1,8 +1,15 @@
 /* global require, module */
 var React = require('react');
 
-var GnocchiTextarea = React.createClass({
-  getDefaultProps: function(){
+module.exports = React.createClass({
+  displayName: 'Gnocchi.Textarea',
+
+  propTypes: {
+    placeholder: React.PropTypes.string,
+    lines: React.PropTypes.number
+  },
+
+  getDefaultProps: () => {
     return {
       placeholder: 'Type something',
       lines: 4
@@ -19,5 +26,3 @@ var GnocchiTextarea = React.createClass({
     );
   }
 });
-
-module.exports = GnocchiTextarea;

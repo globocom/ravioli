@@ -1,18 +1,22 @@
 /* global require, module */
-
 var React = require('react');
 
-var GnocchiCheck = React.createClass({
-  getDefaultProps: function(){
+module.exports = React.createClass({
+  displayName: 'Gnocchi.Check',
+
+  propTypes: {
+    checked: React.PropTypes.bool,
+    label: React.PropTypes.string
+  },
+
+  getDefaultProps: () => {
     return {
       checked: false,
       label: 'Check me'
     };
   },
 
-  preventFocusOnClick: function(event){
-    event.preventDefault();
-  },
+  preventFocusOnClick: event => event.preventDefault(),
 
   toggle: function(){
     this.setProps({checked: !this.props.checked});
@@ -38,5 +42,3 @@ var GnocchiCheck = React.createClass({
     );
   }
 });
-
-module.exports = GnocchiCheck;

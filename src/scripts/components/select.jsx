@@ -1,22 +1,30 @@
 /* global require, module, console */
-
 var React = require('react');
 
-var GnocchiSelect = React.createClass({
-  getDefaultProps: function(){
+module.exports = React.createClass({
+  displayName: 'Gnocchi.Select',
+
+  propTypes: {
+    options: React.PropTypes.array,
+    placeholder: React.PropTypes.string
+  },
+
+  getDefaultProps: () => {
     return {
       options: [],
       placeholder: 'Select something'
     };
   },
 
-  getInitialState: function(){
+  getInitialState: () => {
     return {
       open: false,
       focusedOption: null,
       selectedOption: null
     };
   },
+
+  preventFocusOnClick: event => event.preventDefault(),
 
   onkeydown: function(event){
     if(this.state.open){
@@ -31,13 +39,8 @@ var GnocchiSelect = React.createClass({
       this.open();
     }
 
-    if([27, 38, 40, 13, 32].indexOf(event.which) !== -1){
+    if([27, 38, 40, 13, 32].indexOf(event.which) !== -1)
       event.preventDefault();
-    }
-  },
-
-  preventFocusOnClick: function(event){
-    event.preventDefault();
   },
 
   open: function(){
@@ -56,19 +59,17 @@ var GnocchiSelect = React.createClass({
   },
 
   focusPrev: function(){
-    if(this.state.focusedOption > 0){
+    if(this.state.focusedOption > 0)
       this.focusOption(this.state.focusedOption - 1);
-    }
   },
 
   focusNext: function(){
     var newFocusedOption = this.state.focusedOption;
 
-    if(this.state.focusedOption === null){
+    if(this.state.focusedOption === null)
       newFocusedOption = 0;
-    } else if(this.state.focusedOption < this.props.options.length - 1){
+    else if(this.state.focusedOption < this.props.options.length - 1)
       newFocusedOption++;
-    }
 
     this.focusOption(newFocusedOption);
   },
@@ -141,5 +142,3 @@ var GnocchiSelect = React.createClass({
     );
   }
 });
-
-module.exports = GnocchiSelect;

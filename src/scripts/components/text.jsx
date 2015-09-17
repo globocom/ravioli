@@ -1,8 +1,14 @@
 /* global module, require */
 var React = require('react');
 
-var GnocchiText = React.createClass({
-  getDefaultProps: function(){
+module.exports = React.createClass({
+  displayName: 'Gnocchi.Text',
+
+  propTypes: {
+    placeholder: React.PropTypes.string
+  },
+
+  getDefaultProps: () => {
     return {
       placeholder: 'Type something'
     };
@@ -22,5 +28,3 @@ var GnocchiText = React.createClass({
     );
   }
 });
-
-module.exports = GnocchiText;

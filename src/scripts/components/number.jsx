@@ -2,19 +2,31 @@
 var React = require('react');
 var GnocchiText = require('./text');
 
-var GnocchiNumber = React.createClass({
-  onkeydown: function(event){
-    if(event.which === 38){
-      this.increment();
-    } else if(event.which === 40){
-      this.decrement();
-    }
+module.exports = React.createClass({
+  displayName: 'Gnocchi.Number',
+
+  propTypes: {
+    placeholder: React.PropTypes.string,
+    value: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
+    ])
   },
 
-  onkeypress: function(event){
-    if(event.which < 48 || event.which > 57){
-      event.preventDefault();
-    }
+  getDefaultProps: () => {
+    return {
+      placeholder: '#',
+      value: ''
+    };
+  },
+
+  onkeypress: event => {
+    if(event.which < 48 || event.which > 57) event.preventDefault();
+  },
+
+  onkeydown: function(event){
+    if(event.which === 38) this.increment();
+    else if(event.which === 40) this.decrement();
   },
 
   oninput: function(event){
@@ -32,13 +44,6 @@ var GnocchiNumber = React.createClass({
 
   decrement: function(){
     this.setValue(this.props.value - 1);
-  },
-
-  getDefaultProps: function(){
-    return {
-      placeholder: '#',
-      value: ''
-    };
   },
 
   render: function(){
@@ -63,5 +68,3 @@ var GnocchiNumber = React.createClass({
     );
   }
 });
-
-module.exports = GnocchiNumber;
