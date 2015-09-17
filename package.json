@@ -1,5 +1,6 @@
 {
   "name": "gnocchi",
+  "title": "Gnocchi",
   "version": "0.0.1",
   "description": "Gnocchi is a UI component set for form elements.",
   "main": "./dist/scripts/main.js",
@@ -17,7 +18,13 @@
     "form",
     "reactive"
   ],
-  "author": "Almir Filho",
+  "author": {
+    "name": "Almir Filho",
+    "email": "almir@almirfilho.com",
+    "page": "http://almirfilho.com",
+    "twitter": "almirfilho",
+    "github": "almirfilho"
+  },
   "license": "ISC",
   "homepage": "https://bitbucket.org/almirfilho/gnocchi#readme",
   "dependencies": {
