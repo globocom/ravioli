@@ -22,3 +22,4 @@ module.exports = (grunt) ->
     release:
       options:
         tags: true
+        verbose: true

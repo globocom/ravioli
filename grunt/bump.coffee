@@ -4,3 +4,4 @@ module.exports = (grunt) ->
       commit: false
       createTag: false
       push: false
+      prereleaseName: 'rc'
