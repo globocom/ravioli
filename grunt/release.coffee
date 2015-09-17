@@ -10,4 +10,5 @@ module.exports = (grunt) ->
       'gitcommit'
       'gittag'
       'gitpush'
+      'publish'
     ]
