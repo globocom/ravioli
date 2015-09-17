@@ -1,7 +1,7 @@
 /* global require, describe, before, it, console */
 var expect = require('chai').expect;
 var utils = require('../utils');
-var GnocchiIcon = require('../../src/scripts/components/icon.jsx');
+var GnocchiIcon = require('../../src/lib/components/icon.jsx');
 
 describe('GnocchiIcon component', () => {
   var component;

@@ -1,6 +1,6 @@
 /* global require, describe, before, it, console */
 var expect = require('chai').expect;
-var ClassList = require('../../src/scripts/mixins/classlist');
+var ClassList = require('../../src/lib/mixins/classlist');
 
 describe('ClassList mixin', () => {
 

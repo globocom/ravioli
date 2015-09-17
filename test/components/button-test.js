@@ -2,7 +2,7 @@
 
 var expect = require('chai').expect;
 var utils = require('../utils');
-var GnocchiButton = require('../../src/scripts/components/button.jsx');
+var GnocchiButton = require('../../src/lib/components/button.jsx');
 
 describe('GnocchiButton', function(){
   var component;
