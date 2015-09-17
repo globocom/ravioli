@@ -4,4 +4,7 @@ module.exports = (grunt) ->
       options:
         banner: grunt.file.read 'grunt/banner.txt'
       files:
-        src: 'dist/**/gnocchi*'
+        src: [
+          'dist/scripts/**/gnocchi*'
+          'dist/styles/**/gnocchi*'
+        ]

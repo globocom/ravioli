@@ -1,7 +1,7 @@
 module.exports = (grunt) ->
   grunt.config 'watch',
     scripts:
-      files: 'src/scripts/**/*.{js,jsx}'
+      files: 'src/lib/**/*.{js,jsx}'
       tasks: 'scripts:dev'
     tests:
       files: 'test/**/*.js'

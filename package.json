@@ -1,9 +1,9 @@
 {
   "name": "gnocchi",
   "title": "Gnocchi",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Gnocchi is a UI component set for form elements.",
-  "main": "./dist/scripts/main.js",
+  "main": "./dist/lib/main.js",
   "scripts": {
     "test": "grunt test",
     "build": "grunt build"

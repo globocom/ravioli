@@ -3,8 +3,8 @@ module.exports = (grunt) ->
     transform:
       files: [
         expand: true
-        cwd: 'src/scripts'
-        dest: 'dist/scripts'
+        cwd: 'src/lib'
+        dest: 'dist/lib'
         src: '**/*.{js,jsx}'
         ext: '.js'
       ]
