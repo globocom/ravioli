@@ -5,3 +5,4 @@ module.exports = (grunt) ->
       createTag: false
       push: false
       prereleaseName: 'rc'
+      updateConfigs: ['pkg']
