@@ -1,31 +1,31 @@
 /* global require, describe, before, it, console */
 var expect = require('chai').expect;
-var ClassListMixin = require('../../src/scripts/mixins/classlist');
+var ClassList = require('../../src/scripts/mixins/classlist');
 
-describe('ClassListMixin', () => {
+describe('ClassList mixin', () => {
 
-  describe('#renderClassNames', () => {
-    var render = ClassListMixin.renderClassNames;
+  describe('#classList', () => {
+    var list = ClassList.classList;
 
-    it('should render classes', () => {
-      expect(render('acdc')).to.equal('acdc');
-      expect(render('acdc', 'angus')).to.equal('acdc acdc-angus');
-      expect(render('acdc', 'angus,brian')).to.equal('acdc acdc-angus acdc-brian');
+    it('should list classes', () => {
+      expect(list('acdc')).to.equal('acdc');
+      expect(list('acdc', 'angus')).to.equal('acdc acdc-angus');
+      expect(list('acdc', 'angus,brian')).to.equal('acdc acdc-angus acdc-brian');
     });
 
-    it('should not render empty classes', () => {
-      expect(render('acdc', '')).to.equal('acdc');
-      expect(render('acdc', ',,,')).to.equal('acdc');
-      expect(render('acdc', 'angus,,,')).to.equal('acdc acdc-angus');
-      expect(render('acdc', ',,brian,')).to.equal('acdc acdc-brian');
-      expect(render('acdc', ',angus,,brian,')).to.equal('acdc acdc-angus acdc-brian');
+    it('should not list empty classes', () => {
+      expect(list('acdc', '')).to.equal('acdc');
+      expect(list('acdc', ',,,')).to.equal('acdc');
+      expect(list('acdc', 'angus,,,')).to.equal('acdc acdc-angus');
+      expect(list('acdc', ',,brian,')).to.equal('acdc acdc-brian');
+      expect(list('acdc', ',angus,,brian,')).to.equal('acdc acdc-angus acdc-brian');
     });
 
     it('should remove white spaces', () => {
-      expect(render('  acdc  ')).to.equal('acdc');
-      expect(render('  acdc  ', '  angus  ')).to.equal('acdc acdc-angus');
-      expect(render('  acdc  ', '  angus  ,  brian  ')).to.equal('acdc acdc-angus acdc-brian');
-      expect(render('  acdc  ', '  ,  ,  ')).to.equal('acdc');
+      expect(list('  acdc  ')).to.equal('acdc');
+      expect(list('  acdc  ', '  angus  ')).to.equal('acdc acdc-angus');
+      expect(list('  acdc  ', '  angus  ,  brian  ')).to.equal('acdc acdc-angus acdc-brian');
+      expect(list('  acdc  ', '  ,  ,  ')).to.equal('acdc');
     });
   });
 });

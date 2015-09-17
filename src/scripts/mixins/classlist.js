@@ -1,7 +1,7 @@
 /* global module */
 
 module.exports = {
-  renderClassNames: (baseClass, otherClasses) => {
+  classList: (baseClass, otherClasses) => {
     baseClass = baseClass.trim();
     var rendered = baseClass;
 
