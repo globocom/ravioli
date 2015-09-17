@@ -106,7 +106,7 @@ module.exports = React.createClass({
             <i className={iconClassName}></i>
           </div>
         </div>
-        <ul className='gnocchi-select-options'>
+        <ul className='gnocchi-select-list'>
           {this.props.options.map(this.renderOption)}
         </ul>
       </div>
