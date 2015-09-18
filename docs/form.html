@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>form</title>
+  <meta name="viewport" content="width=device-width" />
+  <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' />
+  <link rel="stylesheet" type="text/css" href="styles/gnocchi.css" />
+  <style type="text/css">
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    *, body, input {
+      font-family: 'Open Sans', Helvetica, sans-serif;
+    }
+
+    .ht-header {
+      height: 50px;
+      background: orange;
+    }
+
+    .ht-cover {
+      display: flex;
+      height: 360px;
+      margin-bottom: 20px;
+      text-align: center;
+      background: #d9d9d9;
+    }
+
+    .ht-cover-button {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      width: 200px;
+      height: 200px;
+      margin: auto;
+    }
+
+    .ht-cover-button img {
+      margin: auto;
+    }
+
+    #g-section {
+      padding-left: 40px;
+    }
+
+    #g-time-minutes {
+      margin-right: 20px;
+    }
+
+    #g-video .gnocchi-icon,
+    #g-image .gnocchi-icon {
+      font-size: 22px;
+      top: 0;
+      margin-left: 8px;
+    }
+  </style>
+</head>
+<body>
+  <header class="ht-header"></header>
+
+  <section class="ht-cover">
+    <div class="ht-cover-button">
+      <img src="assets/cover-button.png" />
+      <h3 class="gg-subtitle">Foto de destaque</h3>
+      <small class="gg-description">Adicione a melhor foto da receita pronta.</small>
+    </div>
+  </section>
+
+  <main>
+    <div class="gg-row gg-header">
+      <div class="gg-col-2/3 gg-col--is-aligned">
+        <h2 class="gg-title">A Receita</h2>
+      </div>
+      <div class="gg-col-1/3" id="g-section">input editoria</div>
+    </div>
+
+    <div class="gg-row">
+      <div class="gg-col-2/3 gg-section">
+        <h3 class="gg-subtitle">Informações</h3>
+        <small class="gg-description">Escolha um nome fácil para ser buscado. Fale um pouco sobre a receita.</small>
+        <div class="gg-row" id="g-title">input titulo</div>
+        <div class="gg-row" id="g-subtitle">input subtitulo</div>
+        <div class="gg-row" id="g-description">input descricao</div>
+        <div class="gg-row">
+          <div class="gg-col-1/3" id="g-video">input video</div>
+          <div class="gg-col-1/3" id="g-image">input foto</div>
+        </div>
+        <div class="gg-row gg-row-space">
+          <div class="gg-col-1/2">
+            <h3 class="gg-subtitle">Tempo de preparo</h3>
+            <div class="gg-row">
+              <div class="gg-col" id="g-time-hours">input horas</div>
+              <div class="gg-col" id="g-time-minutes">input minutos</div>
+            </div>
+          </div>
+          <div class="gg-col-1/4">
+            <h3 class="gg-subtitle">Rendimento</h3>
+            <div class="gg-row" id="g-yield">input rendimento</div>
+          </div>
+        </div>
+      </div>
+      <div class="gg-col-1/3 gg-section">
+        <h3 class="gg-subtitle">classificação da receita</h3>
+        <small class="gg-description">Preencha as categorias para ajudar a busca.</small>
+        <div class="gg-row" id="g-type">input tipo de prato</div>
+        <div class="gg-row" id="g-methods">input modos de preparo</div>
+        <div class="gg-row" id="g-diets">input dietas</div>
+        <div class="gg-row" id="g-cuisines">input cozinhas</div>
+        <div class="gg-row" id="g-occasions">input ocasioes</div>
+      </div>
+    </div>
+
+    <div class="gg-row">
+      <div class="gg-col gg-section">
+        <h3 class="gg-subtitle">Anotações semânticas</h3>
+        <small class="gg-description">Ajude sua receita a ser distribuída pelo Gshow. Ex.: William Bonner foi participante no programa Estrelas.</small>
+        <div class="gg-row">
+          <div class="gg-col" id="g-performance">input atuacao</div>
+          <div class="gg-col" id="g-season">input temporada</div>
+          <div class="gg-col" id="g-subject">input assunto</div>
+        </div>
+        <div class="gg-row">
+          <div class="gg-col" id="g-personality">input personalidade</div>
+          <div class="gg-col" id="g-episode">input capitulo</div>
+          <div class="gg-col"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="ht-footer">footer</footer>
+
+  <script type="text/javascript" src="assets/react.min.js"></script>
+  <script type="text/javascript" src="assets/jsxtransformer.js"></script>
+  <script type="text/javascript" src="scripts/gnocchi.js"></script>
+  <script type="text/jsx">
+    React.render(<Gnocchi.Text placeholder="Editoria" />, document.getElementById('g-section'));
+    React.render(<Gnocchi.Text placeholder="Título" />, document.getElementById('g-title'));
+    React.render(<Gnocchi.Text placeholder="Subtítulo" />, document.getElementById('g-subtitle'));
+    React.render(<Gnocchi.Textarea placeholder="Descrição" />, document.getElementById('g-description'));
+    React.render(<Gnocchi.Button label='escolha o vídeo' icon='play' />, document.getElementById('g-video'));
+    React.render(<Gnocchi.Button label='escolha a foto' icon='image' />, document.getElementById('g-image'));
+    React.render(<Gnocchi.Number placeholder="Horas" />, document.getElementById('g-time-hours'));
+    React.render(<Gnocchi.Number placeholder="Minutos" />, document.getElementById('g-time-minutes'));
+    React.render(<Gnocchi.Number placeholder="Nº de porções" />, document.getElementById('g-yield'));
+
+    React.render(<Gnocchi.Text placeholder="Prato" />, document.getElementById('g-type'));
+    React.render(<Gnocchi.Text placeholder="Modos de preparo" />, document.getElementById('g-methods'));
+    React.render(<Gnocchi.Text placeholder="Dietas" />, document.getElementById('g-diets'));
+    React.render(<Gnocchi.Text placeholder="Cozinhas" />, document.getElementById('g-cuisines'));
+    React.render(<Gnocchi.Text placeholder="Ocasiões" />, document.getElementById('g-occasions'));
+
+    React.render(<Gnocchi.Text placeholder="Atuação" />, document.getElementById('g-performance'));
+    React.render(<Gnocchi.Text placeholder="Temporada" />, document.getElementById('g-season'));
+    React.render(<Gnocchi.Text placeholder="Assunto" />, document.getElementById('g-subject'));
+    React.render(<Gnocchi.Text placeholder="Personalidade" />, document.getElementById('g-personality'));
+    React.render(<Gnocchi.Text placeholder="Capítulo/Episódio" />, document.getElementById('g-episode'));
+  </script>
+</body>
+</html>
