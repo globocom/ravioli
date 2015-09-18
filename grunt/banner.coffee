@@ -6,15 +6,14 @@ banner = '''
  * @version <%= pkg.version %>
  * @license <%= pkg.license %>
  */
+
 '''
 
 module.exports = (grunt) ->
+  grunt.config 'banner', banner
   grunt.config 'usebanner',
-    dist:
-      options:
-        banner: banner
+    options:
+      banner: banner
+    styles:
       files:
-        src: [
-          'dist/scripts/**/gnocchi*'
-          'dist/styles/**/gnocchi*'
-        ]
+        src: 'dist/styles/**/*.min.css'

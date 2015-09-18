@@ -5,7 +5,6 @@ module.exports = (grunt) ->
     grunt.task.run [
       "bump:#{type or 'patch'}"
       'build'
-      'usebanner'
       'gitadd'
       'gitcommit'
       'gittag'

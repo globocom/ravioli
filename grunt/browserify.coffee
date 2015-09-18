@@ -6,6 +6,7 @@ module.exports = (grunt) ->
         dest: 'dist/scripts/gnocchi.js'
       ]
       options:
+        banner: '<%= banner %>'
         external: ['react']
         transform: ['browserify-shim']
         require: ['./dist/lib/main.js:gnocchi']

@@ -55,4 +55,5 @@ module.exports = (grunt) ->
     'concat:styles'
     'postcss'
     'cssmin'
+    'usebanner:styles'
   ]
