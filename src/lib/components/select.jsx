@@ -126,7 +126,7 @@ module.exports = React.createClass({
     return (
       <li
         className={className}
-        data-value={option.value || option}
+        key={option.value || option}
         onMouseEnter={this.focusOption.bind(this, i)}
         onClick={this.selectOption.bind(this, i)}>
         {option.label || option}
