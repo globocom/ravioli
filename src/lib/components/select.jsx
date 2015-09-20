@@ -6,8 +6,17 @@ module.exports = React.createClass({
   displayName: 'Gnocchi.Select',
 
   propTypes: {
-    options: React.PropTypes.array,
-    placeholder: React.PropTypes.string
+    placeholder: React.PropTypes.string,
+    selected: React.PropTypes.string,
+    options: React.PropTypes.arrayOf(
+      React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.shape({
+          value: React.PropTypes.string,
+          label: React.PropTypes.string
+        })
+      ])
+    )
   },
 
   getDefaultProps: () => {
@@ -17,12 +26,21 @@ module.exports = React.createClass({
     };
   },
 
-  getInitialState: () => {
+  getInitialState: function(){
     return {
       open: false,
       focusedOption: null,
-      selectedOption: null
+      selectedOption: this.setSelectedOption(this.props.selected)
     };
+  },
+
+  setSelectedOption: function(str){
+    if(str){
+      let idx = this.props.options.findIndex(o => o === str || o.value === str);
+      if(idx !== -1) return idx;
+    }
+
+    return null;
   },
 
   preventFocusOnClick: event => event.preventDefault(),
@@ -127,6 +145,7 @@ module.exports = React.createClass({
       <li
         className={className}
         key={option.value || option}
+        data-value={option.value || option}
         onMouseEnter={this.focusOption.bind(this, i)}
         onClick={this.selectOption.bind(this, i)}>
         {option.label || option}

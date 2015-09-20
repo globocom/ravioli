@@ -4,6 +4,7 @@ var React = require('react/addons');
 
 module.exports = {
   findByClass: React.addons.TestUtils.findRenderedDOMComponentWithClass,
+  findAllByClass: React.addons.TestUtils.scryRenderedDOMComponentsWithClass,
   click: React.addons.TestUtils.Simulate.click,
 
   keydown: function(element, code){
