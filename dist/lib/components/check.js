@@ -13,10 +13,11 @@ module.exports = React.createClass({
   },
 
   getDefaultProps: function getDefaultProps() {
-    return {
-      checked: false,
-      label: 'Check me'
-    };
+    return { checked: false };
+  },
+
+  getInitialState: function getInitialState() {
+    return { checked: this.props.checked };
   },
 
   preventFocusOnClick: function preventFocusOnClick(event) {
@@ -24,12 +25,12 @@ module.exports = React.createClass({
   },
 
   toggle: function toggle() {
-    this.setProps({ checked: !this.props.checked });
+    this.setState({ checked: !this.state.checked });
   },
 
   render: function render() {
     var className = 'gnocchi-check-box';
-    if (this.props.checked) className += ' gnocchi--is-checked';
+    if (this.state.checked) className += ' gnocchi--is-checked';
 
     return React.createElement(
       'div',
@@ -41,13 +42,19 @@ module.exports = React.createClass({
           tabIndex: '0',
           onClick: this.toggle,
           onMouseDown: this.preventFocusOnClick },
-        this.props.checked ? React.createElement(GnocchiIcon, { type: 'check' }) : ''
+        this.state.checked ? React.createElement(GnocchiIcon, { type: 'check' }) : ''
       ),
-      React.createElement(
+      this.renderLabel()
+    );
+  },
+
+  renderLabel: function renderLabel() {
+    if (this.props.label) {
+      return React.createElement(
         'span',
         { className: 'gnocchi-check-label', onClick: this.toggle },
         this.props.label
-      )
-    );
+      );
+    }
   }
 });
