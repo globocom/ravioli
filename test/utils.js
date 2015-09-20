@@ -1,8 +1,20 @@
 /* global require, module, global, document */
+var jsdom = require('jsdom');
+
+var mockDOM = () => {
+  if(!global.document){
+    global.document = jsdom.jsdom();
+    global.window = document.parentWindow;
+    global.navigator = { userAgent: 'node.js' };
+  }
+};
+
+mockDOM();
 
 var React = require('react/addons');
 
 module.exports = {
+  mockDOM: mockDOM,
   findByClass: React.addons.TestUtils.findRenderedDOMComponentWithClass,
   findAllByClass: React.addons.TestUtils.scryRenderedDOMComponentsWithClass,
   click: React.addons.TestUtils.Simulate.click,
@@ -21,12 +33,5 @@ module.exports = {
     return React.addons.TestUtils.renderIntoDocument(
       React.createElement(element, props, child)
     );
-  },
-
-  mockDOM: function(){
-    if(!global.document){
-      global.document = require('jsdom').jsdom();
-      global.window = document.parentWindow;
-    }
   }
 };
