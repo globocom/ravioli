@@ -20,6 +20,10 @@ module.exports = React.createClass({
     };
   },
 
+  getInitialState: function getInitialState() {
+    return { value: this.props.value };
+  },
+
   onkeypress: function onkeypress(event) {
     if (event.which < 48 || event.which > 57) event.preventDefault();
   },
@@ -34,15 +38,15 @@ module.exports = React.createClass({
 
   setValue: function setValue(value) {
     value = parseInt(value, 10);
-    this.setProps({ value: isNaN(value) ? '' : value });
+    this.setState({ value: isNaN(value) ? '' : value });
   },
 
   increment: function increment() {
-    this.setValue(this.props.value + 1);
+    this.setValue(this.state.value + 1);
   },
 
   decrement: function decrement() {
-    this.setValue(this.props.value - 1);
+    this.setValue(this.state.value - 1);
   },
 
   render: function render() {
@@ -50,7 +54,7 @@ module.exports = React.createClass({
       'div',
       { className: 'gnocchi-number' },
       React.createElement(GnocchiText, {
-        value: this.props.value,
+        value: this.state.value,
         placeholder: this.props.placeholder,
         onKeyPress: this.onkeypress,
         onKeyDown: this.onkeydown,
