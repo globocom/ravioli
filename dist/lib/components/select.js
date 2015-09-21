@@ -8,8 +8,12 @@ module.exports = React.createClass({
   displayName: 'Gnocchi.Select',
 
   propTypes: {
-    options: React.PropTypes.array,
-    placeholder: React.PropTypes.string
+    placeholder: React.PropTypes.string,
+    selected: React.PropTypes.string,
+    options: React.PropTypes.arrayOf(React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.shape({
+      value: React.PropTypes.string,
+      label: React.PropTypes.string
+    })]))
   },
 
   getDefaultProps: function getDefaultProps() {
@@ -23,8 +27,19 @@ module.exports = React.createClass({
     return {
       open: false,
       focusedOption: null,
-      selectedOption: null
+      selectedOption: this.getOptionIndex(this.props.selected)
     };
+  },
+
+  getOptionIndex: function getOptionIndex(str) {
+    if (str) {
+      var idx = this.props.options.findIndex(function (o) {
+        return o === str || o.value === str;
+      });
+      if (idx !== -1) return idx;
+    }
+
+    return null;
   },
 
   preventFocusOnClick: function preventFocusOnClick(event) {
@@ -59,7 +74,7 @@ module.exports = React.createClass({
   close: function close() {
     if (this.state.open) {
       this.setState({ open: false });
-      this.focusOption(null);
+      this.unfocusOption();
     }
   },
 
@@ -80,12 +95,18 @@ module.exports = React.createClass({
   },
 
   focusOption: function focusOption(optionIndex) {
-    this.setState({ focusedOption: optionIndex });
+    if (optionIndex >= 0 && optionIndex < this.props.options.length) this.setState({ focusedOption: optionIndex });
+  },
+
+  unfocusOption: function unfocusOption() {
+    this.setState({ focusedOption: null });
   },
 
   selectOption: function selectOption(optionIndex) {
-    this.setState({ selectedOption: optionIndex });
-    this.close();
+    if (optionIndex >= 0 && optionIndex < this.props.options.length) {
+      this.setState({ selectedOption: optionIndex });
+      this.close();
+    }
   },
 
   render: function render() {
@@ -100,7 +121,7 @@ module.exports = React.createClass({
         onBlur: this.close,
         onKeyDown: this.onkeydown,
         onMouseDown: this.preventFocusOnClick,
-        onMouseLeave: this.focusOption.bind(this, null) },
+        onMouseLeave: this.unfocusOption },
       React.createElement(
         'div',
         { className: 'gnocchi-text', onClick: this.toggle },
@@ -143,6 +164,7 @@ module.exports = React.createClass({
       'li',
       {
         className: className,
+        key: option.value || option,
         'data-value': option.value || option,
         onMouseEnter: this.focusOption.bind(this, i),
         onClick: this.selectOption.bind(this, i) },

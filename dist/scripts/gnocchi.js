@@ -53,10 +53,11 @@ module.exports = React.createClass({
   },
 
   getDefaultProps: function getDefaultProps() {
-    return {
-      checked: false,
-      label: 'Check me'
-    };
+    return { checked: false };
+  },
+
+  getInitialState: function getInitialState() {
+    return { checked: this.props.checked };
   },
 
   preventFocusOnClick: function preventFocusOnClick(event) {
@@ -64,12 +65,12 @@ module.exports = React.createClass({
   },
 
   toggle: function toggle() {
-    this.setProps({ checked: !this.props.checked });
+    this.setState({ checked: !this.state.checked });
   },
 
   render: function render() {
     var className = 'gnocchi-check-box';
-    if (this.props.checked) className += ' gnocchi--is-checked';
+    if (this.state.checked) className += ' gnocchi--is-checked';
 
     return React.createElement(
       'div',
@@ -81,14 +82,20 @@ module.exports = React.createClass({
           tabIndex: '0',
           onClick: this.toggle,
           onMouseDown: this.preventFocusOnClick },
-        this.props.checked ? React.createElement(GnocchiIcon, { type: 'check' }) : ''
+        this.state.checked ? React.createElement(GnocchiIcon, { type: 'check' }) : ''
       ),
-      React.createElement(
+      this.renderLabel()
+    );
+  },
+
+  renderLabel: function renderLabel() {
+    if (this.props.label) {
+      return React.createElement(
         'span',
         { className: 'gnocchi-check-label', onClick: this.toggle },
         this.props.label
-      )
-    );
+      );
+    }
   }
 });
 
@@ -139,6 +146,10 @@ module.exports = React.createClass({
     };
   },
 
+  getInitialState: function getInitialState() {
+    return { value: this.props.value };
+  },
+
   onkeypress: function onkeypress(event) {
     if (event.which < 48 || event.which > 57) event.preventDefault();
   },
@@ -153,15 +164,15 @@ module.exports = React.createClass({
 
   setValue: function setValue(value) {
     value = parseInt(value, 10);
-    this.setProps({ value: isNaN(value) ? '' : value });
+    this.setState({ value: isNaN(value) ? '' : value });
   },
 
   increment: function increment() {
-    this.setValue(this.props.value + 1);
+    this.setValue(this.state.value + 1);
   },
 
   decrement: function decrement() {
-    this.setValue(this.props.value - 1);
+    this.setValue(this.state.value - 1);
   },
 
   render: function render() {
@@ -169,7 +180,7 @@ module.exports = React.createClass({
       'div',
       { className: 'gnocchi-number' },
       React.createElement(GnocchiText, {
-        value: this.props.value,
+        value: this.state.value,
         placeholder: this.props.placeholder,
         onKeyPress: this.onkeypress,
         onKeyDown: this.onkeydown,
@@ -206,8 +217,12 @@ module.exports = React.createClass({
   displayName: 'Gnocchi.Select',
 
   propTypes: {
-    options: React.PropTypes.array,
-    placeholder: React.PropTypes.string
+    placeholder: React.PropTypes.string,
+    selected: React.PropTypes.string,
+    options: React.PropTypes.arrayOf(React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.shape({
+      value: React.PropTypes.string,
+      label: React.PropTypes.string
+    })]))
   },
 
   getDefaultProps: function getDefaultProps() {
@@ -221,8 +236,19 @@ module.exports = React.createClass({
     return {
       open: false,
       focusedOption: null,
-      selectedOption: null
+      selectedOption: this.getOptionIndex(this.props.selected)
     };
+  },
+
+  getOptionIndex: function getOptionIndex(str) {
+    if (str) {
+      var idx = this.props.options.findIndex(function (o) {
+        return o === str || o.value === str;
+      });
+      if (idx !== -1) return idx;
+    }
+
+    return null;
   },
 
   preventFocusOnClick: function preventFocusOnClick(event) {
@@ -257,7 +283,7 @@ module.exports = React.createClass({
   close: function close() {
     if (this.state.open) {
       this.setState({ open: false });
-      this.focusOption(null);
+      this.unfocusOption();
     }
   },
 
@@ -278,12 +304,18 @@ module.exports = React.createClass({
   },
 
   focusOption: function focusOption(optionIndex) {
-    this.setState({ focusedOption: optionIndex });
+    if (optionIndex >= 0 && optionIndex < this.props.options.length) this.setState({ focusedOption: optionIndex });
+  },
+
+  unfocusOption: function unfocusOption() {
+    this.setState({ focusedOption: null });
   },
 
   selectOption: function selectOption(optionIndex) {
-    this.setState({ selectedOption: optionIndex });
-    this.close();
+    if (optionIndex >= 0 && optionIndex < this.props.options.length) {
+      this.setState({ selectedOption: optionIndex });
+      this.close();
+    }
   },
 
   render: function render() {
@@ -298,7 +330,7 @@ module.exports = React.createClass({
         onBlur: this.close,
         onKeyDown: this.onkeydown,
         onMouseDown: this.preventFocusOnClick,
-        onMouseLeave: this.focusOption.bind(this, null) },
+        onMouseLeave: this.unfocusOption },
       React.createElement(
         'div',
         { className: 'gnocchi-text', onClick: this.toggle },
@@ -341,6 +373,7 @@ module.exports = React.createClass({
       'li',
       {
         className: className,
+        key: option.value || option,
         'data-value': option.value || option,
         onMouseEnter: this.focusOption.bind(this, i),
         onClick: this.selectOption.bind(this, i) },
