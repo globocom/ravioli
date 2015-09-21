@@ -1,16 +1,13 @@
 /* global require, describe, before, after, it, context, console */
-
 var expect = require('chai').expect;
 var utils = require('../utils');
 var GnocchiSelect = require('../../src/lib/components/select.jsx');
 
-describe('GnocchiSelect', () => {
+describe('Select component', () => {
   var component;
 
-  var createSelect = (opts) => component = utils.render(GnocchiSelect, opts);
+  var createSelect = opts => component = utils.render(GnocchiSelect, opts);
   var destroySelect = () => component = null;
-
-  before(() => utils.mockDOM());
 
   describe('Initialization', () => {
     before(() => {
@@ -78,61 +75,133 @@ describe('GnocchiSelect', () => {
   });
 
   describe('Unit', () => {
-    before(() => createSelect());
-
+    before(() => createSelect({ options: ['paranoid', 'ironman'] }));
     after(() => destroySelect());
 
-
     describe('#open()', () => {
-      it('should open');
+      it('should open', () => {
+        component.open();
+        expect(component.state.open).to.be.true;
+      });
     });
 
     describe('#close()', () => {
-      it('should close');
+      before(() => component.open());
+
+      it('should close', () => {
+        component.close();
+        expect(component.state.open).to.be.false;
+      });
     });
 
     describe('#focusOption()', () => {
-      it('should focus an option');
-      it('should not focus an unexisting option');
+      it('should focus an option', () => {
+        component.focusOption(0);
+        expect(component.state.focusedOption).to.equal(0);
+      });
+
+      it('should not focus an unexisting option', () => {
+        component.focusOption(2);
+        expect(component.state.focusedOption).not.to.equal(2);
+
+        component.focusOption(-2);
+        expect(component.state.focusedOption).not.to.equal(-2);
+      });
+    });
+
+    describe('#unfocusOption()', () => {
+      before(() => component.focusOption(0));
+
+      it('should unfocus from current focused option', () => {
+        component.unfocusOption();
+        expect(component.state.focusedOption).to.be.null;
+      });
     });
 
     describe('#selectOption()', () => {
-      it('should select option');
-      it('should not select an unexisting option');
+      it('should select option', () => {
+        component.selectOption(0);
+        expect(component.state.selectedOption).to.equal(0);
+      });
+
+      it('should not select an unexisting option', () => {
+        component.selectOption(2);
+        expect(component.state.selectedOption).not.to.equal(2);
+      });
     });
 
-    describe('#focusPrev', () => {
+    describe('#getOptionIndex()', () => {
+      it('should return option index', () => {
+        expect(component.getOptionIndex('paranoid')).to.equal(0);
+        expect(component.getOptionIndex('ironman')).to.equal(1);
+      });
+
+      it('should return null when option does not exist', () => {
+        expect(component.getOptionIndex('stairway to heaven')).to.be.null;
+      });
+    });
+
+    describe('#focusPrev()', () => {
       context('when there is not focused option', () => {
-        it('should not focus on anything');
+        before(() => component.unfocusOption());
+
+        it('should not focus on anything', () => {
+          component.focusPrev();
+          expect(component.state.focusedOption).to.be.null;
+        });
       });
 
       context('when the first option is focused', () => {
-        it('should not set focus to an unexisting previous option');
+        before(() => component.focusOption(0));
+
+        it('should not set focus to an unexisting previous option', () => {
+          component.focusPrev();
+          expect(component.state.focusedOption).to.equal(0);
+        });
       });
 
       context('when there is a focused option', () => {
-        it('should set focus to previous option');
+        before(() => component.focusOption(1));
+
+        it('should set focus to previous option', () => {
+          component.focusPrev();
+          expect(component.state.focusedOption).to.equal(0);
+        });
       });
     });
 
-    describe('#focusNext', () => {
+    describe('#focusNext()', () => {
       context('when there is not focused option', () => {
-        it('should set focus to the first option');
+        before(() => component.unfocusOption());
+
+        it('should set focus to the first option', () => {
+          component.focusNext();
+          expect(component.state.focusedOption).to.equal(0);
+        });
       });
 
       context('when there is a focused option', () => {
-        it('should set focus to next option');
+        before(() => component.focusOption(0));
+
+        it('should set focus to next option', () => {
+          component.focusNext();
+          expect(component.state.focusedOption).to.equal(1);
+        });
       });
 
       context('when the last option is focused', () => {
-        it('should not set focus to an unexisting next option');
+        before(() => component.focusOption(1));
+
+        it('should not set focus to an unexisting next option', () => {
+          component.focusNext();
+          expect(component.state.focusedOption).to.equal(1);
+        });
       });
     });
   });
 
-  describe.skip('Behaviors', () => {
+  describe.skip('User interaction', () => {
     before(() => createSelect());
-
     after(() => destroySelect());
   });
 });
