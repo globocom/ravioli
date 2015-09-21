@@ -30,11 +30,11 @@ module.exports = React.createClass({
     return {
       open: false,
       focusedOption: null,
-      selectedOption: this.setSelectedOption(this.props.selected)
+      selectedOption: this.getOptionIndex(this.props.selected)
     };
   },
 
-  setSelectedOption: function(str){
+  getOptionIndex: function(str){
     if(str){
       let idx = this.props.options.findIndex(o => o === str || o.value === str);
       if(idx !== -1) return idx;
@@ -69,7 +69,7 @@ module.exports = React.createClass({
   close: function(){
     if(this.state.open){
       this.setState({open: false});
-      this.focusOption(null);
+      this.unfocusOption();
     }
   },
 
@@ -94,12 +94,19 @@ module.exports = React.createClass({
   },
 
   focusOption: function(optionIndex){
-    this.setState({focusedOption: optionIndex});
+    if(optionIndex >= 0 && optionIndex < this.props.options.length)
+      this.setState({focusedOption: optionIndex});
+  },
+
+  unfocusOption: function(){
+    this.setState({focusedOption: null});
   },
 
   selectOption: function(optionIndex){
-    this.setState({selectedOption: optionIndex});
-    this.close();
+    if(optionIndex >= 0 && optionIndex < this.props.options.length){
+      this.setState({selectedOption: optionIndex});
+      this.close();
+    }
   },
 
   render: function(){
@@ -113,7 +120,7 @@ module.exports = React.createClass({
         onBlur={this.close}
         onKeyDown={this.onkeydown}
         onMouseDown={this.preventFocusOnClick}
-        onMouseLeave={this.focusOption.bind(this, null)}>
+        onMouseLeave={this.unfocusOption}>
         <div className='gnocchi-text' onClick={this.toggle}>
           <div className='gnocchi-select-display'>
             {this.renderDisplay(this.state.selectedOption)}
