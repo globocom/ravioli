@@ -12,13 +12,16 @@ module.exports = React.createClass({
   propTypes: {
     icon: React.PropTypes.string,
     label: React.PropTypes.string,
-    classes: React.PropTypes.string
+    classes: React.PropTypes.string,
+    className: React.PropTypes.string
   },
 
   render: function render() {
+    var classes = this.classList('gnocchi-button', this.props.classes);
+
     return React.createElement(
       'button',
-      { className: this.classList('gnocchi-button', this.props.classes) },
+      { className: classes + ' ' + this.props.className },
       this.props.label,
       this.props.icon ? React.createElement(GnocchiIcon, { type: this.props.icon }) : ''
     );

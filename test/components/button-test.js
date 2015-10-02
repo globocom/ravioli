@@ -12,7 +12,8 @@ describe('GnocchiButton', function(){
     this.component = utils.render(GnocchiButton, {
       label: 'the beatles',
       icon: 'arrow-right',
-      classes: 'john, paul, george, ringo'
+      classes: 'john, paul, george, ringo',
+      className: 'something-in-the-way she-moves'
     });
   });
 
@@ -32,5 +33,11 @@ describe('GnocchiButton', function(){
     expect(classes).to.contains('gnocchi-button-paul');
     expect(classes).to.contains('gnocchi-button-george');
     expect(classes).to.contains('gnocchi-button-ringo');
+  });
+
+  it('should set custom classes', function(){
+    var classes = this.component.getDOMNode().getAttribute('class');
+    expect(classes).to.contains('something-in-the-way');
+    expect(classes).to.contains('she-moves');
   });
 });

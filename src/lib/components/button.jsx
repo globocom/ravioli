@@ -10,12 +10,15 @@ module.exports = React.createClass({
   propTypes: {
     icon: React.PropTypes.string,
     label: React.PropTypes.string,
-    classes: React.PropTypes.string
+    classes: React.PropTypes.string,
+    className: React.PropTypes.string
   },
 
   render: function(){
+    let classes = this.classList('gnocchi-button', this.props.classes);
+
     return (
-      <button className={this.classList('gnocchi-button', this.props.classes)}>
+      <button className={`${classes} ${this.props.className}`}>
         {this.props.label}
         {this.props.icon ? <GnocchiIcon type={this.props.icon}/> : ''}
       </button>
