@@ -1,4 +1,4 @@
-/* global require, describe, before, it, console */
+/* global require, describe, before, it, context */
 
 var expect = require('chai').expect;
 var utils = require('../utils');
@@ -28,16 +28,36 @@ describe('GnocchiButton', function(){
   });
 
   it('should set modifier classes', function(){
-    var classes = this.component.getDOMNode().getAttribute('class');
-    expect(classes).to.contains('gnocchi-button-john');
-    expect(classes).to.contains('gnocchi-button-paul');
-    expect(classes).to.contains('gnocchi-button-george');
-    expect(classes).to.contains('gnocchi-button-ringo');
+    expect(this.component.getDOMNode().className)
+      .to.contains('gnocchi-button-john')
+      .and.to.contains('gnocchi-button-paul')
+      .and.to.contains('gnocchi-button-george')
+      .and.to.contains('gnocchi-button-ringo');
   });
 
   it('should set custom classes', function(){
-    var classes = this.component.getDOMNode().getAttribute('class');
-    expect(classes).to.contains('something-in-the-way');
-    expect(classes).to.contains('she-moves');
+    expect(this.component.getDOMNode().className)
+      .to.contains('something-in-the-way')
+      .and.to.contains('she-moves');
+  });
+
+  it('should be a button element', function(){
+    expect(this.component.getDOMNode()).to.have.property('tagName', 'BUTTON');
+  });
+
+  context('when link prop is present', () => {
+    before(() => {
+      component = utils.render(GnocchiButton, {
+        link: 'http://ilovecoffee.com/'
+      });
+    });
+
+    it('should be a link element', () => {
+      expect(component.getDOMNode()).to.have.property('tagName', 'A');
+    });
+
+    it('should have href url', () => {
+      expect(component.getDOMNode()).to.have.property('href', 'http://ilovecoffee.com/');
+    });
   });
 });

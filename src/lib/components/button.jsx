@@ -8,6 +8,7 @@ module.exports = React.createClass({
   mixins: [ClassList],
 
   propTypes: {
+    link: React.PropTypes.string,
     icon: React.PropTypes.string,
     label: React.PropTypes.string,
     classes: React.PropTypes.string,
@@ -15,13 +16,35 @@ module.exports = React.createClass({
   },
 
   render: function(){
-    let classes = this.classList('gnocchi-button', this.props.classes);
+    return this.props.link ? this.renderLink() : this.renderButton();
+  },
 
+  renderLink: function(){
     return (
-      <button className={`${classes} ${this.props.className}`}>
-        {this.props.label}
-        {this.props.icon ? <GnocchiIcon type={this.props.icon}/> : ''}
+      <a className={this.renderClassNames()} href={this.props.link}>
+        {this.renderLabel()}
+      </a>
+    );
+  },
+
+  renderButton: function(){
+    return (
+      <button className={this.renderClassNames()}>
+        {this.renderLabel()}
       </button>
     );
+  },
+
+  renderClassNames: function(){
+    let classNames = this.classList('gnocchi-button', this.props.classes);
+    if(this.props.className) classNames += ` ${this.props.className}`;
+    return classNames;
+  },
+
+  renderLabel: function(){
+    return [
+      this.props.label,
+      this.props.icon ? <GnocchiIcon type={this.props.icon}/> : ''
+    ];
   }
 });
