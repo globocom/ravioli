@@ -271,11 +271,18 @@
 }
 .gnocchi-button {
   line-height: 100%;
+  text-align: center;
+  text-decoration: none;
   letter-spacing: -0.02em;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+}
+a.gnocchi-button {
+  line-height: 35px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 .gnocchi-button > * {
   vertical-align: middle;

@@ -38,6 +38,7 @@ var Styleguide = React.createClass({
           <Gnocchi.Button label='Highlight' classes='highlight'/>
           <Gnocchi.Button label='Lowlight' classes='lowlight'/>
           <Gnocchi.Button label='Fit' classes='fit'/>
+          <Gnocchi.Button label='Link' classes='fit' link='http://google.com'/>
         </section>
       </main>
     );
