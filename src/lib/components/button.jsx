@@ -42,9 +42,11 @@ module.exports = React.createClass({
   },
 
   renderLabel: function(){
-    return [
-      this.props.label,
-      this.props.icon ? <GnocchiIcon type={this.props.icon}/> : ''
-    ];
+    return (
+      <span>
+        {this.props.label}
+        {this.props.icon ? <GnocchiIcon type={this.props.icon}/> : ''}
+      </span>
+    );
   }
 });
