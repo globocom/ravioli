@@ -4,7 +4,7 @@ var jsdom = require('jsdom');
 var mockDOM = () => {
   if(!global.document){
     global.document = jsdom.jsdom();
-    global.window = document.parentWindow;
+    global.window = document.defaultView;
     global.navigator = { userAgent: 'node.js' };
   }
 };
