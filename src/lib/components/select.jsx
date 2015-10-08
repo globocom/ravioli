@@ -103,7 +103,18 @@ module.exports = React.createClass({
   },
 
   selectOption: function(optionIndex){
-    if(optionIndex >= 0 && optionIndex < this.props.options.length){
+    if((optionIndex >= 0 && optionIndex < this.props.options.length) || optionIndex === null){
+      if(this.props.onChange && optionIndex !== this.state.selectedOption){
+        let selectedValue = null;
+
+        if(optionIndex){
+          let selected = this.props.options[optionIndex];
+          selectedValue = selected.value || selected;
+        }
+
+        this.props.onChange(selectedValue);
+      }
+
       this.setState({selectedOption: optionIndex});
       this.close();
     }
