@@ -21,7 +21,9 @@ module.exports = React.createClass({
   preventFocusOnClick: event => event.preventDefault(),
 
   toggle: function(){
-    this.setState({checked: !this.state.checked});
+    var newValue = !this.state.checked;
+    if(this.props.onChange) this.props.onChange(newValue);
+    this.setState({checked: newValue});
   },
 
   render: function(){
