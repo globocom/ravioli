@@ -1,7 +1,5 @@
 /* global require, describe, before, beforeEach, after, it, context, console */
-var chai = require('chai');
-var spies = require('chai-spies');
-var expect = chai.expect;
+var expect = require('chai').expect;
 var utils = require('../utils');
 var GnocchiSelect = require('../../src/lib/components/select.jsx');
 
@@ -135,11 +133,18 @@ describe('Select component', () => {
         component.selectOption(2);
         expect(component.state.selectedOption).not.to.equal(2);
       });
+    });
 
-      context('if `onChange` exists in props', () => {
-        var selectedValue;
-        var changeCount;
+    describe('#triggerChange()', () => {
+      var selectedValue;
+      var changeCount = 0;
 
+      it('should not try to fire handler if it does not exist', () => {
+        component.triggerChange(0, 1);
+        expect(changeCount).to.equal(0);
+      });
+
+      context('when `onChange` handler exists in props', () => {
         before(() => {
           createSelect({
             options: ['paranoid', 'ironman'],
@@ -150,23 +155,20 @@ describe('Select component', () => {
           });
         });
 
-        beforeEach(() => {
-          component.selectOption(null);
-          changeCount = 0;
-        });
+        beforeEach(() => changeCount = 0);
 
         it('should fire handler when selection does change', () => {
-          component.selectOption(0);
+          component.triggerChange(null, 0);
           expect(changeCount).to.equal(1);
         });
 
         it('should not fire handler when selection does not change', () => {
-          component.selectOption(null);
+          component.triggerChange(0, 0);
           expect(changeCount).to.equal(0);
         });
 
         it('should pass new selected value to the handler', () => {
-          component.selectOption(1);
+          component.triggerChange(0, 1);
           expect(selectedValue).to.equal('ironman');
         });
       });
