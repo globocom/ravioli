@@ -114,7 +114,7 @@ module.exports = React.createClass({
     if(this.props.onChange && oldOptionIndex !== newOptionIndex){
       let selectedValue = null;
 
-      if(newOptionIndex){
+      if(newOptionIndex !== null){
         let selected = this.props.options[newOptionIndex];
         selectedValue = selected.value || selected;
       }

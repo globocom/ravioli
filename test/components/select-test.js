@@ -170,6 +170,8 @@ describe('Select component', () => {
         it('should pass new selected value to the handler', () => {
           component.triggerChange(0, 1);
           expect(selectedValue).to.equal('ironman');
+          component.triggerChange(1, 0);
+          expect(selectedValue).to.equal('paranoid');
         });
       });
     });
