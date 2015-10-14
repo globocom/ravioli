@@ -19,11 +19,14 @@ var Styleguide = React.createClass({
 
         <section>
           <h3>Select</h3>
-          <Gnocchi.Select options={[
-            {value: 123, label: 'dasdsadsadasdsa'},
-            {value: 'sswws', label: 1234567890},
-            'sffffffff',
-            1234]}/>
+          <Gnocchi.Select
+            placeholder='Select something (or not)'
+            empty='empty label'
+            options={[
+              {value: 123, label: 'dasdsadsadasdsa'},
+              {value: 'sswws', label: 1234567890},
+              'sffffffff',
+              1234]}/>
         </section>
 
         <section>
