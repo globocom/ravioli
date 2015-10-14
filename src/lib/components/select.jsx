@@ -6,14 +6,27 @@ module.exports = React.createClass({
   displayName: 'Gnocchi.Select',
 
   propTypes: {
-    placeholder: React.PropTypes.string,
-    selected: React.PropTypes.string,
+    placeholder: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
+    ]),
+    selected: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
+    ]),
     options: React.PropTypes.arrayOf(
       React.PropTypes.oneOfType([
         React.PropTypes.string,
+        React.PropTypes.number,
         React.PropTypes.shape({
-          value: React.PropTypes.string,
-          label: React.PropTypes.string
+          value: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.number
+          ]),
+          label: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.number
+          ])
         })
       ])
     )
