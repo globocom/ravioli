@@ -43,8 +43,6 @@ module.exports = React.createClass({
     return null;
   },
 
-  preventFocusOnClick: event => event.preventDefault(),
-
   onkeydown: function(event){
     if(this.state.open){
       switch(event.which){
@@ -133,7 +131,6 @@ module.exports = React.createClass({
         tabIndex='0'
         onBlur={this.close}
         onKeyDown={this.onkeydown}
-        onMouseDown={this.preventFocusOnClick}
         onMouseLeave={this.unfocusOption}>
         <div className='gnocchi-text' onClick={this.toggle}>
           <div className='gnocchi-select-display'>
