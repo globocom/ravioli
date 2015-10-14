@@ -83,29 +83,21 @@ describe('Select component', () => {
 
       it('should be placed at the first position', () => {
         var options = utils.findAllByClass(component, 'gnocchi-select-option');
-        var option = utils.filterAll(component, el => {
-          return el.getDOMNode().getAttribute('data-value') === '';
-        })[0];
-
-        expect(options[0]).to.equal(option);
-      });
-
-      it('should has empty value', () => {
-        var options = utils.findAllByClass(component, 'gnocchi-select-option');
-        expect(options[0].getDOMNode().getAttribute('data-value')).to.be.empty;
+        var emptyOption = utils.findByClass(component, 'gnocchi-select-option-empty');
+        expect(options[0]).to.equal(emptyOption);
       });
 
       it('should has an empty label', () => {
-        var options = utils.findAllByClass(component, 'gnocchi-select-option');
-        expect(options[0].getDOMNode().textContent).to.be.empty;
+        var emptyOption = utils.findByClass(component, 'gnocchi-select-option-empty');
+        expect(emptyOption.getDOMNode().textContent).to.be.empty;
       });
 
       context('and it is a string', () => {
         before(() => createSelect({empty: 'none', options: ['ozzy', 'tommy']}));
 
         it('should set label with the string', () => {
-          var options = utils.findAllByClass(component, 'gnocchi-select-option');
-          expect(options[0].getDOMNode().textContent).to.equal('none');
+          var emptyOption = utils.findByClass(component, 'gnocchi-select-option-empty');
+          expect(emptyOption.getDOMNode().textContent).to.equal('none');
         });
       });
     });
