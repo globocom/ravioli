@@ -17,6 +17,7 @@ module.exports = {
   mockDOM: mockDOM,
   findByClass: React.addons.TestUtils.findRenderedDOMComponentWithClass,
   findAllByClass: React.addons.TestUtils.scryRenderedDOMComponentsWithClass,
+  filterAll: React.addons.TestUtils.findAllInRenderedTree,
   click: React.addons.TestUtils.Simulate.click,
 
   keydown: function(element, code){

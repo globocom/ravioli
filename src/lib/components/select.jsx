@@ -34,18 +34,25 @@ module.exports = React.createClass({
 
   getDefaultProps: () => {
     return {
+      empty: false,
       options: [],
       placeholder: 'Select something'
     };
   },
 
   getInitialState: function(){
+    if(this.props.empty)
+      this.props.options.unshift({ value: '', label: this.props.empty });
+
     return {
       open: false,
       focusedOption: null,
       selectedOption: this.getOptionIndex(this.props.selected)
     };
   },
+
+  getOptionValue: option => (option.value === undefined ? option : option.value),
+  getOptionLabel: option => (option.label === undefined ? option : option.label),
 
   getOptionIndex: function(str){
     if(str){
@@ -127,7 +134,7 @@ module.exports = React.createClass({
 
       if(newOptionIndex !== null){
         let selected = this.props.options[newOptionIndex];
-        selectedValue = selected.value || selected;
+        selectedValue = this.getOptionValue(selected);
       }
 
       this.props.onChange(selectedValue);
@@ -162,7 +169,7 @@ module.exports = React.createClass({
 
   renderDisplay: function(optionIndex){
     var selected = this.props.options[optionIndex];
-    if(selected) return selected.label || selected;
+    if(selected) return this.getOptionLabel(selected);
     return <span className='gnocchi-placeholder'>{this.props.placeholder}</span>;
   },
 
@@ -174,12 +181,12 @@ module.exports = React.createClass({
 
     return (
       <li
+        key={i}
         className={className}
-        key={option.value || option}
-        data-value={option.value || option}
+        data-value={this.getOptionValue(option)}
         onMouseEnter={this.focusOption.bind(this, i)}
         onClick={this.selectOption.bind(this, i)}>
-        {option.label || option}
+        {this.getOptionLabel(option)}
         {i === this.state.selectedOption ? <GnocchiIcon type='check'/> : ''}
       </li>
     );

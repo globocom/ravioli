@@ -72,6 +72,43 @@ describe('Select component', () => {
         expect(component.state.selectedOption).to.equal(0);
       });
     });
+
+    describe('when empty option is present', () => {
+      before(() => createSelect({empty: true, options: ['ozzy', 'tommy']}));
+
+      it('should be included among the other options', () => {
+        var options = utils.findAllByClass(component, 'gnocchi-select-option');
+        expect(options).to.have.length(3);
+      });
+
+      it('should be placed at the first position', () => {
+        var options = utils.findAllByClass(component, 'gnocchi-select-option');
+        var option = utils.filterAll(component, el => {
+          return el.getDOMNode().getAttribute('data-value') === '';
+        })[0];
+
+        expect(options[0]).to.equal(option);
+      });
+
+      it('should has empty value', () => {
+        var options = utils.findAllByClass(component, 'gnocchi-select-option');
+        expect(options[0].getDOMNode().getAttribute('data-value')).to.be.empty;
+      });
+
+      it('should has an empty label', () => {
+        var options = utils.findAllByClass(component, 'gnocchi-select-option');
+        expect(options[0].getDOMNode().textContent).to.be.empty;
+      });
+
+      context('and it is a string', () => {
+        before(() => createSelect({empty: 'none', options: ['ozzy', 'tommy']}));
+
+        it('should set label with the string', () => {
+          var options = utils.findAllByClass(component, 'gnocchi-select-option');
+          expect(options[0].getDOMNode().textContent).to.equal('none');
+        });
+      });
+    });
   });
 
   describe('Unit', () => {
@@ -184,6 +221,28 @@ describe('Select component', () => {
 
       it('should return null when option does not exist', () => {
         expect(component.getOptionIndex('stairway to heaven')).to.be.null;
+      });
+    });
+
+    describe('#getOptionValue', () => {
+      it('should return value when option is an object', () => {
+        var option = {value: 'my value', label: 'my label'};
+        expect(component.getOptionValue(option)).to.equal('my value');
+      });
+
+      it('should return value when option is a string', () => {
+        expect(component.getOptionValue('my value')).to.equal('my value');
+      });
+    });
+
+    describe('#getOptionLabel', () => {
+      it('should return label when option is an object', () => {
+        var option = {value: 'my value', label: 'my label'};
+        expect(component.getOptionLabel(option)).to.equal('my label');
+      });
+
+      it('should return label when option is a string', () => {
+        expect(component.getOptionLabel('my label')).to.equal('my label');
       });
     });
 
