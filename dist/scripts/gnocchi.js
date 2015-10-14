@@ -264,8 +264,6 @@ module.exports = React.createClass({
   },
 
   getInitialState: function getInitialState() {
-    if (this.props.empty) this.props.options.unshift({ value: '', label: this.props.empty });
-
     return {
       open: false,
       focusedOption: null,
@@ -289,6 +287,10 @@ module.exports = React.createClass({
     }
 
     return null;
+  },
+
+  isValidOption: function isValidOption(optionIndex) {
+    return optionIndex >= 0 && optionIndex < this.props.options.length;
   },
 
   onkeydown: function onkeydown(event) {
@@ -328,19 +330,15 @@ module.exports = React.createClass({
   },
 
   focusPrev: function focusPrev() {
-    if (this.state.focusedOption > 0) this.focusOption(this.state.focusedOption - 1);
+    if (this.state.focusedOption > 0) this.focusOption(this.state.focusedOption - 1);else if (this.props.empty) this.focusOption('empty');
   },
 
   focusNext: function focusNext() {
-    var newFocusedOption = this.state.focusedOption;
-
-    if (this.state.focusedOption === null) newFocusedOption = 0;else if (this.state.focusedOption < this.props.options.length - 1) newFocusedOption++;
-
-    this.focusOption(newFocusedOption);
+    if (this.state.focusedOption === null) this.props.empty ? this.focusOption('empty') : this.focusOption(0);else if (this.state.focusedOption === 'empty') this.focusOption(0);else if (this.state.focusedOption < this.props.options.length - 1) this.focusOption(this.state.focusedOption + 1);
   },
 
   focusOption: function focusOption(optionIndex) {
-    if (optionIndex >= 0 && optionIndex < this.props.options.length) this.setState({ focusedOption: optionIndex });
+    if (this.isValidOption(optionIndex) || optionIndex === null || optionIndex === 'empty') this.setState({ focusedOption: optionIndex });
   },
 
   unfocusOption: function unfocusOption() {
@@ -348,7 +346,7 @@ module.exports = React.createClass({
   },
 
   selectOption: function selectOption(optionIndex) {
-    if (optionIndex >= 0 && optionIndex < this.props.options.length || optionIndex === null) {
+    if (this.isValidOption(optionIndex) || optionIndex === null || optionIndex === 'empty') {
       this.triggerChange(this.state.selectedOption, optionIndex);
       this.setState({ selectedOption: optionIndex });
       this.close();
@@ -397,6 +395,7 @@ module.exports = React.createClass({
       React.createElement(
         'ul',
         { className: 'gnocchi-select-list' },
+        this.renderEmptyOption(this.props.empty),
         this.props.options.map(this.renderOption)
       )
     );
@@ -429,6 +428,22 @@ module.exports = React.createClass({
       this.getOptionLabel(option),
       i === this.state.selectedOption ? React.createElement(GnocchiIcon, { type: 'check' }) : ''
     );
+  },
+
+  renderEmptyOption: function renderEmptyOption(emptyOption) {
+    if (emptyOption) {
+      var className = 'gnocchi-select-option gnocchi-select-option-empty';
+      if (this.state.focusedOption === 'empty') className += ' gnocchi--is-focused';
+
+      return React.createElement(
+        'li',
+        {
+          className: className,
+          onMouseEnter: this.focusOption.bind(this, 'empty'),
+          onClick: this.selectOption.bind(this, null) },
+        emptyOption
+      );
+    }
   }
 });
 

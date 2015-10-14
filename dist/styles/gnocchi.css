@@ -469,6 +469,9 @@ a.gnocchi-button {
   margin-left: 6px;
   vertical-align: sub;
 }
+.gnocchi-select-option-empty {
+  font-style: italic;
+}
 .gnocchi-text::-webkit-input-placeholder,
 .gnocchi-textarea::-webkit-input-placeholder {
   color: #b9b9b9;
