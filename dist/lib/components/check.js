@@ -25,7 +25,9 @@ module.exports = React.createClass({
   },
 
   toggle: function toggle() {
-    this.setState({ checked: !this.state.checked });
+    var newValue = !this.state.checked;
+    if (this.props.onChange) this.props.onChange(newValue);
+    this.setState({ checked: newValue });
   },
 
   render: function render() {

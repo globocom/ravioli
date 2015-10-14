@@ -44,6 +44,11 @@ module.exports = React.createClass({
   },
 
   renderLabel: function renderLabel() {
-    return [this.props.label, this.props.icon ? React.createElement(GnocchiIcon, { type: this.props.icon }) : ''];
+    return React.createElement(
+      'span',
+      null,
+      this.props.label,
+      this.props.icon ? React.createElement(GnocchiIcon, { type: this.props.icon }) : ''
+    );
   }
 });

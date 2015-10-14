@@ -3,7 +3,7 @@
  *
  * @author Almir Filho <almir@almirfilho.com>
  * @version 0.0.2
- * @license ISC
+ * @license MIT
  */
 
 require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -54,7 +54,12 @@ module.exports = React.createClass({
   },
 
   renderLabel: function renderLabel() {
-    return [this.props.label, this.props.icon ? React.createElement(GnocchiIcon, { type: this.props.icon }) : ''];
+    return React.createElement(
+      'span',
+      null,
+      this.props.label,
+      this.props.icon ? React.createElement(GnocchiIcon, { type: this.props.icon }) : ''
+    );
   }
 });
 
@@ -88,7 +93,9 @@ module.exports = React.createClass({
   },
 
   toggle: function toggle() {
-    this.setState({ checked: !this.state.checked });
+    var newValue = !this.state.checked;
+    if (this.props.onChange) this.props.onChange(newValue);
+    this.setState({ checked: newValue });
   },
 
   render: function render() {
@@ -335,9 +342,23 @@ module.exports = React.createClass({
   },
 
   selectOption: function selectOption(optionIndex) {
-    if (optionIndex >= 0 && optionIndex < this.props.options.length) {
+    if (optionIndex >= 0 && optionIndex < this.props.options.length || optionIndex === null) {
+      this.triggerChange(this.state.selectedOption, optionIndex);
       this.setState({ selectedOption: optionIndex });
       this.close();
+    }
+  },
+
+  triggerChange: function triggerChange(oldOptionIndex, newOptionIndex) {
+    if (this.props.onChange && oldOptionIndex !== newOptionIndex) {
+      var selectedValue = null;
+
+      if (newOptionIndex) {
+        var selected = this.props.options[newOptionIndex];
+        selectedValue = selected.value || selected;
+      }
+
+      this.props.onChange(selectedValue);
     }
   },
 

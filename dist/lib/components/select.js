@@ -103,9 +103,23 @@ module.exports = React.createClass({
   },
 
   selectOption: function selectOption(optionIndex) {
-    if (optionIndex >= 0 && optionIndex < this.props.options.length) {
+    if (optionIndex >= 0 && optionIndex < this.props.options.length || optionIndex === null) {
+      this.triggerChange(this.state.selectedOption, optionIndex);
       this.setState({ selectedOption: optionIndex });
       this.close();
+    }
+  },
+
+  triggerChange: function triggerChange(oldOptionIndex, newOptionIndex) {
+    if (this.props.onChange && oldOptionIndex !== newOptionIndex) {
+      var selectedValue = null;
+
+      if (newOptionIndex) {
+        var selected = this.props.options[newOptionIndex];
+        selectedValue = selected.value || selected;
+      }
+
+      this.props.onChange(selectedValue);
     }
   },
 
