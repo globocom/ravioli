@@ -443,6 +443,7 @@ a.gnocchi-button {
 }
 .gnocchi-select-option {
   position: relative;
+  min-height: 40px;
   background-color: #fff;
   border-top-width: 0;
   border-bottom-width: 0;

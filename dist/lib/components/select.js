@@ -8,27 +8,37 @@ module.exports = React.createClass({
   displayName: 'Gnocchi.Select',
 
   propTypes: {
-    placeholder: React.PropTypes.string,
-    selected: React.PropTypes.string,
-    options: React.PropTypes.arrayOf(React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.shape({
-      value: React.PropTypes.string,
-      label: React.PropTypes.string
+    placeholder: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
+    selected: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
+    options: React.PropTypes.arrayOf(React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number, React.PropTypes.shape({
+      value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
+      label: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number])
     })]))
   },
 
   getDefaultProps: function getDefaultProps() {
     return {
+      empty: false,
       options: [],
       placeholder: 'Select something'
     };
   },
 
   getInitialState: function getInitialState() {
+    if (this.props.empty) this.props.options.unshift({ value: '', label: this.props.empty });
+
     return {
       open: false,
       focusedOption: null,
       selectedOption: this.getOptionIndex(this.props.selected)
     };
+  },
+
+  getOptionValue: function getOptionValue(option) {
+    return option.value === undefined ? option : option.value;
+  },
+  getOptionLabel: function getOptionLabel(option) {
+    return option.label === undefined ? option : option.label;
   },
 
   getOptionIndex: function getOptionIndex(str) {
@@ -40,10 +50,6 @@ module.exports = React.createClass({
     }
 
     return null;
-  },
-
-  preventFocusOnClick: function preventFocusOnClick(event) {
-    return event.preventDefault();
   },
 
   onkeydown: function onkeydown(event) {
@@ -116,7 +122,7 @@ module.exports = React.createClass({
 
       if (newOptionIndex !== null) {
         var selected = this.props.options[newOptionIndex];
-        selectedValue = selected.value || selected;
+        selectedValue = this.getOptionValue(selected);
       }
 
       this.props.onChange(selectedValue);
@@ -134,7 +140,6 @@ module.exports = React.createClass({
         tabIndex: '0',
         onBlur: this.close,
         onKeyDown: this.onkeydown,
-        onMouseDown: this.preventFocusOnClick,
         onMouseLeave: this.unfocusOption },
       React.createElement(
         'div',
@@ -160,7 +165,7 @@ module.exports = React.createClass({
 
   renderDisplay: function renderDisplay(optionIndex) {
     var selected = this.props.options[optionIndex];
-    if (selected) return selected.label || selected;
+    if (selected) return this.getOptionLabel(selected);
     return React.createElement(
       'span',
       { className: 'gnocchi-placeholder' },
@@ -177,12 +182,12 @@ module.exports = React.createClass({
     return React.createElement(
       'li',
       {
+        key: i,
         className: className,
-        key: option.value || option,
-        'data-value': option.value || option,
+        'data-value': this.getOptionValue(option),
         onMouseEnter: this.focusOption.bind(this, i),
         onClick: this.selectOption.bind(this, i) },
-      option.label || option,
+      this.getOptionLabel(option),
       i === this.state.selectedOption ? React.createElement(GnocchiIcon, { type: 'check' }) : ''
     );
   }
