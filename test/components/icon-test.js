@@ -12,7 +12,7 @@ describe('GnocchiIcon component', () => {
   });
 
   it('should render icon', () => {
-    var classes = component.getDOMNode().getAttribute('class');
+    var classes = utils.getDOMNode(component).getAttribute('class');
     expect(classes).to.equal('gnocchi-icon gnocchi-icon-bob-dylan');
   });
 });

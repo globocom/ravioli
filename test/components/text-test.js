@@ -13,7 +13,7 @@ describe('GnocchiText', function(){
   });
 
   it('should set placeholder', function(){
-    var placeholder = this.component.getDOMNode().getAttribute('placeholder');
+    var placeholder = utils.getDOMNode(this.component).getAttribute('placeholder');
     expect(placeholder).to.equal('pink floyd');
   });
 });

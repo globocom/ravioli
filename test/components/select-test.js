@@ -30,25 +30,25 @@ describe('Select component', () => {
 
     it('should render placeholder', () => {
       var placeholder = utils.findByClass(component, 'gnocchi-placeholder');
-      expect(placeholder.getDOMNode().textContent).to.equal('black sabbath');
+      expect(utils.getDOMNode(placeholder).textContent).to.equal('black sabbath');
     });
 
     it('should render options', () => {
       var options = utils.findAllByClass(component, 'gnocchi-select-option');
 
-      var option1 = options[0].getDOMNode();
+      var option1 = utils.getDOMNode(options[0]);
       expect(option1.textContent).to.equal('ozzy');
       expect(option1.getAttribute('data-value')).to.equal('ozzy');
 
-      var option2 = options[1].getDOMNode();
+      var option2 = utils.getDOMNode(options[1]);
       expect(option2.textContent).to.equal('Tommy Iommi');
       expect(option2.getAttribute('data-value')).to.equal('tommy');
 
-      var option3 = options[2].getDOMNode();
+      var option3 = utils.getDOMNode(options[2]);
       expect(option3.textContent).to.equal('Billy Ward');
       expect(option3.getAttribute('data-value')).to.equal('Bill Ward');
 
-      var option4 = options[3].getDOMNode();
+      var option4 = utils.getDOMNode(options[3]);
       expect(option4.textContent).to.equal('Geezer Butler');
       expect(option4.getAttribute('data-value')).to.equal('Geezer Butler');
     });
@@ -89,7 +89,7 @@ describe('Select component', () => {
 
       it('should has an empty label', () => {
         var emptyOption = utils.findByClass(component, 'gnocchi-select-option-empty');
-        expect(emptyOption.getDOMNode().textContent).to.be.empty;
+        expect(utils.getDOMNode(emptyOption).textContent).to.be.empty;
       });
 
       context('and it is a string', () => {
@@ -97,7 +97,7 @@ describe('Select component', () => {
 
         it('should set label with the string', () => {
           var emptyOption = utils.findByClass(component, 'gnocchi-select-option-empty');
-          expect(emptyOption.getDOMNode().textContent).to.equal('none');
+          expect(utils.getDOMNode(emptyOption).textContent).to.equal('none');
         });
       });
     });

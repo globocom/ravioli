@@ -18,7 +18,7 @@ describe('GnocchiButton', function(){
   });
 
   it('should set label', function(){
-    var label = this.component.getDOMNode().textContent;
+    var label = utils.getDOMNode(this.component).textContent;
     expect(label).to.contains('the beatles');
   });
 
@@ -28,7 +28,7 @@ describe('GnocchiButton', function(){
   });
 
   it('should set modifier classes', function(){
-    expect(this.component.getDOMNode().className)
+    expect(utils.getDOMNode(this.component).className)
       .to.contains('gnocchi-button-john')
       .and.to.contains('gnocchi-button-paul')
       .and.to.contains('gnocchi-button-george')
@@ -36,13 +36,14 @@ describe('GnocchiButton', function(){
   });
 
   it('should set custom classes', function(){
-    expect(this.component.getDOMNode().className)
+    expect(utils.getDOMNode(this.component).className)
       .to.contains('something-in-the-way')
       .and.to.contains('she-moves');
   });
 
   it('should be a button element', function(){
-    expect(this.component.getDOMNode()).to.have.property('tagName', 'BUTTON');
+    expect(utils.getDOMNode(this.component))
+      .to.have.property('tagName', 'BUTTON');
   });
 
   context('when link prop is present', () => {
@@ -53,11 +54,12 @@ describe('GnocchiButton', function(){
     });
 
     it('should be a link element', () => {
-      expect(component.getDOMNode()).to.have.property('tagName', 'A');
+      expect(utils.getDOMNode(component)).to.have.property('tagName', 'A');
     });
 
     it('should have href url', () => {
-      expect(component.getDOMNode()).to.have.property('href', 'http://ilovecoffee.com/');
+      expect(utils.getDOMNode(component))
+        .to.have.property('href', 'http://ilovecoffee.com/');
     });
   });
 });

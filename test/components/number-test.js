@@ -27,12 +27,12 @@ describe('GnocchiNumber', function(){
     });
 
     it('should set placeholder', function(){
-      var placeholder = this.textinput.getDOMNode().getAttribute('placeholder');
+      var placeholder = utils.getDOMNode(this.textinput).getAttribute('placeholder');
       expect(placeholder).to.equal('bob dylan');
     });
 
     it('should set value', function(){
-      var value = this.textinput.getDOMNode().value;
+      var value = utils.getDOMNode(this.textinput).value;
       expect(value).to.equal('100');
     });
   });

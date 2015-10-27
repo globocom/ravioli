@@ -16,12 +16,12 @@ describe('GnocchiTextarea', function(){
   });
 
   it('should set placeholder', function(){
-    var placeholder = this.component.getDOMNode().getAttribute('placeholder');
+    var placeholder = utils.getDOMNode(this.component).getAttribute('placeholder');
     expect(placeholder).to.equal('led zeppelin');
   });
 
   it('should set lines quantity', function(){
-    var rows = this.component.getDOMNode().getAttribute('rows');
+    var rows = utils.getDOMNode(this.component).getAttribute('rows');
     expect(rows).to.equal('10');
   });
 });
