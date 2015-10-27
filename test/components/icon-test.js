@@ -3,8 +3,9 @@ var expect = require('chai').expect;
 var utils = require('../utils');
 var GnocchiIcon = require('../../src/lib/components/icon.jsx');
 
-describe('GnocchiIcon component', () => {
-  var component;
+
+describe('GnocchiIcon', () => {
+  let component;
 
   before(() => {
     utils.mockDOM();
@@ -12,7 +13,7 @@ describe('GnocchiIcon component', () => {
   });
 
   it('should render icon', () => {
-    var classes = utils.getDOMNode(component).getAttribute('class');
+    let classes = utils.getDOMNode(component).getAttribute('class');
     expect(classes).to.equal('gnocchi-icon gnocchi-icon-bob-dylan');
   });
 });
