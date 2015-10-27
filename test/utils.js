@@ -11,28 +11,32 @@ var mockDOM = () => {
 
 mockDOM();
 
+
 var React = require('react');
-var TestUtils = require('react-addons-test-utils');
+var ReactDOM = require('react-dom');
+var ReactTestUtils = require('react-addons-test-utils');
+
 
 module.exports = {
   mockDOM: mockDOM,
-  findByClass: TestUtils.findRenderedDOMComponentWithClass,
-  findAllByClass: TestUtils.scryRenderedDOMComponentsWithClass,
-  filterAll: TestUtils.findAllInRenderedTree,
-  click: TestUtils.Simulate.click,
+  getDOMNode: ReactDOM.findDOMNode,
+  findByClass: ReactTestUtils.findRenderedDOMComponentWithClass,
+  findAllByClass: ReactTestUtils.scryRenderedDOMComponentsWithClass,
+  filterAll: ReactTestUtils.findAllInRenderedTree,
+  click: ReactTestUtils.Simulate.click,
 
   keydown: function(element, code){
-    return TestUtils.Simulate.keyDown(element, {which: code});
+    return ReactTestUtils.Simulate.keyDown(element, {which: code});
   },
 
   input: function(element, value){
-    return TestUtils.Simulate.input(element, {
+    return ReactTestUtils.Simulate.input(element, {
       target: {value: value}
     });
   },
 
   render: function(element, props, child){
-    return TestUtils.renderIntoDocument(
+    return ReactTestUtils.renderIntoDocument(
       React.createElement(element, props, child)
     );
   }
