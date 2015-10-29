@@ -1,13 +1,13 @@
-/* global require, describe, before, beforeEach, after, it, context, console */
-var expect = require('chai').expect;
-var utils = require('../utils');
-var GnocchiCheck = require('../../src/lib/components/check.jsx');
+const expect = require('chai').expect;
+const utils = require('../utils');
+const GnocchiCheck = require('../../src/lib/components/check.jsx');
+
 
 describe('Check component', () => {
-  var component;
+  let component;
 
-  var createCheck = opts => component = utils.render(GnocchiCheck, opts);
-  var destroyCheck = () => component = null;
+  const createCheck = opts => component = utils.render(GnocchiCheck, opts);
+  const destroyCheck = () => component = null;
 
   describe('Initialization', () => {
     before(() => createCheck({}));
@@ -18,7 +18,7 @@ describe('Check component', () => {
     });
 
     it('should not render label', () => {
-      var label = utils.findAllByClass(component, 'gnocchi-check-label');
+      let label = utils.findAllByClass(component, 'gnocchi-check-label');
       expect(label).to.be.empty;
     });
 
@@ -27,15 +27,31 @@ describe('Check component', () => {
     });
 
     context('with props', () => {
-      before(() => createCheck({ checked: true, label: 'Eye of the tiger' }));
+      before(() => createCheck({
+        checked: true,
+        label: 'Eye of the tiger',
+        rel: 'something'
+      }));
 
       it('should render label', () => {
-        var label = utils.findByClass(component, 'gnocchi-check-label');
+        let label = utils.findByClass(component, 'gnocchi-check-label');
         expect(label).to.exist;
+        expect(label.textContent).to.equal('Eye of the tiger');
       });
 
       it('should set as checked', () => {
         expect(component.state.checked).to.be.true;
+      });
+
+      it('should pass additional html attributes', () => {
+        let node = utils.getDOMNode(component);
+        expect(node.getAttribute('rel')).to.equal('something');
+      });
+
+      it('should not pass internal props as html attributes', () => {
+        let node = utils.getDOMNode(component);
+        expect(node.getAttribute('label')).to.not.exist;
+        expect(node.getAttribute('checked')).to.not.exist;
       });
     });
   });
@@ -53,8 +69,8 @@ describe('Check component', () => {
       });
 
       context('when `onChange` handler exists', () => {
-        var changeCount = 0;
-        var checkedValue;
+        let changeCount = 0;
+        let checkedValue;
 
         before(() => createCheck({
           onChange: (value) => {
@@ -69,7 +85,7 @@ describe('Check component', () => {
         });
 
         it('should pass new value to handler', () => {
-          var checked = component.state.checked;
+          let checked = component.state.checked;
           component.toggle();
           expect(checkedValue).to.not.equal(checked);
         });

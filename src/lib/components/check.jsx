@@ -1,4 +1,4 @@
-/* global require, module */
+/* global others */
 var React = require('react');
 var GnocchiIcon = require('./icon');
 
@@ -23,15 +23,16 @@ module.exports = React.createClass({
   toggle: function(){
     var newValue = !this.state.checked;
     if(this.props.onChange) this.props.onChange(newValue);
-    this.setState({checked: newValue});
+    this.setState({ checked: newValue });
   },
 
   render: function(){
     var className = 'gnocchi-check-box';
     if(this.state.checked) className += ' gnocchi--is-checked';
+    let { checked, label, ...others } = this.props;
 
     return (
-      <div className='gnocchi-check'>
+      <div {...others} className='gnocchi-check'>
         <div
           className={className}
           tabIndex='0'
