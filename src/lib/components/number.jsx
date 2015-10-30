@@ -2,6 +2,7 @@ import React from 'react';
 import GnocchiText from './text';
 import GnocchiIcon from './icon';
 import propsfilter from '../helpers/propsfilter';
+import keys from '../helpers/keycodes';
 
 
 export default class GnocchiNumber extends React.Component {
@@ -11,12 +12,12 @@ export default class GnocchiNumber extends React.Component {
   }
 
   onkeypress(event){
-    if(event.which < 48 || event.which > 57) event.preventDefault();
+    if(event.which < keys.N0 || event.which > keys.N9) event.preventDefault();
   }
 
   onkeydown(event){
-    if(event.which === 38) this.increment();
-    else if(event.which === 40) this.decrement();
+    if(event.which === keys.UP) this.increment();
+    else if(event.which === keys.DOWN) this.decrement();
   }
 
   oninput(event){

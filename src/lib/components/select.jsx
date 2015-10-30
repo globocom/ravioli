@@ -1,6 +1,7 @@
 import React from 'react';
 import GnocchiIcon from './icon';
 import propsfilter from '../helpers/propsfilter';
+import keys from '../helpers/keycodes';
 
 
 export default class GnocchiSelect extends React.Component {
@@ -36,20 +37,23 @@ export default class GnocchiSelect extends React.Component {
   }
 
   onkeydown(event){
-    if(this.state.open){
-      switch(event.which){
-        case 27: this.close();      break; // esc
-        case 38: this.focusPrev();  break; // up arrow
-        case 40: this.focusNext();  break; // down arrow
-        case 13:                           // enter
-        case 32: this.selectOption(this.state.focusedOption); break; // space
-      }
-    } else if([40, 13, 32].indexOf(event.which) !== -1){ // down, enter, space
-      this.open();
-    }
+    let key = event.which;
 
-    if([27, 38, 40, 13, 32].indexOf(event.which) !== -1)
+    if(key === keys.ESC || key === keys.UP || key === keys.DOWN ||
+       key === keys.ENTER || key === keys.SPACE){
+
+      if(this.state.open){
+        if(key === keys.ESC) this.close();
+        else if(key === keys.UP) this.focusPrev();
+        else if(key === keys.DOWN) this.focusNext();
+        else if(key === keys.ENTER || key === keys.SPACE)
+          this.selectOption(this.state.focusedOption);
+      } else if(key === keys.DOWN || key === keys.ENTER || key === keys.SPACE){
+        this.open();
+      }
+
       event.preventDefault();
+    }
   }
 
   open(){
