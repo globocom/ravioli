@@ -1,7 +1,7 @@
 var React = require('react');
 var GnocchiText = require('./text');
 var GnocchiIcon = require('./icon');
-var propsfilter = require('../helpers/props-filter');
+var propsfilter = require('../helpers/propsfilter');
 
 
 var GnocchiNumber = React.createClass({

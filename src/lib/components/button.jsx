@@ -1,7 +1,7 @@
 var React = require('react');
 var GnocchiIcon = require('./icon');
 var classlist = require('../helpers/classlist');
-var propsfilter = require('../helpers/props-filter');
+var propsfilter = require('../helpers/propsfilter');
 var extend = require('underscore').extend;
 
 

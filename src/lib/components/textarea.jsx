@@ -1,5 +1,5 @@
 var React = require('react');
-var propsfilter = require('../helpers/props-filter');
+var propsfilter = require('../helpers/propsfilter');
 
 
 var GnocchiTextarea = React.createClass({

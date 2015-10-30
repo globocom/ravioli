@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var propsfilter = require('../../src/lib/helpers/props-filter');
+var propsfilter = require('../../src/lib/helpers/propsfilter');
 
 
 describe('PropsFilter helper', () => {

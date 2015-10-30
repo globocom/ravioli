@@ -1,6 +1,6 @@
 var React = require('react');
 var classlist = require('../helpers/classlist');
-var propsfilter = require('../helpers/props-filter');
+var propsfilter = require('../helpers/propsfilter');
 
 
 var GnocchiIcon = React.createClass({
