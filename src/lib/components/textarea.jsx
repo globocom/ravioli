@@ -6,8 +6,11 @@ var GnocchiTextarea = React.createClass({
   displayName: 'Gnocchi.Textarea',
 
   propTypes: {
-    placeholder: React.PropTypes.string,
-    lines: React.PropTypes.number
+    lines: React.PropTypes.number,
+    placeholder: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
+    ])
   },
 
   getDefaultProps: () => {
