@@ -12,9 +12,12 @@ var GnocchiButton = React.createClass({
   propTypes: {
     link: React.PropTypes.string,
     icon: React.PropTypes.string,
-    label: React.PropTypes.string,
     classes: React.PropTypes.string,
-    className: React.PropTypes.string
+    className: React.PropTypes.string,
+    label: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
+    ])
   },
 
   render: function(){
