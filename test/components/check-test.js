@@ -30,7 +30,8 @@ describe('Check component', () => {
       before(() => createCheck({
         checked: true,
         label: 'Eye of the tiger',
-        rel: 'something'
+        rel: 'something',
+        onClick: event => event.done()
       }));
 
       it('should render label', () => {
@@ -52,6 +53,10 @@ describe('Check component', () => {
         let node = utils.getDOMNode(component);
         expect(node.getAttribute('label')).to.not.exist;
         expect(node.getAttribute('checked')).to.not.exist;
+      });
+
+      it('should set additional prop handlers', done => {
+        utils.click(utils.getDOMNode(component), { done: done });
       });
     });
   });
