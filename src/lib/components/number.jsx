@@ -8,7 +8,10 @@ var GnocchiNumber = React.createClass({
   displayName: 'Gnocchi.Number',
 
   propTypes: {
-    placeholder: React.PropTypes.string,
+    placeholder: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
+    ]),
     value: React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.number
