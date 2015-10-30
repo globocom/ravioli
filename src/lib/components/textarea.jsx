@@ -1,7 +1,8 @@
-/* global require, module */
 var React = require('react');
+var propsfilter = require('../helpers/props-filter');
 
-module.exports = React.createClass({
+
+var GnocchiTextarea = React.createClass({
   displayName: 'Gnocchi.Textarea',
 
   propTypes: {
@@ -17,8 +18,10 @@ module.exports = React.createClass({
   },
 
   render: function(){
+    const otherAttrs = propsfilter(this.props, GnocchiTextarea.propTypes);
+
     return (
-      <textarea
+      <textarea {...otherAttrs}
         className='gnocchi-textarea'
         rows={this.props.lines}
         placeholder={this.props.placeholder}>
@@ -26,3 +29,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+module.exports = GnocchiTextarea;
