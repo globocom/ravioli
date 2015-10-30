@@ -44,12 +44,12 @@ describe('Check component', () => {
         expect(component.state.checked).to.be.true;
       });
 
-      it('should pass additional html attributes', () => {
+      it('should set additional html attributes', () => {
         let node = utils.getDOMNode(component);
         expect(node.getAttribute('rel')).to.equal('something');
       });
 
-      it('should not pass internal props as html attributes', () => {
+      it('should not set internal props as html attributes', () => {
         let node = utils.getDOMNode(component);
         expect(node.getAttribute('label')).to.not.exist;
         expect(node.getAttribute('checked')).to.not.exist;

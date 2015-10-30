@@ -1,10 +1,9 @@
-/* global require, describe, before, it, context */
 var expect = require('chai').expect;
 var utils = require('../utils');
 var GnocchiButton = require('../../src/lib/components/button.jsx');
 
 
-describe('GnocchiButton', () => {
+describe('Button component', () => {
   let component;
 
   before(() => {
@@ -46,12 +45,10 @@ describe('GnocchiButton', () => {
       .to.have.property('tagName', 'BUTTON');
   });
 
-  context('when link prop is present', () => {
-    before(() => {
-      component = utils.render(GnocchiButton, {
-        link: 'http://ilovecoffee.com/'
-      });
-    });
+  context('with link prop', () => {
+    before(() => component = utils.render(GnocchiButton, {
+      link: 'http://ilovecoffee.com/'
+    }));
 
     it('should be a link element', () => {
       expect(utils.getDOMNode(component)).to.have.property('tagName', 'A');
@@ -60,6 +57,30 @@ describe('GnocchiButton', () => {
     it('should have href url', () => {
       expect(utils.getDOMNode(component))
         .to.have.property('href', 'http://ilovecoffee.com/');
+    });
+  });
+
+  context('with additional html attributes', () => {
+    before(() => component = utils.render(GnocchiButton, {
+      label: 'the beatles',
+      icon: 'arrow-right',
+      rel: 'something',
+      onClick: event => event.done()
+    }));
+
+    it('should set additional html attributes', () => {
+      let node = utils.getDOMNode(component);
+      expect(node.getAttribute('rel')).to.equal('something');
+    });
+
+    it('should not set internal props as html attributes', () => {
+      let node = utils.getDOMNode(component);
+      expect(node.getAttribute('label')).to.not.exist;
+      expect(node.getAttribute('icon')).to.not.exist;
+    });
+
+    it('should set additional prop handlers', done => {
+      utils.click(utils.getDOMNode(component), { done: done });
     });
   });
 });

@@ -1,9 +1,11 @@
-/* global require, module, console */
 var React = require('react');
 var GnocchiIcon = require('./icon');
 var ClassList = require('../mixins/classlist');
+var propsfilter = require('../helpers/props-filter');
+var extend = require('underscore').extend;
 
-module.exports = React.createClass({
+
+var GnocchiButton = React.createClass({
   displayName: 'Gnocchi.Button',
   mixins: [ClassList],
 
@@ -16,22 +18,20 @@ module.exports = React.createClass({
   },
 
   render: function(){
-    return this.props.link ? this.renderLink() : this.renderButton();
-  },
-
-  renderLink: function(){
-    return (
-      <a className={this.renderClassNames()} href={this.props.link}>
-        {this.renderLabel()}
-      </a>
+    let tag = 'button';
+    let props = extend({},
+      propsfilter(this.props, GnocchiButton.propTypes),
+      { className: this.renderClassNames() }
     );
-  },
 
-  renderButton: function(){
-    return (
-      <button className={this.renderClassNames()}>
-        {this.renderLabel()}
-      </button>
+    if(this.props.link){
+      tag = 'a';
+      props.href = this.props.link;
+    }
+
+    return React.createElement(tag, props,
+      this.props.label,
+      this.props.icon ? <GnocchiIcon type={this.props.icon}/> : ''
     );
   },
 
@@ -39,14 +39,7 @@ module.exports = React.createClass({
     let classNames = this.classList('gnocchi-button', this.props.classes);
     if(this.props.className) classNames += ` ${this.props.className}`;
     return classNames;
-  },
-
-  renderLabel: function(){
-    return (
-      <span>
-        {this.props.label}
-        {this.props.icon ? <GnocchiIcon type={this.props.icon}/> : ''}
-      </span>
-    );
   }
 });
+
+module.exports = GnocchiButton;
