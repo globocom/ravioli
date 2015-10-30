@@ -4,8 +4,6 @@ var propsfilter = require('../helpers/props-filter');
 
 
 var GnocchiCheck = React.createClass({
-  displayName: 'Gnocchi.Check',
-
   propTypes: {
     checked: React.PropTypes.bool,
     label: React.PropTypes.oneOfType([

@@ -1,14 +1,11 @@
 var React = require('react');
 var GnocchiIcon = require('./icon');
-var ClassList = require('../mixins/classlist');
+var classlist = require('../helpers/classlist');
 var propsfilter = require('../helpers/props-filter');
 var extend = require('underscore').extend;
 
 
 var GnocchiButton = React.createClass({
-  displayName: 'Gnocchi.Button',
-  mixins: [ClassList],
-
   propTypes: {
     link: React.PropTypes.string,
     icon: React.PropTypes.string,
@@ -39,7 +36,7 @@ var GnocchiButton = React.createClass({
   },
 
   renderClassNames: function(){
-    let classNames = this.classList('gnocchi-button', this.props.classes);
+    let classNames = classlist('gnocchi-button', this.props.classes);
     if(this.props.className) classNames += ` ${this.props.className}`;
     return classNames;
   }
