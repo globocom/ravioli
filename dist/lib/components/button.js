@@ -50,6 +50,8 @@ var GnocchiButton = (function (_React$Component) {
       if (this.props.link) {
         tag = 'a';
         props.href = this.props.link;
+      } else {
+        props.type = 'button';
       }
 
       return _react2['default'].createElement(tag, props, this.props.label, this.props.icon ? _react2['default'].createElement(_icon2['default'], { type: this.props.icon }) : '');
