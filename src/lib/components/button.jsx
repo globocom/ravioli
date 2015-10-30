@@ -16,6 +16,8 @@ export default class GnocchiButton extends React.Component {
     if(this.props.link){
       tag = 'a';
       props.href = this.props.link;
+    } else {
+      props.type = 'button';
     }
 
     return React.createElement(tag, props,
