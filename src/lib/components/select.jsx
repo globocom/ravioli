@@ -1,76 +1,41 @@
-var React = require('react');
-var GnocchiIcon = require('./icon');
-var propsfilter = require('../helpers/propsfilter');
+import React from 'react';
+import GnocchiIcon from './icon';
+import propsfilter from '../helpers/propsfilter';
 
 
-var GnocchiSelect = React.createClass({
-  displayName: 'Gnocchi.Select',
+export default class GnocchiSelect extends React.Component {
+  constructor(props){
+    super(props);
 
-  propTypes: {
-    empty: React.PropTypes.oneOfType([
-      React.PropTypes.bool,
-      React.PropTypes.string,
-      React.PropTypes.number
-    ]),
-    placeholder: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number
-    ]),
-    selected: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number
-    ]),
-    options: React.PropTypes.arrayOf(
-      React.PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.number,
-        React.PropTypes.shape({
-          value: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.number
-          ]),
-          label: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.number
-          ])
-        })
-      ])
-    )
-  },
-
-  getDefaultProps: () => {
-    return {
-      empty: false,
-      options: [],
-      placeholder: 'Select something'
-    };
-  },
-
-  getInitialState: function(){
-    return {
+    this.state = {
       open: false,
       focusedOption: null,
-      selectedOption: this.getOptionIndex(this.props.selected)
+      selectedOption: this.getOptionIndex(props.selected)
     };
-  },
+  }
 
-  getOptionValue: option => (option.value === undefined ? option : option.value),
-  getOptionLabel: option => (option.label === undefined ? option : option.label),
+  getOptionValue(option){
+    return option.value === undefined ? option : option.value;
+  }
 
-  getOptionIndex: function(str){
+  getOptionLabel(option){
+    return option.label === undefined ? option : option.label;
+  }
+
+  getOptionIndex(str){
     if(str){
       let idx = this.props.options.findIndex(o => o === str || o.value === str);
       if(idx !== -1) return idx;
     }
 
     return null;
-  },
+  }
 
-  isValidOption: function(optionIndex){
+  isValidOption(optionIndex){
     return optionIndex >= 0 && optionIndex < this.props.options.length;
-  },
+  }
 
-  onkeydown: function(event){
+  onkeydown(event){
     if(this.state.open){
       switch(event.which){
         case 27: this.close();      break; // esc
@@ -85,57 +50,57 @@ var GnocchiSelect = React.createClass({
 
     if([27, 38, 40, 13, 32].indexOf(event.which) !== -1)
       event.preventDefault();
-  },
+  }
 
-  open: function(){
-    if(!this.state.open) this.setState({open: true});
-  },
+  open(){
+    if(!this.state.open) this.setState({ open: true });
+  }
 
-  close: function(){
+  close(){
     if(this.state.open){
-      this.setState({open: false});
+      this.setState({ open: false });
       this.unfocusOption();
     }
-  },
+  }
 
-  toggle: function(){
+  toggle(){
     this.state.open ? this.close() : this.open();
-  },
+  }
 
-  focusPrev: function(){
+  focusPrev(){
     if(this.state.focusedOption > 0)
       this.focusOption(this.state.focusedOption - 1);
     else if(this.props.empty)
       this.focusOption('empty');
-  },
+  }
 
-  focusNext: function(){
+  focusNext(){
     if(this.state.focusedOption === null)
       this.props.empty ? this.focusOption('empty') : this.focusOption(0);
     else if(this.state.focusedOption === 'empty')
       this.focusOption(0);
     else if(this.state.focusedOption < this.props.options.length - 1)
       this.focusOption(this.state.focusedOption + 1);
-  },
+  }
 
-  focusOption: function(optionIndex){
+  focusOption(optionIndex){
     if(this.isValidOption(optionIndex) || optionIndex === null || optionIndex === 'empty')
-      this.setState({focusedOption: optionIndex});
-  },
+      this.setState({ focusedOption: optionIndex });
+  }
 
-  unfocusOption: function(){
-    this.setState({focusedOption: null});
-  },
+  unfocusOption(){
+    this.setState({ focusedOption: null });
+  }
 
-  selectOption: function(optionIndex){
+  selectOption(optionIndex){
     if(this.isValidOption(optionIndex) || optionIndex === null || optionIndex === 'empty'){
       this.triggerChange(this.state.selectedOption, optionIndex);
-      this.setState({selectedOption: optionIndex});
+      this.setState({ selectedOption: optionIndex });
       this.close();
     }
-  },
+  }
 
-  triggerChange: function(oldOptionIndex, newOptionIndex){
+  triggerChange(oldOptionIndex, newOptionIndex){
     if(this.props.onChange && oldOptionIndex !== newOptionIndex){
       let selectedValue = null;
 
@@ -146,21 +111,21 @@ var GnocchiSelect = React.createClass({
 
       this.props.onChange(selectedValue);
     }
-  },
+  }
 
-  render: function(){
+  render(){
     const otherAttrs = propsfilter(this.props, GnocchiSelect.propTypes);
-    var className = 'gnocchi-select';
+    let className = 'gnocchi-select';
     if(this.state.open) className += ' gnocchi--is-open';
 
     return (
       <div {...otherAttrs}
         className={className}
         tabIndex='0'
-        onBlur={this.close}
-        onKeyDown={this.onkeydown}
-        onMouseLeave={this.unfocusOption}>
-        <div className='gnocchi-text' onClick={this.toggle}>
+        onBlur={this.close.bind(this)}
+        onKeyDown={this.onkeydown.bind(this)}
+        onMouseLeave={this.unfocusOption.bind(this)}>
+        <div className='gnocchi-text' onClick={this.toggle.bind(this)}>
           <div className='gnocchi-select-display'>
             {this.renderDisplay(this.state.selectedOption)}
           </div>
@@ -170,21 +135,20 @@ var GnocchiSelect = React.createClass({
         </div>
         <ul className='gnocchi-select-list'>
           {this.renderEmptyOption(this.props.empty)}
-          {this.props.options.map(this.renderOption)}
+          {this.props.options.map(this.renderOption.bind(this))}
         </ul>
       </div>
     );
-  },
+  }
 
-  renderDisplay: function(optionIndex){
-    var selected = this.props.options[optionIndex];
+  renderDisplay(optionIndex){
+    let selected = this.props.options[optionIndex];
     if(selected) return this.getOptionLabel(selected);
     return <span className='gnocchi-placeholder'>{this.props.placeholder}</span>;
-  },
+  }
 
-  renderOption: function(option, i){
-    var className = 'gnocchi-select-option';
-
+  renderOption(option, i){
+    let className = 'gnocchi-select-option';
     if(i === this.state.focusedOption) className += ' gnocchi--is-focused';
     if(i === this.state.selectedOption) className += ' gnocchi--is-selected';
 
@@ -199,9 +163,9 @@ var GnocchiSelect = React.createClass({
         {i === this.state.selectedOption ? <GnocchiIcon type='check'/> : ''}
       </li>
     );
-  },
+  }
 
-  renderEmptyOption: function(emptyOption){
+  renderEmptyOption(emptyOption){
     if(emptyOption){
       let className = 'gnocchi-select-option gnocchi-select-option-empty';
       if(this.state.focusedOption === 'empty')
@@ -217,6 +181,42 @@ var GnocchiSelect = React.createClass({
       );
     }
   }
-});
+}
 
-module.exports = GnocchiSelect;
+GnocchiSelect.propTypes = {
+  empty: React.PropTypes.oneOfType([
+    React.PropTypes.bool,
+    React.PropTypes.string,
+    React.PropTypes.number
+  ]),
+  placeholder: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.number
+  ]),
+  selected: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.number
+  ]),
+  options: React.PropTypes.arrayOf(
+    React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number,
+      React.PropTypes.shape({
+        value: React.PropTypes.oneOfType([
+          React.PropTypes.string,
+          React.PropTypes.number
+        ]),
+        label: React.PropTypes.oneOfType([
+          React.PropTypes.string,
+          React.PropTypes.number
+        ])
+      })
+    ])
+  )
+};
+
+GnocchiSelect.defaultProps = {
+  empty: false,
+  options: [],
+  placeholder: 'Select something'
+};

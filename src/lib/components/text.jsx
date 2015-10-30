@@ -1,24 +1,9 @@
-var React = require('react');
-var propsfilter = require('../helpers/propsfilter');
+import React from 'react';
+import propsfilter from '../helpers/propsfilter';
 
 
-var GnocchiText = React.createClass({
-  displayName: 'Gnocchi.Text',
-
-  propTypes: {
-    placeholder: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number
-    ])
-  },
-
-  getDefaultProps: () => {
-    return {
-      placeholder: 'Type something'
-    };
-  },
-
-  render: function(){
+export default class GnocchiText extends React.Component {
+  render(){
     const otherAttrs = propsfilter(this.props, GnocchiText.propTypes);
 
     return (
@@ -33,6 +18,15 @@ var GnocchiText = React.createClass({
         onChange={this.props.onChange} />
     );
   }
-});
+}
 
-module.exports = GnocchiText;
+GnocchiText.propTypes = {
+  placeholder: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.number
+  ])
+};
+
+GnocchiText.defaultProps = {
+  placeholder: 'Type something'
+};

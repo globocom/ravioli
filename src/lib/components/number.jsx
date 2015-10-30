@@ -1,61 +1,42 @@
-var React = require('react');
-var GnocchiText = require('./text');
-var GnocchiIcon = require('./icon');
-var propsfilter = require('../helpers/propsfilter');
+import React from 'react';
+import GnocchiText from './text';
+import GnocchiIcon from './icon';
+import propsfilter from '../helpers/propsfilter';
 
 
-var GnocchiNumber = React.createClass({
-  displayName: 'Gnocchi.Number',
+export default class GnocchiNumber extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = { value: props.value };
+  }
 
-  propTypes: {
-    placeholder: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number
-    ]),
-    value: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number
-    ])
-  },
-
-  getDefaultProps: () => {
-    return {
-      placeholder: '#',
-      value: ''
-    };
-  },
-
-  getInitialState: function(){
-    return { value: this.props.value };
-  },
-
-  onkeypress: event => {
+  onkeypress(event){
     if(event.which < 48 || event.which > 57) event.preventDefault();
-  },
+  }
 
-  onkeydown: function(event){
+  onkeydown(event){
     if(event.which === 38) this.increment();
     else if(event.which === 40) this.decrement();
-  },
+  }
 
-  oninput: function(event){
+  oninput(event){
     this.setValue(event.target.value);
-  },
+  }
 
-  setValue: function(value){
+  setValue(value){
     value = parseInt(value, 10);
-    this.setState({value: isNaN(value) ? '' : value});
-  },
+    this.setState({ value: isNaN(value) ? '' : value });
+  }
 
-  increment: function(){
+  increment(){
     this.setValue(this.state.value + 1);
-  },
+  }
 
-  decrement: function(){
+  decrement(){
     this.setValue(this.state.value - 1);
-  },
+  }
 
-  render: function(){
+  render(){
     const otherAttrs = propsfilter(this.props, GnocchiNumber.propTypes);
 
     return (
@@ -63,21 +44,35 @@ var GnocchiNumber = React.createClass({
         <GnocchiText
           value={this.state.value}
           placeholder={this.props.placeholder}
-          onKeyPress={this.onkeypress}
-          onKeyDown={this.onkeydown}
-          onInput={this.oninput}
+          onKeyPress={this.onkeypress.bind(this)}
+          onKeyDown={this.onkeydown.bind(this)}
+          onInput={this.oninput.bind(this)}
           onChange={function(){}} />
         <div className='gnocchi-number-buttons'>
-          <div className='gnocchi-number-up' onClick={this.increment}>
+          <div className='gnocchi-number-up' onClick={this.increment.bind(this)}>
             <GnocchiIcon type='arrow-up'/>
           </div>
-          <div className='gnocchi-number-down' onClick={this.decrement}>
+          <div className='gnocchi-number-down' onClick={this.decrement.bind(this)}>
             <GnocchiIcon type='arrow-down'/>
           </div>
         </div>
       </div>
     );
   }
-});
+}
 
-module.exports = GnocchiNumber;
+GnocchiNumber.propTypes = {
+  placeholder: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.number
+  ]),
+  value: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.number
+  ])
+};
+
+GnocchiNumber.defaultProps = {
+  placeholder: '#',
+  value: ''
+};

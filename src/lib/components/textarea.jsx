@@ -1,26 +1,9 @@
-var React = require('react');
-var propsfilter = require('../helpers/propsfilter');
+import React from 'react';
+import propsfilter from '../helpers/propsfilter';
 
 
-var GnocchiTextarea = React.createClass({
-  displayName: 'Gnocchi.Textarea',
-
-  propTypes: {
-    lines: React.PropTypes.number,
-    placeholder: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number
-    ])
-  },
-
-  getDefaultProps: () => {
-    return {
-      placeholder: 'Type something',
-      lines: 4
-    };
-  },
-
-  render: function(){
+export default class GnocchiTextarea extends React.Component {
+  render(){
     const otherAttrs = propsfilter(this.props, GnocchiTextarea.propTypes);
 
     return (
@@ -31,6 +14,17 @@ var GnocchiTextarea = React.createClass({
       </textarea>
     );
   }
-});
+}
 
-module.exports = GnocchiTextarea;
+GnocchiTextarea.propTypes = {
+  lines: React.PropTypes.number,
+  placeholder: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.number
+  ])
+};
+
+GnocchiTextarea.defaultProps = {
+  lines: 4,
+  placeholder: 'Type something'
+};

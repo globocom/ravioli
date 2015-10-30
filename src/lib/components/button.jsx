@@ -1,23 +1,12 @@
-var React = require('react');
-var GnocchiIcon = require('./icon');
-var classlist = require('../helpers/classlist');
-var propsfilter = require('../helpers/propsfilter');
-var extend = require('underscore').extend;
+import React from 'react';
+import GnocchiIcon from './icon';
+import classlist from '../helpers/classlist';
+import propsfilter from '../helpers/propsfilter';
+import { extend } from 'underscore';
 
 
-var GnocchiButton = React.createClass({
-  propTypes: {
-    link: React.PropTypes.string,
-    icon: React.PropTypes.string,
-    classes: React.PropTypes.string,
-    className: React.PropTypes.string,
-    label: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number
-    ])
-  },
-
-  render: function(){
+export default class GnocchiButton extends React.Component {
+  render(){
     let tag = 'button';
     let props = extend({},
       propsfilter(this.props, GnocchiButton.propTypes),
@@ -33,13 +22,22 @@ var GnocchiButton = React.createClass({
       this.props.label,
       this.props.icon ? <GnocchiIcon type={this.props.icon}/> : ''
     );
-  },
+  }
 
-  renderClassNames: function(){
+  renderClassNames(){
     let classNames = classlist('gnocchi-button', this.props.classes);
     if(this.props.className) classNames += ` ${this.props.className}`;
     return classNames;
   }
-});
+}
 
-module.exports = GnocchiButton;
+GnocchiButton.propTypes = {
+  link: React.PropTypes.string,
+  icon: React.PropTypes.string,
+  classes: React.PropTypes.string,
+  className: React.PropTypes.string,
+  label: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.number
+  ])
+};
