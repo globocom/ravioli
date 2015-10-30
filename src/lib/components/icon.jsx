@@ -1,8 +1,9 @@
-/* global require, module */
 var React = require('react');
 var ClassList = require('../mixins/classlist');
+var propsfilter = require('../helpers/props-filter');
 
-module.exports = React.createClass({
+
+var GnocchiIcon = React.createClass({
   displayName: 'Gnocchi.Icon',
   mixins: [ClassList],
 
@@ -11,6 +12,11 @@ module.exports = React.createClass({
   },
 
   render: function(){
-    return <i className={this.classList('gnocchi-icon', this.props.type)}></i>;
+    const otherAttrs = propsfilter(this.props, GnocchiIcon.propTypes);
+    const className = this.classList('gnocchi-icon', this.props.type);
+
+    return <i {...otherAttrs} className={className}></i>;
   }
 });
+
+module.exports = GnocchiIcon;
