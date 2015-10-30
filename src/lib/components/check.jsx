@@ -1,8 +1,9 @@
-/* global others */
 var React = require('react');
 var GnocchiIcon = require('./icon');
+var propsfilter = require('../helpers/props-filter');
 
-module.exports = React.createClass({
+
+var GnocchiCheck = React.createClass({
   displayName: 'Gnocchi.Check',
 
   propTypes: {
@@ -27,12 +28,12 @@ module.exports = React.createClass({
   },
 
   render: function(){
+    var otherAttrs = propsfilter(this.props, GnocchiCheck.propTypes);
     var className = 'gnocchi-check-box';
     if(this.state.checked) className += ' gnocchi--is-checked';
-    let { checked, label, ...others } = this.props;
 
     return (
-      <div {...others} className='gnocchi-check'>
+      <div {...otherAttrs} className='gnocchi-check'>
         <div
           className={className}
           tabIndex='0'
@@ -55,3 +56,5 @@ module.exports = React.createClass({
     }
   }
 });
+
+module.exports = GnocchiCheck;
