@@ -1,7 +1,7 @@
-/* global require, describe, before, beforeEach, after, it, context, console */
 var expect = require('chai').expect;
 var utils = require('../utils');
 var GnocchiSelect = require('../../src/lib/components/select.jsx');
+
 
 describe('Select component', () => {
   var component;
@@ -99,6 +99,32 @@ describe('Select component', () => {
           var emptyOption = utils.findByClass(component, 'gnocchi-select-option-empty');
           expect(utils.getDOMNode(emptyOption).textContent).to.equal('none');
         });
+      });
+    });
+
+    context('with additional html attributes', () => {
+      before(() => createSelect({
+        empty: true,
+        options: ['ozzy', 'tommy'],
+        selected: 'ozzy',
+        rel: 'something',
+        onClick: event => event.done()
+      }));
+
+      it('should set additional html attributes', () => {
+        let node = utils.getDOMNode(component);
+        expect(node.getAttribute('rel')).to.equal('something');
+      });
+
+      it('should not set internal props as html attributes', () => {
+        let node = utils.getDOMNode(component);
+        expect(node.getAttribute('empty')).to.not.exist;
+        expect(node.getAttribute('options')).to.not.exist;
+        expect(node.getAttribute('selected')).to.not.exist;
+      });
+
+      it('should set additional prop handlers', done => {
+        utils.click(utils.getDOMNode(component), { done: done });
       });
     });
   });

@@ -1,11 +1,17 @@
-/* global require, module, console */
 var React = require('react');
 var GnocchiIcon = require('./icon');
+var propsfilter = require('../helpers/props-filter');
 
-module.exports = React.createClass({
+
+var GnocchiSelect = React.createClass({
   displayName: 'Gnocchi.Select',
 
   propTypes: {
+    empty: React.PropTypes.oneOfType([
+      React.PropTypes.bool,
+      React.PropTypes.string,
+      React.PropTypes.number
+    ]),
     placeholder: React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.number
@@ -143,11 +149,12 @@ module.exports = React.createClass({
   },
 
   render: function(){
+    const otherAttrs = propsfilter(this.props, GnocchiSelect.propTypes);
     var className = 'gnocchi-select';
     if(this.state.open) className += ' gnocchi--is-open';
 
     return (
-      <div
+      <div {...otherAttrs}
         className={className}
         tabIndex='0'
         onBlur={this.close}
@@ -211,3 +218,5 @@ module.exports = React.createClass({
     }
   }
 });
+
+module.exports = GnocchiSelect;
