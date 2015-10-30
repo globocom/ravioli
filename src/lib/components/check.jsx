@@ -8,7 +8,10 @@ var GnocchiCheck = React.createClass({
 
   propTypes: {
     checked: React.PropTypes.bool,
-    label: React.PropTypes.string
+    label: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
+    ])
   },
 
   getDefaultProps: () => {
