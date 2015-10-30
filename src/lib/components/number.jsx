@@ -1,9 +1,10 @@
-/* global require, module */
 var React = require('react');
 var GnocchiText = require('./text');
 var GnocchiIcon = require('./icon');
+var propsfilter = require('../helpers/props-filter');
 
-module.exports = React.createClass({
+
+var GnocchiNumber = React.createClass({
   displayName: 'Gnocchi.Number',
 
   propTypes: {
@@ -52,8 +53,10 @@ module.exports = React.createClass({
   },
 
   render: function(){
+    const otherAttrs = propsfilter(this.props, GnocchiNumber.propTypes);
+
     return (
-      <div className='gnocchi-number'>
+      <div {...otherAttrs} className='gnocchi-number'>
         <GnocchiText
           value={this.state.value}
           placeholder={this.props.placeholder}
@@ -73,3 +76,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+module.exports = GnocchiNumber;

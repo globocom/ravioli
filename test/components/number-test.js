@@ -1,10 +1,9 @@
-/* global require, describe, before, after, it, context */
 var expect = require('chai').expect;
 var utils = require('../utils');
 var GnocchiNumber = require('../../src/lib/components/number.jsx');
 
 
-describe('GnocchiNumber', () => {
+describe('Number component', () => {
   let component;
   let textinput;
 
@@ -34,6 +33,30 @@ describe('GnocchiNumber', () => {
     it('should set value', () => {
       let value = utils.getDOMNode(textinput).value;
       expect(value).to.equal('100');
+    });
+
+    context('with additional html attributes', () => {
+      before(() => component = utils.render(GnocchiNumber, {
+        placeholder: 'bob dylan',
+        value: 100,
+        rel: 'something',
+        onClick: event => event.done()
+      }));
+
+      it('should set additional html attributes', () => {
+        let node = utils.getDOMNode(component);
+        expect(node.getAttribute('rel')).to.equal('something');
+      });
+
+      it('should not set internal props as html attributes', () => {
+        let node = utils.getDOMNode(component);
+        expect(node.getAttribute('placeholder')).to.not.exist;
+        expect(node.getAttribute('value')).to.not.exist;
+      });
+
+      it('should set additional prop handlers', done => {
+        utils.click(utils.getDOMNode(component), { done: done });
+      });
     });
   });
 

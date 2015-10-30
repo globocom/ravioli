@@ -3,7 +3,7 @@ var utils = require('../utils');
 var GnocchiIcon = require('../../src/lib/components/icon.jsx');
 
 
-describe('GnocchiIcon component', () => {
+describe('Icon component', () => {
   let component;
 
   before(() => {
