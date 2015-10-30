@@ -6,7 +6,10 @@ var GnocchiText = React.createClass({
   displayName: 'Gnocchi.Text',
 
   propTypes: {
-    placeholder: React.PropTypes.string
+    placeholder: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
+    ])
   },
 
   getDefaultProps: () => {
