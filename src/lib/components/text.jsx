@@ -1,7 +1,8 @@
-/* global module, require */
 var React = require('react');
+var propsfilter = require('../helpers/props-filter');
 
-module.exports = React.createClass({
+
+var GnocchiText = React.createClass({
   displayName: 'Gnocchi.Text',
 
   propTypes: {
@@ -15,8 +16,10 @@ module.exports = React.createClass({
   },
 
   render: function(){
+    const otherAttrs = propsfilter(this.props, GnocchiText.propTypes);
+
     return (
-      <input
+      <input {...otherAttrs}
         className='gnocchi-text'
         type='text'
         value={this.props.value}
@@ -28,3 +31,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+module.exports = GnocchiText;
