@@ -28,6 +28,7 @@ describe('Text component', () => {
 
   context('with additional html attributes', () => {
     before(() => createText({
+      value: 'echoes',
       placeholder: 'pink floyd',
       rel: 'something',
       onClick: event => event.done()
@@ -36,6 +37,12 @@ describe('Text component', () => {
     it('should set additional html attributes', () => {
       let node = utils.getDOMNode(component);
       expect(node.getAttribute('rel')).to.equal('something');
+    });
+
+    it('should not set internal props as html attributes', () => {
+      let node = utils.getDOMNode(component);
+      expect(node.getAttribute('value')).to.not.exist;
+      expect(node.getAttribute('placeholder')).to.not.exist;
     });
 
     it('should set additional prop handlers', done => {
