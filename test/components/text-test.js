@@ -6,18 +6,28 @@ var GnocchiText = require('../../src/lib/components/text.jsx');
 describe('Text component', () => {
   let component;
 
+  const createText = opts => component = utils.render(GnocchiText, opts);
+  const destroyText = () => component = null;
+
   before(() => {
     utils.mockDOM();
-    component = utils.render(GnocchiText, {placeholder: 'pink floyd'});
+    createText({placeholder: 'pink floyd', value: 'echoes'});
+  });
+
+  after(() => destroyText());
+
+  it('should set value', () => {
+    let node = utils.findByTag(component, 'input');
+    expect(node.getAttribute('value')).to.equal('echoes');
   });
 
   it('should set placeholder', () => {
-    let placeholder = utils.getDOMNode(component).getAttribute('placeholder');
-    expect(placeholder).to.equal('pink floyd');
+    let node = utils.findByTag(component, 'input');
+    expect(node.getAttribute('placeholder')).to.equal('pink floyd');
   });
 
   context('with additional html attributes', () => {
-    before(() => component = utils.render(GnocchiText, {
+    before(() => createText({
       placeholder: 'pink floyd',
       rel: 'something',
       onClick: event => event.done()

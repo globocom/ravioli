@@ -7,15 +7,13 @@ export default class GnocchiText extends React.Component {
     const otherAttrs = propsfilter(this.props, GnocchiText.propTypes);
 
     return (
-      <input {...otherAttrs}
-        className='gnocchi-text'
-        type='text'
-        value={this.props.value}
-        placeholder={this.props.placeholder}
-        onKeyPress={this.props.onKeyPress}
-        onKeyDown={this.props.onKeyDown}
-        onInput={this.props.onInput}
-        onChange={this.props.onChange} />
+      <div {...otherAttrs} className='gnocchi-text-wrapper'>
+        <input
+          className='gnocchi-text'
+          type='text'
+          defaultValue={this.props.value}
+          placeholder={this.props.placeholder}/>
+      </div>
     );
   }
 }
