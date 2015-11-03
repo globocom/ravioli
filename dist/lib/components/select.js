@@ -28,6 +28,10 @@ var _helpersPropsfilter = require('../helpers/propsfilter');
 
 var _helpersPropsfilter2 = _interopRequireDefault(_helpersPropsfilter);
 
+var _helpersKeycodes = require('../helpers/keycodes');
+
+var _helpersKeycodes2 = _interopRequireDefault(_helpersKeycodes);
+
 var GnocchiSelect = (function (_React$Component) {
   _inherits(GnocchiSelect, _React$Component);
 
@@ -73,24 +77,18 @@ var GnocchiSelect = (function (_React$Component) {
   }, {
     key: 'onkeydown',
     value: function onkeydown(event) {
-      if (this.state.open) {
-        switch (event.which) {
-          case 27:
-            this.close();break; // esc
-          case 38:
-            this.focusPrev();break; // up arrow
-          case 40:
-            this.focusNext();break; // down arrow
-          case 13: // enter
-          case 32:
-            this.selectOption(this.state.focusedOption);break; // space
-        }
-      } else if ([40, 13, 32].indexOf(event.which) !== -1) {
-          // down, enter, space
+      var key = event.which;
+
+      if (key === _helpersKeycodes2['default'].ESC || key === _helpersKeycodes2['default'].UP || key === _helpersKeycodes2['default'].DOWN || key === _helpersKeycodes2['default'].ENTER || key === _helpersKeycodes2['default'].SPACE) {
+
+        if (this.state.open) {
+          if (key === _helpersKeycodes2['default'].ESC) this.close();else if (key === _helpersKeycodes2['default'].UP) this.focusPrev();else if (key === _helpersKeycodes2['default'].DOWN) this.focusNext();else if (key === _helpersKeycodes2['default'].ENTER || key === _helpersKeycodes2['default'].SPACE) this.selectOption(this.state.focusedOption);
+        } else if (key === _helpersKeycodes2['default'].DOWN || key === _helpersKeycodes2['default'].ENTER || key === _helpersKeycodes2['default'].SPACE) {
           this.open();
         }
 
-      if ([27, 38, 40, 13, 32].indexOf(event.which) !== -1) event.preventDefault();
+        event.preventDefault();
+      }
     }
   }, {
     key: 'open',

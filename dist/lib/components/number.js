@@ -32,6 +32,10 @@ var _helpersPropsfilter = require('../helpers/propsfilter');
 
 var _helpersPropsfilter2 = _interopRequireDefault(_helpersPropsfilter);
 
+var _helpersKeycodes = require('../helpers/keycodes');
+
+var _helpersKeycodes2 = _interopRequireDefault(_helpersKeycodes);
+
 var GnocchiNumber = (function (_React$Component) {
   _inherits(GnocchiNumber, _React$Component);
 
@@ -39,29 +43,18 @@ var GnocchiNumber = (function (_React$Component) {
     _classCallCheck(this, GnocchiNumber);
 
     _get(Object.getPrototypeOf(GnocchiNumber.prototype), 'constructor', this).call(this, props);
-    this.state = { value: props.value };
+    this.state = { value: this.convertValue(props.value) };
   }
 
   _createClass(GnocchiNumber, [{
-    key: 'onkeypress',
-    value: function onkeypress(event) {
-      if (event.which < 48 || event.which > 57) event.preventDefault();
+    key: 'handleTyping',
+    value: function handleTyping(event) {
+      if (event.which < _helpersKeycodes2['default'].N0 || event.which > _helpersKeycodes2['default'].N9) event.preventDefault();
     }
   }, {
-    key: 'onkeydown',
-    value: function onkeydown(event) {
-      if (event.which === 38) this.increment();else if (event.which === 40) this.decrement();
-    }
-  }, {
-    key: 'oninput',
-    value: function oninput(event) {
-      this.setValue(event.target.value);
-    }
-  }, {
-    key: 'setValue',
-    value: function setValue(value) {
-      value = parseInt(value, 10);
-      this.setState({ value: isNaN(value) ? '' : value });
+    key: 'handleControl',
+    value: function handleControl(event) {
+      if (event.which === _helpersKeycodes2['default'].UP) this.increment();else if (event.which === _helpersKeycodes2['default'].DOWN) this.decrement();
     }
   }, {
     key: 'increment',
@@ -74,6 +67,21 @@ var GnocchiNumber = (function (_React$Component) {
       this.setValue(this.state.value - 1);
     }
   }, {
+    key: 'setValue',
+    value: function setValue(newValue) {
+      newValue = this.convertValue(newValue);
+
+      if (this.props.onChange && newValue !== this.state.value) this.props.onChange.call(null, newValue);
+
+      this.setState({ value: newValue });
+    }
+  }, {
+    key: 'convertValue',
+    value: function convertValue(value) {
+      value = parseInt(value, 10);
+      return isNaN(value) ? '' : value;
+    }
+  }, {
     key: 'render',
     value: function render() {
       var otherAttrs = (0, _helpersPropsfilter2['default'])(this.props, GnocchiNumber.propTypes);
@@ -84,10 +92,9 @@ var GnocchiNumber = (function (_React$Component) {
         _react2['default'].createElement(_text2['default'], {
           value: this.state.value,
           placeholder: this.props.placeholder,
-          onKeyPress: this.onkeypress.bind(this),
-          onKeyDown: this.onkeydown.bind(this),
-          onInput: this.oninput.bind(this),
-          onChange: function () {} }),
+          onKeyPress: this.handleTyping.bind(this),
+          onKeyDown: this.handleControl.bind(this),
+          onChange: this.setValue.bind(this) }),
         _react2['default'].createElement(
           'div',
           { className: 'gnocchi-number-buttons' },
@@ -113,7 +120,8 @@ exports['default'] = GnocchiNumber;
 
 GnocchiNumber.propTypes = {
   placeholder: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number]),
-  value: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number])
+  value: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number]),
+  onChange: _react2['default'].PropTypes.func
 };
 
 GnocchiNumber.defaultProps = {

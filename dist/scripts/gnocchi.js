@@ -90,7 +90,7 @@ GnocchiButton.propTypes = {
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../helpers/classlist":8,"../helpers/propsfilter":9,"./icon":3,"underscore":10}],2:[function(require,module,exports){
+},{"../helpers/classlist":8,"../helpers/propsfilter":10,"./icon":3,"underscore":11}],2:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -195,7 +195,7 @@ GnocchiCheck.defaultProps = {
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../helpers/propsfilter":9,"./icon":3}],3:[function(require,module,exports){
+},{"../helpers/propsfilter":10,"./icon":3}],3:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -257,7 +257,7 @@ GnocchiIcon.propTypes = {
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../helpers/classlist":8,"../helpers/propsfilter":9}],4:[function(require,module,exports){
+},{"../helpers/classlist":8,"../helpers/propsfilter":10}],4:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -293,6 +293,10 @@ var _helpersPropsfilter = require('../helpers/propsfilter');
 
 var _helpersPropsfilter2 = _interopRequireDefault(_helpersPropsfilter);
 
+var _helpersKeycodes = require('../helpers/keycodes');
+
+var _helpersKeycodes2 = _interopRequireDefault(_helpersKeycodes);
+
 var GnocchiNumber = (function (_React$Component) {
   _inherits(GnocchiNumber, _React$Component);
 
@@ -300,29 +304,18 @@ var GnocchiNumber = (function (_React$Component) {
     _classCallCheck(this, GnocchiNumber);
 
     _get(Object.getPrototypeOf(GnocchiNumber.prototype), 'constructor', this).call(this, props);
-    this.state = { value: props.value };
+    this.state = { value: this.convertValue(props.value) };
   }
 
   _createClass(GnocchiNumber, [{
-    key: 'onkeypress',
-    value: function onkeypress(event) {
-      if (event.which < 48 || event.which > 57) event.preventDefault();
+    key: 'handleTyping',
+    value: function handleTyping(event) {
+      if (event.which < _helpersKeycodes2['default'].N0 || event.which > _helpersKeycodes2['default'].N9) event.preventDefault();
     }
   }, {
-    key: 'onkeydown',
-    value: function onkeydown(event) {
-      if (event.which === 38) this.increment();else if (event.which === 40) this.decrement();
-    }
-  }, {
-    key: 'oninput',
-    value: function oninput(event) {
-      this.setValue(event.target.value);
-    }
-  }, {
-    key: 'setValue',
-    value: function setValue(value) {
-      value = parseInt(value, 10);
-      this.setState({ value: isNaN(value) ? '' : value });
+    key: 'handleControl',
+    value: function handleControl(event) {
+      if (event.which === _helpersKeycodes2['default'].UP) this.increment();else if (event.which === _helpersKeycodes2['default'].DOWN) this.decrement();
     }
   }, {
     key: 'increment',
@@ -335,6 +328,21 @@ var GnocchiNumber = (function (_React$Component) {
       this.setValue(this.state.value - 1);
     }
   }, {
+    key: 'setValue',
+    value: function setValue(newValue) {
+      newValue = this.convertValue(newValue);
+
+      if (this.props.onChange && newValue !== this.state.value) this.props.onChange.call(null, newValue);
+
+      this.setState({ value: newValue });
+    }
+  }, {
+    key: 'convertValue',
+    value: function convertValue(value) {
+      value = parseInt(value, 10);
+      return isNaN(value) ? '' : value;
+    }
+  }, {
     key: 'render',
     value: function render() {
       var otherAttrs = (0, _helpersPropsfilter2['default'])(this.props, GnocchiNumber.propTypes);
@@ -345,10 +353,9 @@ var GnocchiNumber = (function (_React$Component) {
         _react2['default'].createElement(_text2['default'], {
           value: this.state.value,
           placeholder: this.props.placeholder,
-          onKeyPress: this.onkeypress.bind(this),
-          onKeyDown: this.onkeydown.bind(this),
-          onInput: this.oninput.bind(this),
-          onChange: function () {} }),
+          onKeyPress: this.handleTyping.bind(this),
+          onKeyDown: this.handleControl.bind(this),
+          onChange: this.setValue.bind(this) }),
         _react2['default'].createElement(
           'div',
           { className: 'gnocchi-number-buttons' },
@@ -374,7 +381,8 @@ exports['default'] = GnocchiNumber;
 
 GnocchiNumber.propTypes = {
   placeholder: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number]),
-  value: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number])
+  value: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number]),
+  onChange: _react2['default'].PropTypes.func
 };
 
 GnocchiNumber.defaultProps = {
@@ -384,7 +392,7 @@ GnocchiNumber.defaultProps = {
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../helpers/propsfilter":9,"./icon":3,"./text":6}],5:[function(require,module,exports){
+},{"../helpers/keycodes":9,"../helpers/propsfilter":10,"./icon":3,"./text":6}],5:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -415,6 +423,10 @@ var _icon2 = _interopRequireDefault(_icon);
 var _helpersPropsfilter = require('../helpers/propsfilter');
 
 var _helpersPropsfilter2 = _interopRequireDefault(_helpersPropsfilter);
+
+var _helpersKeycodes = require('../helpers/keycodes');
+
+var _helpersKeycodes2 = _interopRequireDefault(_helpersKeycodes);
 
 var GnocchiSelect = (function (_React$Component) {
   _inherits(GnocchiSelect, _React$Component);
@@ -461,24 +473,18 @@ var GnocchiSelect = (function (_React$Component) {
   }, {
     key: 'onkeydown',
     value: function onkeydown(event) {
-      if (this.state.open) {
-        switch (event.which) {
-          case 27:
-            this.close();break; // esc
-          case 38:
-            this.focusPrev();break; // up arrow
-          case 40:
-            this.focusNext();break; // down arrow
-          case 13: // enter
-          case 32:
-            this.selectOption(this.state.focusedOption);break; // space
-        }
-      } else if ([40, 13, 32].indexOf(event.which) !== -1) {
-          // down, enter, space
+      var key = event.which;
+
+      if (key === _helpersKeycodes2['default'].ESC || key === _helpersKeycodes2['default'].UP || key === _helpersKeycodes2['default'].DOWN || key === _helpersKeycodes2['default'].ENTER || key === _helpersKeycodes2['default'].SPACE) {
+
+        if (this.state.open) {
+          if (key === _helpersKeycodes2['default'].ESC) this.close();else if (key === _helpersKeycodes2['default'].UP) this.focusPrev();else if (key === _helpersKeycodes2['default'].DOWN) this.focusNext();else if (key === _helpersKeycodes2['default'].ENTER || key === _helpersKeycodes2['default'].SPACE) this.selectOption(this.state.focusedOption);
+        } else if (key === _helpersKeycodes2['default'].DOWN || key === _helpersKeycodes2['default'].ENTER || key === _helpersKeycodes2['default'].SPACE) {
           this.open();
         }
 
-      if ([27, 38, 40, 13, 32].indexOf(event.which) !== -1) event.preventDefault();
+        event.preventDefault();
+      }
     }
   }, {
     key: 'open',
@@ -650,7 +656,7 @@ GnocchiSelect.defaultProps = {
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../helpers/propsfilter":9,"./icon":3}],6:[function(require,module,exports){
+},{"../helpers/keycodes":9,"../helpers/propsfilter":10,"./icon":3}],6:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -688,19 +694,25 @@ var GnocchiText = (function (_React$Component) {
   }
 
   _createClass(GnocchiText, [{
+    key: 'handleChange',
+    value: function handleChange(event) {
+      if (this.props.onChange) this.props.onChange.call(null, event.target.value);
+    }
+  }, {
     key: 'render',
     value: function render() {
       var otherAttrs = (0, _helpersPropsfilter2['default'])(this.props, GnocchiText.propTypes);
 
-      return _react2['default'].createElement('input', _extends({}, otherAttrs, {
-        className: 'gnocchi-text',
-        type: 'text',
-        value: this.props.value,
-        placeholder: this.props.placeholder,
-        onKeyPress: this.props.onKeyPress,
-        onKeyDown: this.props.onKeyDown,
-        onInput: this.props.onInput,
-        onChange: this.props.onChange }));
+      return _react2['default'].createElement(
+        'div',
+        _extends({}, otherAttrs, { className: 'gnocchi-text-wrapper' }),
+        _react2['default'].createElement('input', {
+          className: 'gnocchi-text',
+          type: 'text',
+          value: this.props.value,
+          placeholder: this.props.placeholder,
+          onChange: this.handleChange.bind(this) })
+      );
     }
   }]);
 
@@ -710,7 +722,9 @@ var GnocchiText = (function (_React$Component) {
 exports['default'] = GnocchiText;
 
 GnocchiText.propTypes = {
-  placeholder: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number])
+  value: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number]),
+  placeholder: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number]),
+  onChange: _react2['default'].PropTypes.func
 };
 
 GnocchiText.defaultProps = {
@@ -719,7 +733,7 @@ GnocchiText.defaultProps = {
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../helpers/propsfilter":9}],7:[function(require,module,exports){
+},{"../helpers/propsfilter":10}],7:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -785,7 +799,7 @@ GnocchiTextarea.defaultProps = {
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../helpers/propsfilter":9}],8:[function(require,module,exports){
+},{"../helpers/propsfilter":10}],8:[function(require,module,exports){
 'use strict';
 
 module.exports = function (baseClass, otherClasses) {
@@ -806,6 +820,40 @@ module.exports = function (baseClass, otherClasses) {
 };
 
 },{}],9:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = {
+  BACKSPACE: 8,
+  TAB: 9,
+  ENTER: 13,
+  SHIFT: 16,
+  CTRL: 17,
+  ALT: 18,
+  CAPSLOCK: 20,
+  ESC: 27,
+  SPACE: 32,
+  LEFT: 37,
+  UP: 38,
+  RIGHT: 39,
+  DOWN: 40,
+  DELETE: 46,
+  N0: 48,
+  N1: 49,
+  N2: 50,
+  N3: 51,
+  N4: 52,
+  N5: 53,
+  N6: 54,
+  N7: 55,
+  N8: 56,
+  N9: 57
+};
+module.exports = exports["default"];
+
+},{}],10:[function(require,module,exports){
 'use strict';
 
 var omit = require('underscore').omit;
@@ -813,7 +861,7 @@ module.exports = function (all, exclude) {
   return omit(all, Object.keys(exclude));
 };
 
-},{"underscore":10}],10:[function(require,module,exports){
+},{"underscore":11}],11:[function(require,module,exports){
 //     Underscore.js 1.7.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors

@@ -34,19 +34,25 @@ var GnocchiText = (function (_React$Component) {
   }
 
   _createClass(GnocchiText, [{
+    key: 'handleChange',
+    value: function handleChange(event) {
+      if (this.props.onChange) this.props.onChange.call(null, event.target.value);
+    }
+  }, {
     key: 'render',
     value: function render() {
       var otherAttrs = (0, _helpersPropsfilter2['default'])(this.props, GnocchiText.propTypes);
 
-      return _react2['default'].createElement('input', _extends({}, otherAttrs, {
-        className: 'gnocchi-text',
-        type: 'text',
-        value: this.props.value,
-        placeholder: this.props.placeholder,
-        onKeyPress: this.props.onKeyPress,
-        onKeyDown: this.props.onKeyDown,
-        onInput: this.props.onInput,
-        onChange: this.props.onChange }));
+      return _react2['default'].createElement(
+        'div',
+        _extends({}, otherAttrs, { className: 'gnocchi-text-wrapper' }),
+        _react2['default'].createElement('input', {
+          className: 'gnocchi-text',
+          type: 'text',
+          value: this.props.value,
+          placeholder: this.props.placeholder,
+          onChange: this.handleChange.bind(this) })
+      );
     }
   }]);
 
@@ -56,7 +62,9 @@ var GnocchiText = (function (_React$Component) {
 exports['default'] = GnocchiText;
 
 GnocchiText.propTypes = {
-  placeholder: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number])
+  value: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number]),
+  placeholder: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number]),
+  onChange: _react2['default'].PropTypes.func
 };
 
 GnocchiText.defaultProps = {
