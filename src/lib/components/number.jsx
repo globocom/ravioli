@@ -8,25 +8,16 @@ import keys from '../helpers/keycodes';
 export default class GnocchiNumber extends React.Component {
   constructor(props){
     super(props);
-    this.state = { value: props.value };
+    this.state = { value: this.convertValue(props.value) };
   }
 
-  onkeypress(event){
+  handleTyping(event){
     if(event.which < keys.N0 || event.which > keys.N9) event.preventDefault();
   }
 
-  onkeydown(event){
+  handleControl(event){
     if(event.which === keys.UP) this.increment();
     else if(event.which === keys.DOWN) this.decrement();
-  }
-
-  oninput(event){
-    this.setValue(event.target.value);
-  }
-
-  setValue(value){
-    value = parseInt(value, 10);
-    this.setState({ value: isNaN(value) ? '' : value });
   }
 
   increment(){
@@ -37,6 +28,20 @@ export default class GnocchiNumber extends React.Component {
     this.setValue(this.state.value - 1);
   }
 
+  setValue(newValue){
+    newValue = this.convertValue(newValue);
+
+    if(this.props.onChange && newValue !== this.state.value)
+      this.props.onChange.call(null, newValue);
+
+    this.setState({ value: newValue });
+  }
+
+  convertValue(value){
+    value = parseInt(value, 10);
+    return isNaN(value) ? '' : value;
+  }
+
   render(){
     const otherAttrs = propsfilter(this.props, GnocchiNumber.propTypes);
 
@@ -45,10 +50,9 @@ export default class GnocchiNumber extends React.Component {
         <GnocchiText
           value={this.state.value}
           placeholder={this.props.placeholder}
-          onKeyPress={this.onkeypress.bind(this)}
-          onKeyDown={this.onkeydown.bind(this)}
-          onInput={this.oninput.bind(this)}
-          onChange={function(){}} />
+          onKeyPress={this.handleTyping.bind(this)}
+          onKeyDown={this.handleControl.bind(this)}
+          onChange={this.setValue.bind(this)} />
         <div className='gnocchi-number-buttons'>
           <div className='gnocchi-number-up' onClick={this.increment.bind(this)}>
             <GnocchiIcon type='arrow-up'/>
@@ -70,7 +74,8 @@ GnocchiNumber.propTypes = {
   value: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.number
-  ])
+  ]),
+  onChange: React.PropTypes.func
 };
 
 GnocchiNumber.defaultProps = {

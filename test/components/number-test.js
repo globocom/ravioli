@@ -7,55 +7,56 @@ describe('Number component', () => {
   let component;
   let textinput;
 
-  before(() => {
-    utils.mockDOM();
-  });
+  const createNumber = opts => {
+    component = utils.render(GnocchiNumber, opts);
+    textinput = utils.findByTag(component, 'input');
+  };
+
+  const destroyNumber = () => component = textinput = null;
+
+  before(() => utils.mockDOM());
 
   describe('Initialization', () => {
-    before(() => {
-      component = utils.render(GnocchiNumber, {
-        placeholder: 'bob dylan',
-        value: 100
-      });
+    before(() => createNumber({
+      placeholder: 'bob dylan',
+      value: 100
+    }));
 
-      textinput = utils.findByClass(component, 'gnocchi-text');
-    });
-
-    after(() => {
-      component = textinput = null;
-    });
+    after(() => destroyNumber());
 
     it('should set placeholder', () => {
-      let placeholder = utils.getDOMNode(textinput).getAttribute('placeholder');
-      expect(placeholder).to.equal('bob dylan');
+      expect(textinput.getAttribute('placeholder')).to.equal('bob dylan');
     });
 
     it('should set value', () => {
-      let value = utils.getDOMNode(textinput).value;
-      expect(value).to.equal('100');
+      expect(textinput.value).to.equal('100');
     });
 
     context('with additional html attributes', () => {
-      before(() => component = utils.render(GnocchiNumber, {
-        placeholder: 'bob dylan',
-        value: 100,
-        rel: 'something',
-        onClick: event => event.done()
-      }));
+      let node;
+
+      before(() => {
+        createNumber({
+          placeholder: 'bob dylan',
+          value: 100,
+          rel: 'something',
+          onClick: event => event.done()
+        });
+
+        node = utils.getDOMNode(component);
+      });
 
       it('should set additional html attributes', () => {
-        let node = utils.getDOMNode(component);
         expect(node.getAttribute('rel')).to.equal('something');
       });
 
       it('should not set internal props as html attributes', () => {
-        let node = utils.getDOMNode(component);
         expect(node.getAttribute('placeholder')).to.not.exist;
         expect(node.getAttribute('value')).to.not.exist;
       });
 
       it('should set additional prop handlers', done => {
-        utils.click(utils.getDOMNode(component), { done: done });
+        utils.click(node, { done: done });
       });
     });
   });
@@ -69,30 +70,22 @@ describe('Number component', () => {
       component = null;
     });
 
-    context('#setValue()', () => {
-      it('should set zero when pass zero', () => {
-        component.setValue(0);
-        expect(component.state.value).to.equal(0);
+    context('#convertValue()', () => {
+      it('should return number when pass number', () => {
+        expect(component.convertValue(0)).to.equal(0);
+        expect(component.convertValue(10)).to.equal(10);
+        expect(component.convertValue(-1)).to.equal(-1);
       });
 
-      it('should set number when pass number', () => {
-        component.setValue(20);
-        expect(component.state.value).to.equal(20);
+      it('should return number when pass string number', () => {
+        expect(component.convertValue('0')).to.equal(0);
+        expect(component.convertValue('10')).to.equal(10);
+        expect(component.convertValue('-1')).to.equal(-1);
       });
 
-      it('should set number when pass string number', () => {
-        component.setValue('20');
-        expect(component.state.value).to.equal(20);
-      });
-
-      it('should set empty string when pass empty string', () => {
-        component.setValue('');
-        expect(component.state.value).to.equal('');
-      });
-
-      it('should set empty string when pass not a number string', () => {
-        component.setValue('some string');
-        expect(component.state.value).to.equal('');
+      it('should return empty string when pass a non number string', () => {
+        expect(component.convertValue('')).to.equal('');
+        expect(component.convertValue('some string')).to.equal('');
       });
     });
 
@@ -124,6 +117,41 @@ describe('Number component', () => {
         component.decrement();
         expect(component.state.value).to.equal(98);
       });
+    });
+  });
+
+  describe('onChange', () => {
+    let currentValue;
+    let changeCount = 0;
+
+    before(() => createNumber({
+      onChange: value => {
+        currentValue = value;
+        changeCount++;
+      }
+    }));
+
+    beforeEach(() => {
+      changeCount = 0;
+      component.setState({ value: '' });
+    });
+
+    it('should call onChange handler', () => {
+      component.setValue(123);
+      expect(changeCount).to.equal(1);
+      expect(currentValue).to.equal(123);
+
+      component.setValue('-123');
+      expect(changeCount).to.equal(2);
+      expect(currentValue).to.equal(-123);
+    });
+
+    it('should not call onChange handler', () => {
+      component.setValue('');
+      expect(changeCount).to.equal(0);
+
+      component.setValue('some string');
+      expect(changeCount).to.equal(0);
     });
   });
 
@@ -167,14 +195,16 @@ describe('Number component', () => {
     it('should update when input numbers on field', () => {
       let textinput = utils.findByClass(component, 'gnocchi-text');
       component.setValue('');
-      utils.input(textinput, 1);
+      textinput.value = 1;
+      utils.change(textinput);
       expect(component.state.value).to.equal(1);
     });
 
     it('should do nothing when input non numbers on field', () => {
       let textinput = utils.findByClass(component, 'gnocchi-text');
       component.setValue('');
-      utils.input(textinput, 'not a number');
+      textinput.value = 'not a number';
+      utils.change(textinput);
       expect(component.state.value).to.equal('');
     });
   });

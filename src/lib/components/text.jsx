@@ -3,7 +3,7 @@ import propsfilter from '../helpers/propsfilter';
 
 
 export default class GnocchiText extends React.Component {
-  update(event){
+  handleChange(event){
     if(this.props.onChange) this.props.onChange.call(null, event.target.value);
   }
 
@@ -15,9 +15,9 @@ export default class GnocchiText extends React.Component {
         <input
           className='gnocchi-text'
           type='text'
-          defaultValue={this.props.value}
+          value={this.props.value}
           placeholder={this.props.placeholder}
-          onChange={this.update.bind(this)}/>
+          onChange={this.handleChange.bind(this)}/>
       </div>
     );
   }

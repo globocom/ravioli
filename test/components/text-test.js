@@ -52,13 +52,13 @@ describe('Text component', () => {
     });
   });
 
-  describe('when changes', () => {
+  describe('onChange', () => {
     let currentValue;
 
     before(() => createText({ onChange: newValue => currentValue = newValue }));
     after(() => destroyText());
 
-    it('should execute onChange handler', () => {
+    it('should call onChange handler', () => {
       let input = utils.findByTag(component, 'input');
       input.value = 'pigs';
       utils.change(input);
