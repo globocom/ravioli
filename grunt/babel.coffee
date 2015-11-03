@@ -8,3 +8,8 @@ module.exports = (grunt) ->
         src: '**/*.{js,jsx}'
         ext: '.js'
       ]
+    docs:
+      files: [
+        src: 'docs/assets/app.jsx'
+        dest: 'docs/assets/app.js'
+      ]
