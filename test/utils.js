@@ -22,6 +22,8 @@ module.exports = {
   getDOMNode: ReactDOM.findDOMNode,
   findByClass: ReactTestUtils.findRenderedDOMComponentWithClass,
   findAllByClass: ReactTestUtils.scryRenderedDOMComponentsWithClass,
+  findByTag: ReactTestUtils.findRenderedDOMComponentWithTag,
+  findAllByTag: ReactTestUtils.scryRenderedDOMComponentsWithTag,
   filterAll: ReactTestUtils.findAllInRenderedTree,
   click: ReactTestUtils.Simulate.click,
 
