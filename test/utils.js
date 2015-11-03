@@ -26,6 +26,7 @@ module.exports = {
   findAllByTag: ReactTestUtils.scryRenderedDOMComponentsWithTag,
   filterAll: ReactTestUtils.findAllInRenderedTree,
   click: ReactTestUtils.Simulate.click,
+  change: ReactTestUtils.Simulate.change,
 
   keydown: function(element, code){
     return ReactTestUtils.Simulate.keyDown(element, {which: code});

@@ -3,6 +3,10 @@ import propsfilter from '../helpers/propsfilter';
 
 
 export default class GnocchiText extends React.Component {
+  update(event){
+    if(this.props.onChange) this.props.onChange.call(null, event.target.value);
+  }
+
   render(){
     const otherAttrs = propsfilter(this.props, GnocchiText.propTypes);
 
@@ -12,7 +16,8 @@ export default class GnocchiText extends React.Component {
           className='gnocchi-text'
           type='text'
           defaultValue={this.props.value}
-          placeholder={this.props.placeholder}/>
+          placeholder={this.props.placeholder}
+          onChange={this.update.bind(this)}/>
       </div>
     );
   }
@@ -26,7 +31,8 @@ GnocchiText.propTypes = {
   placeholder: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.number
-  ])
+  ]),
+  onChange: React.PropTypes.func
 };
 
 GnocchiText.defaultProps = {
