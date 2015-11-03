@@ -51,4 +51,4 @@ var Styleguide = React.createClass({
   }
 });
 
-React.render(<Styleguide/>, document.getElementById('main'));
+ReactDOM.render(<Styleguide/>, document.getElementById('main'));
