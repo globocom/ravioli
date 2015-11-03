@@ -21,6 +21,10 @@ export default class GnocchiText extends React.Component {
 }
 
 GnocchiText.propTypes = {
+  value: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.number
+  ]),
   placeholder: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.number
