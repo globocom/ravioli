@@ -10,8 +10,18 @@
   @extends $typography
   @extends $focus
 
-  &--has-counter &
+  .gnocchi--has-counter &
     padding-right 45px
 
+  .gnocchi--is-required &
+    &::placeholder
+      text-indent 20px
+
   &::placeholder
+    color #b9b9b9
+
+  &-required-icon
+    position absolute
+    top 12px
+    left 12px
     color #b9b9b9

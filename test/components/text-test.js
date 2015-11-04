@@ -28,15 +28,36 @@ describe('Text component', () => {
       expect(node.getAttribute('placeholder')).to.equal('pink floyd');
     });
 
-    it('should not include counter', () => {
-      expect(utils.findAllByType(component, GnocchiCounter)).to.be.empty;
-    });
-
     context('with counter', () => {
       before(() => createText({ counter: true }));
 
+      it('should set has-counter class', () => {
+        let node = utils.getDOMNode(component);
+        expect(node.className).to.contain('gnocchi--has-counter');
+      });
+
       it('should include counter', () => {
         expect(utils.findByType(component, GnocchiCounter)).to.exist;
+      });
+    });
+
+    context('with required', () => {
+      before(() => createText({ required: true }));
+
+      it('should set required class', () => {
+        let node = utils.getDOMNode(component);
+        expect(node.className).to.contain('gnocchi--is-required');
+      });
+
+      it('should render required icon', () => {
+        let icon = utils.findByClass(component, 'gnocchi-text-required-icon');
+        expect(icon).to.exist;
+      });
+
+      it('should hide required icon when value is set', () => {
+        component.setState({ value: 'something' });
+        let icon = utils.findAllByClass(component, 'gnocchi-text-required-icon');
+        expect(icon).to.be.empty;
       });
     });
 

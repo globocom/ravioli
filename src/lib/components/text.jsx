@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import GnocchiIcon from './icon';
 import GnocchiCounter from './counter';
 import propsfilter from '../helpers/propsfilter';
 
@@ -19,7 +20,8 @@ export default class GnocchiText extends React.Component {
   render(){
     const otherAttrs = propsfilter(this.props, GnocchiText.propTypes);
     let className = classnames('gnocchi-text-wrapper', {
-      'gnocchi-text--has-counter': this.props.counter
+      'gnocchi--is-required': this.props.required,
+      'gnocchi--has-counter': this.props.counter
     });
 
     return (
@@ -30,9 +32,15 @@ export default class GnocchiText extends React.Component {
           value={this.state.value}
           placeholder={this.props.placeholder}
           onChange={this.handleChange.bind(this)}/>
+        {this.renderRequiredIcon()}
         {this.renderCounter()}
       </div>
     );
+  }
+
+  renderRequiredIcon(){
+    if(this.props.required && !this.state.value)
+      return <GnocchiIcon type='warn' className='gnocchi-text-required-icon'/>;
   }
 
   renderCounter(){

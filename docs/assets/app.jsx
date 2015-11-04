@@ -5,6 +5,7 @@ var Styleguide = React.createClass({
         <section>
           <h3>Text input</h3>
           <Gnocchi.Text/>
+          <Gnocchi.Text required={true} counter='subtract' counterMax={10}/>
         </section>
 
         <section>
