@@ -41,7 +41,7 @@ export default class GnocchiText extends React.Component {
         <GnocchiCounter
           value={this.state.value}
           max={this.props.counterMax}
-          subtract={this.props.counter === 'sub'}/>
+          subtract={this.props.counter === 'subtract'}/>
       );
   }
 }
