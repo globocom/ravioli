@@ -90,7 +90,7 @@ GnocchiButton.propTypes = {
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../helpers/classlist":8,"../helpers/propsfilter":10,"./icon":3,"underscore":11}],2:[function(require,module,exports){
+},{"../helpers/classlist":9,"../helpers/propsfilter":11,"./icon":4,"underscore":13}],2:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -195,7 +195,89 @@ GnocchiCheck.defaultProps = {
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../helpers/propsfilter":10,"./icon":3}],3:[function(require,module,exports){
+},{"../helpers/propsfilter":11,"./icon":4}],3:[function(require,module,exports){
+(function (global){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x2, _x3, _x4) { var _again = true; _function: while (_again) { var object = _x2, property = _x3, receiver = _x4; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x2 = parent; _x3 = property; _x4 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = (typeof window !== "undefined" ? window['React'] : typeof global !== "undefined" ? global['React'] : null);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var GnocchiCounter = (function (_React$Component) {
+  _inherits(GnocchiCounter, _React$Component);
+
+  function GnocchiCounter() {
+    _classCallCheck(this, GnocchiCounter);
+
+    _get(Object.getPrototypeOf(GnocchiCounter.prototype), 'constructor', this).apply(this, arguments);
+  }
+
+  _createClass(GnocchiCounter, [{
+    key: 'count',
+    value: function count(string, max) {
+      var subtract = arguments.length <= 2 || arguments[2] === undefined ? false : arguments[2];
+
+      if (subtract) {
+        if (isNaN(parseInt(max, 10))) throw new Error('GnocchiCounter: `max` must be a number');
+
+        return max - string.length;
+      }
+
+      return string.length;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var count = this.count(this.props.value, this.props.max, this.props.subtract);
+      var className = (0, _classnames2['default'])('gnocchi-counter', {
+        'gnocchi-counter--is-exceeded': count < 0 || count > this.props.max
+      });
+
+      return _react2['default'].createElement(
+        'div',
+        { className: className },
+        count
+      );
+    }
+  }]);
+
+  return GnocchiCounter;
+})(_react2['default'].Component);
+
+exports['default'] = GnocchiCounter;
+
+GnocchiCounter.propTypes = {
+  value: _react2['default'].PropTypes.string,
+  max: _react2['default'].PropTypes.number,
+  subtract: _react2['default'].PropTypes.bool
+};
+
+GnocchiCounter.defaultProps = {
+  value: '',
+  subtract: false
+};
+module.exports = exports['default'];
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"classnames":12}],4:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -257,7 +339,7 @@ GnocchiIcon.propTypes = {
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../helpers/classlist":8,"../helpers/propsfilter":10}],4:[function(require,module,exports){
+},{"../helpers/classlist":9,"../helpers/propsfilter":11}],5:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -392,7 +474,7 @@ GnocchiNumber.defaultProps = {
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../helpers/keycodes":9,"../helpers/propsfilter":10,"./icon":3,"./text":6}],5:[function(require,module,exports){
+},{"../helpers/keycodes":10,"../helpers/propsfilter":11,"./icon":4,"./text":7}],6:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -656,7 +738,7 @@ GnocchiSelect.defaultProps = {
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../helpers/keycodes":9,"../helpers/propsfilter":10,"./icon":3}],6:[function(require,module,exports){
+},{"../helpers/keycodes":10,"../helpers/propsfilter":11,"./icon":4}],7:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -680,6 +762,14 @@ var _react = (typeof window !== "undefined" ? window['React'] : typeof global !=
 
 var _react2 = _interopRequireDefault(_react);
 
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _counter = require('./counter');
+
+var _counter2 = _interopRequireDefault(_counter);
+
 var _helpersPropsfilter = require('../helpers/propsfilter');
 
 var _helpersPropsfilter2 = _interopRequireDefault(_helpersPropsfilter);
@@ -687,32 +777,47 @@ var _helpersPropsfilter2 = _interopRequireDefault(_helpersPropsfilter);
 var GnocchiText = (function (_React$Component) {
   _inherits(GnocchiText, _React$Component);
 
-  function GnocchiText() {
+  function GnocchiText(props) {
     _classCallCheck(this, GnocchiText);
 
-    _get(Object.getPrototypeOf(GnocchiText.prototype), 'constructor', this).apply(this, arguments);
+    _get(Object.getPrototypeOf(GnocchiText.prototype), 'constructor', this).call(this, props);
+    this.state = { value: props.value };
   }
 
   _createClass(GnocchiText, [{
     key: 'handleChange',
     value: function handleChange(event) {
-      if (this.props.onChange) this.props.onChange.call(null, event.target.value);
+      var newValue = event.target.value;
+      this.setState({ value: newValue });
+      if (this.props.onChange) this.props.onChange.call(null, newValue);
     }
   }, {
     key: 'render',
     value: function render() {
       var otherAttrs = (0, _helpersPropsfilter2['default'])(this.props, GnocchiText.propTypes);
+      var className = (0, _classnames2['default'])('gnocchi-text-wrapper', {
+        'gnocchi-text--has-counter': this.props.counter
+      });
 
       return _react2['default'].createElement(
         'div',
-        _extends({}, otherAttrs, { className: 'gnocchi-text-wrapper' }),
+        _extends({}, otherAttrs, { className: className }),
         _react2['default'].createElement('input', {
           className: 'gnocchi-text',
           type: 'text',
-          value: this.props.value,
+          value: this.state.value,
           placeholder: this.props.placeholder,
-          onChange: this.handleChange.bind(this) })
+          onChange: this.handleChange.bind(this) }),
+        this.renderCounter()
       );
+    }
+  }, {
+    key: 'renderCounter',
+    value: function renderCounter() {
+      if (this.props.counter) return _react2['default'].createElement(_counter2['default'], {
+        value: this.state.value,
+        max: this.props.counterMax,
+        subtract: this.props.counter === 'sub' });
     }
   }]);
 
@@ -733,7 +838,7 @@ GnocchiText.defaultProps = {
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../helpers/propsfilter":10}],7:[function(require,module,exports){
+},{"../helpers/propsfilter":11,"./counter":3,"classnames":12}],8:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -799,7 +904,7 @@ GnocchiTextarea.defaultProps = {
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../helpers/propsfilter":10}],8:[function(require,module,exports){
+},{"../helpers/propsfilter":11}],9:[function(require,module,exports){
 'use strict';
 
 module.exports = function (baseClass, otherClasses) {
@@ -819,7 +924,7 @@ module.exports = function (baseClass, otherClasses) {
   return rendered;
 };
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -853,7 +958,7 @@ exports["default"] = {
 };
 module.exports = exports["default"];
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 var omit = require('underscore').omit;
@@ -861,7 +966,57 @@ module.exports = function (all, exclude) {
   return omit(all, Object.keys(exclude));
 };
 
-},{"underscore":11}],11:[function(require,module,exports){
+},{"underscore":13}],12:[function(require,module,exports){
+/*!
+  Copyright (c) 2015 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+/* global define */
+
+(function () {
+	'use strict';
+
+	var hasOwn = {}.hasOwnProperty;
+
+	function classNames () {
+		var classes = '';
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
+
+			var argType = typeof arg;
+
+			if (argType === 'string' || argType === 'number') {
+				classes += ' ' + arg;
+			} else if (Array.isArray(arg)) {
+				classes += ' ' + classNames.apply(null, arg);
+			} else if (argType === 'object') {
+				for (var key in arg) {
+					if (hasOwn.call(arg, key) && arg[key]) {
+						classes += ' ' + key;
+					}
+				}
+			}
+		}
+
+		return classes.substr(1);
+	}
+
+	if (typeof module !== 'undefined' && module.exports) {
+		module.exports = classNames;
+	} else if (typeof define === 'function' && typeof define.amd === 'object' && define.amd) {
+		// register as 'classnames', consistent with npm package name
+		define('classnames', function () {
+			return classNames;
+		});
+	} else {
+		window.classNames = classNames;
+	}
+}());
+
+},{}],13:[function(require,module,exports){
 //     Underscore.js 1.7.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -2296,4 +2451,4 @@ module.exports = Gnocchi;
 
 if (typeof window !== 'undefined') window.Gnocchi = Gnocchi;
 
-},{"./components/button":1,"./components/check":2,"./components/number":4,"./components/select":5,"./components/text":6,"./components/textarea":7}]},{},["gnocchi"]);
+},{"./components/button":1,"./components/check":2,"./components/number":5,"./components/select":6,"./components/text":7,"./components/textarea":8}]},{},["gnocchi"]);

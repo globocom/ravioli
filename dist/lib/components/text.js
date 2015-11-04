@@ -20,6 +20,14 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _counter = require('./counter');
+
+var _counter2 = _interopRequireDefault(_counter);
+
 var _helpersPropsfilter = require('../helpers/propsfilter');
 
 var _helpersPropsfilter2 = _interopRequireDefault(_helpersPropsfilter);
@@ -27,32 +35,47 @@ var _helpersPropsfilter2 = _interopRequireDefault(_helpersPropsfilter);
 var GnocchiText = (function (_React$Component) {
   _inherits(GnocchiText, _React$Component);
 
-  function GnocchiText() {
+  function GnocchiText(props) {
     _classCallCheck(this, GnocchiText);
 
-    _get(Object.getPrototypeOf(GnocchiText.prototype), 'constructor', this).apply(this, arguments);
+    _get(Object.getPrototypeOf(GnocchiText.prototype), 'constructor', this).call(this, props);
+    this.state = { value: props.value };
   }
 
   _createClass(GnocchiText, [{
     key: 'handleChange',
     value: function handleChange(event) {
-      if (this.props.onChange) this.props.onChange.call(null, event.target.value);
+      var newValue = event.target.value;
+      this.setState({ value: newValue });
+      if (this.props.onChange) this.props.onChange.call(null, newValue);
     }
   }, {
     key: 'render',
     value: function render() {
       var otherAttrs = (0, _helpersPropsfilter2['default'])(this.props, GnocchiText.propTypes);
+      var className = (0, _classnames2['default'])('gnocchi-text-wrapper', {
+        'gnocchi-text--has-counter': this.props.counter
+      });
 
       return _react2['default'].createElement(
         'div',
-        _extends({}, otherAttrs, { className: 'gnocchi-text-wrapper' }),
+        _extends({}, otherAttrs, { className: className }),
         _react2['default'].createElement('input', {
           className: 'gnocchi-text',
           type: 'text',
-          value: this.props.value,
+          value: this.state.value,
           placeholder: this.props.placeholder,
-          onChange: this.handleChange.bind(this) })
+          onChange: this.handleChange.bind(this) }),
+        this.renderCounter()
       );
+    }
+  }, {
+    key: 'renderCounter',
+    value: function renderCounter() {
+      if (this.props.counter) return _react2['default'].createElement(_counter2['default'], {
+        value: this.state.value,
+        max: this.props.counterMax,
+        subtract: this.props.counter === 'sub' });
     }
   }]);
 
