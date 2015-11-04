@@ -52,7 +52,7 @@ export default class GnocchiNumber extends React.Component {
           placeholder={this.props.placeholder}
           onKeyPress={this.handleTyping.bind(this)}
           onKeyDown={this.handleControl.bind(this)}
-          onChange={this.setValue.bind(this)} />
+          onChange={this.setValue.bind(this)}/>
         <div className='gnocchi-number-buttons'>
           <div className='gnocchi-number-up' onClick={this.increment.bind(this)}>
             <GnocchiIcon type='arrow-up'/>
