@@ -29,7 +29,7 @@ export default class GnocchiText extends React.Component {
         <input
           className='gnocchi-text'
           type='text'
-          value={this.state.value}
+          value={this.props.value}
           placeholder={this.props.placeholder}
           onChange={this.handleChange.bind(this)}/>
         {this.renderRequiredIcon()}
