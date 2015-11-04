@@ -39,7 +39,12 @@ export default class GnocchiNumber extends React.Component {
 
   convertValue(value){
     value = parseInt(value, 10);
-    return isNaN(value) ? '' : value;
+    if(isNaN(value)) return '';
+
+    if(value < this.props.min) return this.props.min;
+    if(value > this.props.max) return this.props.max;
+
+    return value;
   }
 
   render(){
@@ -75,7 +80,9 @@ GnocchiNumber.propTypes = {
     React.PropTypes.string,
     React.PropTypes.number
   ]),
-  onChange: React.PropTypes.func
+  onChange: React.PropTypes.func,
+  min: React.PropTypes.number,
+  max: React.PropTypes.number,
 };
 
 GnocchiNumber.defaultProps = {

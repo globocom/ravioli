@@ -59,18 +59,29 @@ describe('Number component', () => {
         utils.click(node, { done: done });
       });
     });
+
+    context('with minimum constraint', () => {
+      before(() => createNumber({ min: 0, value: -1 }));
+
+      it('should set value to the minimum', () => {
+        expect(textinput.value).to.equal('0');
+      });
+    });
+
+    context('with maximum constraint', () => {
+      before(() => createNumber({ max: 10, value: 11 }));
+
+      it('should set value to the maximum', () => {
+        expect(textinput.value).to.equal('10');
+      });
+    });
   });
 
   describe('Unit', () => {
-    before(() => {
-      component = utils.render(GnocchiNumber);
-    });
+    before(() => createNumber());
+    after(() => destroyNumber());
 
-    after(() => {
-      component = null;
-    });
-
-    context('#convertValue()', () => {
+    describe('#convertValue()', () => {
       it('should return number when pass number', () => {
         expect(component.convertValue(0)).to.equal(0);
         expect(component.convertValue(10)).to.equal(10);
@@ -83,13 +94,28 @@ describe('Number component', () => {
         expect(component.convertValue('-1')).to.equal(-1);
       });
 
-      it('should return empty string when pass a non number string', () => {
+      it('should return empty string when pass a non number value', () => {
         expect(component.convertValue('')).to.equal('');
         expect(component.convertValue('some string')).to.equal('');
+        expect(component.convertValue(null)).to.equal('');
+        expect(component.convertValue(undefined)).to.equal('');
+      });
+
+      context('with min and max constraints', () => {
+        before(() => createNumber({ min: 0, max: 10 }));
+        after(() => createNumber());
+
+        it('should not return a lesser value than minimum', () => {
+          expect(component.convertValue(-1)).to.equal(0);
+        });
+
+        it('should not return a greater value than maximum', () => {
+          expect(component.convertValue(11)).to.equal(10);
+        });
       });
     });
 
-    context('#increment()', () => {
+    describe('#increment()', () => {
       it('should increment when value is unset', () => {
         component.setValue('');
         component.increment();
@@ -104,7 +130,7 @@ describe('Number component', () => {
       });
     });
 
-    context('#decrement()', () => {
+    describe('#decrement()', () => {
       it('should decrement when value is unset', () => {
         component.setValue('');
         component.decrement();
@@ -156,19 +182,15 @@ describe('Number component', () => {
   });
 
   describe('Behaviors', () => {
-    before(() => {
-      component = utils.render(GnocchiNumber);
-    });
-
-    after(() => {
-      component = null;
-    });
+    before(() => createNumber());
+    after(() => destroyNumber());
 
     it('should increment when click on up button', () => {
       let button = utils.findByClass(component, 'gnocchi-number-up');
       component.setValue('');
       utils.click(button);
       expect(component.state.value).to.equal(1);
+      expect(textinput.value).to.equal('1');
     });
 
     it('should decrement when click on down button', () => {
@@ -176,6 +198,7 @@ describe('Number component', () => {
       component.setValue('');
       utils.click(button);
       expect(component.state.value).to.equal(-1);
+      expect(textinput.value).to.equal('-1');
     });
 
     it('should increment when press up key', () => {
@@ -183,6 +206,7 @@ describe('Number component', () => {
       component.setValue('');
       utils.keydown(textinput, 38);
       expect(component.state.value).to.equal(1);
+      expect(textinput.value).to.equal('1');
     });
 
     it('should decrement when press down key', () => {
@@ -190,6 +214,7 @@ describe('Number component', () => {
       component.setValue('');
       utils.keydown(textinput, 40);
       expect(component.state.value).to.equal(-1);
+      expect(textinput.value).to.equal('-1');
     });
 
     it('should update when input numbers on field', () => {
@@ -198,6 +223,7 @@ describe('Number component', () => {
       textinput.value = 1;
       utils.change(textinput);
       expect(component.state.value).to.equal(1);
+      expect(textinput.value).to.equal('1');
     });
 
     it('should do nothing when input non numbers on field', () => {
@@ -206,6 +232,62 @@ describe('Number component', () => {
       textinput.value = 'not a number';
       utils.change(textinput);
       expect(component.state.value).to.equal('');
+      expect(textinput.value).to.equal('');
+    });
+
+    context('with min and max constraints', () => {
+      before(() => createNumber({ min: -1, max: 10 }));
+      after(() => destroyNumber());
+
+      it('should not increment when click on up button', () => {
+        let button = utils.findByClass(component, 'gnocchi-number-up');
+        component.setValue(10);
+        utils.click(button);
+        expect(component.state.value).to.equal(10);
+        expect(textinput.value).to.equal('10');
+      });
+
+      it('should not decrement when click on down button', () => {
+        let button = utils.findByClass(component, 'gnocchi-number-down');
+        component.setValue(-1);
+        utils.click(button);
+        expect(component.state.value).to.equal(-1);
+        expect(textinput.value).to.equal('-1');
+      });
+
+      it('should not increment when press up key', () => {
+        let textinput = utils.findByClass(component, 'gnocchi-text');
+        component.setValue(10);
+        utils.keydown(textinput, 38);
+        expect(component.state.value).to.equal(10);
+        expect(textinput.value).to.equal('10');
+      });
+
+      it('should not decrement when press down key', () => {
+        let textinput = utils.findByClass(component, 'gnocchi-text');
+        component.setValue(-1);
+        utils.keydown(textinput, 40);
+        expect(component.state.value).to.equal(-1);
+        expect(textinput.value).to.equal('-1');
+      });
+
+      it('should not update when input numbers on field lesser than minimum', () => {
+        let textinput = utils.findByClass(component, 'gnocchi-text');
+        component.setValue('');
+        textinput.value = -2;
+        utils.change(textinput);
+        expect(component.state.value).to.equal(-1);
+        expect(textinput.value).to.equal('-1');
+      });
+
+      it('should not update when input numbers on field greater than maximum', () => {
+        let textinput = utils.findByClass(component, 'gnocchi-text');
+        component.setValue('');
+        textinput.value = 11;
+        utils.change(textinput);
+        expect(component.state.value).to.equal(10);
+        expect(textinput.value).to.equal('10');
+      });
     });
   });
 });
