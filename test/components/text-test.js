@@ -1,6 +1,7 @@
 var expect = require('chai').expect;
 var utils = require('../utils');
 var GnocchiText = require('../../src/lib/components/text.jsx');
+var GnocchiCounter = require('../../src/lib/components/counter.jsx');
 
 
 describe('Text component', () => {
@@ -25,6 +26,18 @@ describe('Text component', () => {
     it('should set placeholder', () => {
       let node = utils.findByTag(component, 'input');
       expect(node.getAttribute('placeholder')).to.equal('pink floyd');
+    });
+
+    it('should not include counter', () => {
+      expect(utils.findAllByType(component, GnocchiCounter)).to.be.empty;
+    });
+
+    context('with counter', () => {
+      before(() => createText({ counter: true }));
+
+      it('should include counter', () => {
+        expect(utils.findByType(component, GnocchiCounter)).to.exist;
+      });
     });
 
     context('with additional html attributes', () => {
