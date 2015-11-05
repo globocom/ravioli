@@ -28,11 +28,24 @@ export default class GnocchiNumber extends React.Component {
   }
 
   increment(){
-    this.setValue(Number(this.state.value) + 1);
+    let value = Number(this.state.value);
+    this.setValue(this.props.float ? this.floatsum(value, 1) : value + 1);
   }
 
   decrement(){
-    this.setValue(Number(this.state.value) - 1);
+    let value = Number(this.state.value);
+    this.setValue(this.props.float ? this.floatsum(value, -1) : value - 1);
+  }
+
+  floatsum(number, delta){
+    let sum = number + delta;
+
+    if(sum % 1 !== 0){
+      let precision = number.toString().split('.')[1].length;
+      sum = sum.toFixed(precision);
+    }
+
+    return sum;
   }
 
   setValue(newValue){

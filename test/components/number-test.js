@@ -226,6 +226,17 @@ describe('Number component', () => {
         component.increment();
         expect(component.state.value).to.equal(102);
       });
+
+      context('with float option', () => {
+        before(() => createNumber({ float: true }));
+        after(() => createNumber());
+
+        it('should increment value', () => {
+          component.setValue(3.14);
+          component.increment();
+          expect(component.state.value).to.equal(4.14);
+        });
+      });
     });
 
     describe('#decrement()', () => {
@@ -240,6 +251,17 @@ describe('Number component', () => {
         component.decrement();
         component.decrement();
         expect(component.state.value).to.equal(98);
+      });
+
+      context('with float option', () => {
+        before(() => createNumber({ float: true }));
+        after(() => createNumber());
+
+        it('should decrement value', () => {
+          component.setValue(1.33);
+          component.decrement();
+          expect(component.state.value).to.equal(0.33);
+        });
       });
     });
   });
