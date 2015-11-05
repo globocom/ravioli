@@ -75,44 +75,134 @@ describe('Number component', () => {
         expect(textinput.value).to.equal('10');
       });
     });
+
+    // context('with float option', () => {
+    //   before(() => createNumber({ value: 0, float: true }));
+
+    //   it('should set value as a float number', () => {
+    //     expect(component.state.value).to.equal(0.0);
+    //     // expect(textinput.value).to.equal('0.0');
+    //   });
+    // });
   });
 
   describe('Unit', () => {
     before(() => createNumber());
     after(() => destroyNumber());
 
-    describe('#convertValue()', () => {
+    describe('#convert()', () => {
       it('should return number when pass number', () => {
-        expect(component.convertValue(0)).to.equal(0);
-        expect(component.convertValue(10)).to.equal(10);
-        expect(component.convertValue(-1)).to.equal(-1);
+        expect(component.convert(0)).to.equal(0);
+        expect(component.convert(10)).to.equal(10);
+        expect(component.convert(-1)).to.equal(-1);
       });
 
       it('should return number when pass string number', () => {
-        expect(component.convertValue('0')).to.equal(0);
-        expect(component.convertValue('10')).to.equal(10);
-        expect(component.convertValue('-1')).to.equal(-1);
+        expect(component.convert('0')).to.equal(0);
+        expect(component.convert('10')).to.equal(10);
+        expect(component.convert('-1')).to.equal(-1);
       });
 
       it('should return empty string when pass a non number value', () => {
-        expect(component.convertValue('')).to.equal('');
-        expect(component.convertValue('some string')).to.equal('');
-        expect(component.convertValue(null)).to.equal('');
-        expect(component.convertValue(undefined)).to.equal('');
+        expect(component.convert('')).to.equal('');
+        expect(component.convert('some string')).to.equal('');
+        expect(component.convert(null)).to.equal('');
+        expect(component.convert(undefined)).to.equal('');
+      });
+    });
+
+    describe('#validate()', () => {
+      after(() => createNumber());
+
+      it('should validate without min and max', () => {
+        createNumber();
+        expect(component.validate(-1)).to.be.true;
+        expect(component.validate(0)).to.be.true;
+        expect(component.validate(5)).to.be.true;
+        expect(component.validate(10)).to.be.true;
+        expect(component.validate(100)).to.be.true;
       });
 
-      context('with min and max constraints', () => {
-        before(() => createNumber({ min: 0, max: 10 }));
-        after(() => createNumber());
-
-        it('should not return a lesser value than minimum', () => {
-          expect(component.convertValue(-1)).to.equal(0);
-        });
-
-        it('should not return a greater value than maximum', () => {
-          expect(component.convertValue(11)).to.equal(10);
-        });
+      it('should validate with min only', () => {
+        createNumber({ min: 0 });
+        expect(component.validate(-1)).to.be.false;
+        expect(component.validate(0)).to.be.true;
+        expect(component.validate(5)).to.be.true;
+        expect(component.validate(10)).to.be.true;
+        expect(component.validate(100)).to.be.true;
       });
+
+      it('should validate with max only', () => {
+        createNumber({ max: 10 });
+        expect(component.validate(-1)).to.be.true;
+        expect(component.validate(0)).to.be.true;
+        expect(component.validate(5)).to.be.true;
+        expect(component.validate(10)).to.be.true;
+        expect(component.validate(100)).to.be.false;
+      });
+
+      it('should validate with min and max', () => {
+        createNumber({ min: 0, max: 10 });
+        expect(component.validate(-1)).to.be.false;
+        expect(component.validate(0)).to.be.true;
+        expect(component.validate(5)).to.be.true;
+        expect(component.validate(10)).to.be.true;
+        expect(component.validate(100)).to.be.false;
+      });
+    });
+
+    describe('#truncate()', () => {
+      after(() => createNumber());
+
+      it('should truncate without min and max', () => {
+        createNumber();
+        expect(component.truncate(-1)).to.equal(-1);
+        expect(component.truncate(5)).to.equal(5);
+        expect(component.truncate(100)).to.equal(100);
+      });
+
+      it('should truncate with min only', () => {
+        createNumber({ min: 0 });
+        expect(component.truncate(-1)).to.equal(0);
+        expect(component.truncate(5)).to.equal(5);
+        expect(component.truncate(100)).to.equal(100);
+      });
+
+      it('should truncate with max only', () => {
+        createNumber({ max: 10 });
+        expect(component.truncate(-1)).to.equal(-1);
+        expect(component.truncate(5)).to.equal(5);
+        expect(component.truncate(100)).to.equal(10);
+      });
+
+      it('should truncate with min and max', () => {
+        createNumber({ min: 0, max: 10 });
+        expect(component.truncate(-1)).to.equal(0);
+        expect(component.truncate(5)).to.equal(5);
+        expect(component.truncate(100)).to.equal(10);
+      });
+    });
+
+    describe('#display()', () => {
+      it('should return empty string', () => {
+        expect(component.display('')).to.equal('');
+        expect(component.display('some string')).to.equal('');
+      });
+
+      it('should return int string', () => {
+        expect(component.display('2')).to.equal('2');
+        expect(component.display('-2')).to.equal('-2');
+        expect(component.display('0')).to.equal('0');
+      });
+
+      it('should return dotted string', () => {
+        expect(component.display('0.')).to.equal('0.');
+        expect(component.display('0.5')).to.equal('0.5');
+      });
+
+      // it('should put a zero at the beginning of the string', () => {
+      //   expect(component.display('.')).to.equal('0.');
+      // });
     });
 
     describe('#increment()', () => {
@@ -273,20 +363,20 @@ describe('Number component', () => {
 
       it('should not update when input numbers on field lesser than minimum', () => {
         let textinput = utils.findByClass(component, 'gnocchi-text');
-        component.setValue('');
+        component.setValue(5);
         textinput.value = -2;
         utils.change(textinput);
-        expect(component.state.value).to.equal(-1);
-        expect(textinput.value).to.equal('-1');
+        expect(component.state.value).to.equal(5);
+        expect(textinput.value).to.equal('5');
       });
 
       it('should not update when input numbers on field greater than maximum', () => {
         let textinput = utils.findByClass(component, 'gnocchi-text');
-        component.setValue('');
+        component.setValue(5);
         textinput.value = 11;
         utils.change(textinput);
-        expect(component.state.value).to.equal(10);
-        expect(textinput.value).to.equal('10');
+        expect(component.state.value).to.equal(5);
+        expect(textinput.value).to.equal('5');
       });
     });
   });

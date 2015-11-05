@@ -8,11 +8,18 @@ import keys from '../helpers/keycodes';
 export default class GnocchiNumber extends React.Component {
   constructor(props){
     super(props);
-    this.state = { value: this.convertValue(props.value) };
+    let value = this.truncate(this.convert(props.value));
+    this.state = { value: value, displayValue: value };
   }
 
   handleTyping(event){
-    if(event.which < keys.N0 || event.which > keys.N9) event.preventDefault();
+    const key = event.which;
+    const float = this.props.float;
+
+    if((key < keys.N0 || key > keys.N9) && (float && key !== keys.DOT)){
+      console.log('prevent', key, event.keyCode);
+      event.preventDefault();
+    }
   }
 
   handleControl(event){
@@ -29,21 +36,33 @@ export default class GnocchiNumber extends React.Component {
   }
 
   setValue(newValue){
-    newValue = this.convertValue(newValue);
+    let value = this.convert(newValue);
 
-    if(this.props.onChange && newValue !== this.state.value)
-      this.props.onChange.call(null, newValue);
+    if(this.validate(value)){
+      if(this.props.onChange && value !== this.state.value)
+        this.props.onChange.call(null, value);
 
-    this.setState({ value: newValue });
+      this.setState({ value: value, displayValue: this.display(newValue) });
+    }
   }
 
-  convertValue(value){
-    value = parseInt(value, 10);
-    if(isNaN(value)) return '';
+  convert(value){
+    value = parseFloat(value);
+    if(this.props.float) value = value.toFixed(Number(this.props.float));
+    return isNaN(value) ? '' : value;
+  }
 
+  validate(value){
+    return !(value < this.props.min || value > this.props.max);
+  }
+
+  display(value){
+    return this.convert(value) === '' ? '' : value;
+  }
+
+  truncate(value){
     if(value < this.props.min) return this.props.min;
     if(value > this.props.max) return this.props.max;
-
     return value;
   }
 
@@ -53,7 +72,7 @@ export default class GnocchiNumber extends React.Component {
     return (
       <div {...otherAttrs} className='gnocchi-number'>
         <GnocchiText
-          value={this.state.value}
+          value={this.state.displayValue}
           placeholder={this.props.placeholder}
           onKeyPress={this.handleTyping.bind(this)}
           onKeyDown={this.handleControl.bind(this)}
@@ -81,11 +100,13 @@ GnocchiNumber.propTypes = {
     React.PropTypes.number
   ]),
   onChange: React.PropTypes.func,
+  float: React.PropTypes.bool,
   min: React.PropTypes.number,
-  max: React.PropTypes.number,
+  max: React.PropTypes.number
 };
 
 GnocchiNumber.defaultProps = {
   placeholder: '#',
-  value: ''
+  value: '',
+  float: false
 };
