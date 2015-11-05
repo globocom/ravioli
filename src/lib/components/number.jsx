@@ -8,8 +8,8 @@ import keys from '../helpers/keycodes';
 export default class GnocchiNumber extends React.Component {
   constructor(props){
     super(props);
-    let value = this.truncate(this.convert(props.value));
-    this.state = { value: value, displayValue: value };
+    let { value, display } = this.parse(props.value);
+    this.state = { value: this.truncate(value), display: this.truncate(value) };
   }
 
   handleTyping(event){
@@ -28,36 +28,42 @@ export default class GnocchiNumber extends React.Component {
   }
 
   increment(){
-    this.setValue(this.state.value + 1);
+    this.setValue(Number(this.state.value) + 1);
   }
 
   decrement(){
-    this.setValue(this.state.value - 1);
+    this.setValue(Number(this.state.value) - 1);
   }
 
   setValue(newValue){
-    let value = this.convert(newValue);
+    let { value, display } = this.parse(newValue);
 
     if(this.validate(value)){
       if(this.props.onChange && value !== this.state.value)
         this.props.onChange.call(null, value);
 
-      this.setState({ value: value, displayValue: this.display(newValue) });
+      this.setState({ value: value, display: display });
     }
-  }
-
-  convert(value){
-    value = parseFloat(value);
-    if(this.props.float) value = value.toFixed(Number(this.props.float));
-    return isNaN(value) ? '' : value;
   }
 
   validate(value){
     return !(value < this.props.min || value > this.props.max);
   }
 
-  display(value){
-    return this.convert(value) === '' ? '' : value;
+  parse(value){
+    const string = value.toString();
+    const number = parseFloat(string);
+
+    let display = string;
+    value = number;
+
+    if(string === '.'){
+      value = 0;
+      display = '0.';
+    } else if(isNaN(number))
+      value = display = '';
+
+    return { value: value, display: display };
   }
 
   truncate(value){
@@ -72,7 +78,7 @@ export default class GnocchiNumber extends React.Component {
     return (
       <div {...otherAttrs} className='gnocchi-number'>
         <GnocchiText
-          value={this.state.displayValue}
+          value={this.state.display}
           placeholder={this.props.placeholder}
           onKeyPress={this.handleTyping.bind(this)}
           onKeyDown={this.handleControl.bind(this)}
