@@ -77,11 +77,29 @@ describe('Number component', () => {
     });
 
     context('with float option', () => {
-      before(() => createNumber({ value: 0, float: true }));
+      before(() => createNumber({ value: 0.5, float: true }));
 
       it('should set value as a float number', () => {
-        // expect(component.state.value).to.equal(0.0);
-        // expect(textinput.value).to.equal('0.0');
+        expect(component.state.value).to.equal(0.5);
+        expect(textinput.value).to.equal('0.5');
+      });
+
+      context('and minimum constraint', () => {
+        before(() => createNumber({ min: 1.5, value: 0.5, float: true }));
+
+        it('should set value as minimum float number', () => {
+          expect(component.state.value).to.equal(1.5);
+          expect(textinput.value).to.equal('1.5');
+        });
+      });
+
+      context('and maximum constraint', () => {
+        before(() => createNumber({ max: 2.2, value: 2.5, float: true }));
+
+        it('should set value as maximum float number', () => {
+          expect(component.state.value).to.equal(2.2);
+          expect(textinput.value).to.equal('2.2');
+        });
       });
     });
   });
@@ -367,6 +385,61 @@ describe('Number component', () => {
         utils.change(textinput);
         expect(component.state.value).to.equal(5);
         expect(textinput.value).to.equal('5');
+      });
+    });
+
+    context('with float option', () => {
+      before(() => createNumber({ float: true }));
+      after(() => destroyNumber());
+
+      it('should increment when click on up button', () => {
+        let button = utils.findByClass(component, 'gnocchi-number-up');
+        component.setValue(-0.5);
+        utils.click(button);
+        expect(component.state.value).to.equal(0.5);
+        expect(textinput.value).to.equal('0.5');
+      });
+
+      it('should decrement when click on down button', () => {
+        let button = utils.findByClass(component, 'gnocchi-number-down');
+        component.setValue(0.5);
+        utils.click(button);
+        expect(component.state.value).to.equal(-0.5);
+        expect(textinput.value).to.equal('-0.5');
+      });
+
+      it('should increment when press up key', () => {
+        let textinput = utils.findByClass(component, 'gnocchi-text');
+        component.setValue(-0.5);
+        utils.keydown(textinput, 38);
+        expect(component.state.value).to.equal(0.5);
+        expect(textinput.value).to.equal('0.5');
+      });
+
+      it('should decrement when press down key', () => {
+        let textinput = utils.findByClass(component, 'gnocchi-text');
+        component.setValue(0.5);
+        utils.keydown(textinput, 40);
+        expect(component.state.value).to.equal(-0.5);
+        expect(textinput.value).to.equal('-0.5');
+      });
+
+      it('should put zero at the beginning when input just a dot', () => {
+        let textinput = utils.findByClass(component, 'gnocchi-text');
+        component.setValue('');
+        textinput.value = '.';
+        utils.change(textinput);
+        expect(component.state.value).to.equal(0);
+        expect(textinput.value).to.equal('0.');
+      });
+
+      it('should', () => {
+        let textinput = utils.findByClass(component, 'gnocchi-text');
+        component.setValue(0);
+        textinput.value = '0.';
+        utils.change(textinput);
+        expect(component.state.value).to.equal(0);
+        expect(textinput.value).to.equal('0.');
       });
     });
   });
