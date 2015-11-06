@@ -16,7 +16,8 @@ var Styleguide = React.createClass({
         <section>
           <h3>Number input</h3>
           <Gnocchi.Number/>
-          <Gnocchi.Number min={0} max={5} placeholder='# (0 to 5)'/>
+          <Gnocchi.Number min={0} max={5} placeholder='0 to 5'/>
+          <Gnocchi.Number float={true} placeholder='#.#'/>
         </section>
 
         <section>
