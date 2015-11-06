@@ -1,13 +1,13 @@
-var expect = require('chai').expect;
-var utils = require('../utils');
-var GnocchiSelect = require('../../src/lib/components/select.jsx');
+import { expect } from 'chai';
+import utils from '../utils';
+import GnocchiSelect from '../../src/lib/components/select';
 
 
 describe('Select component', () => {
-  var component;
+  let component;
 
-  var createSelect = opts => component = utils.render(GnocchiSelect, opts);
-  var destroySelect = () => component = null;
+  const createSelect = opts => component = utils.render(GnocchiSelect, opts);
+  const destroySelect = () => component = null;
 
   describe('Initialization', () => {
     before(() => {
@@ -29,33 +29,33 @@ describe('Select component', () => {
     });
 
     it('should render placeholder', () => {
-      var placeholder = utils.findByClass(component, 'gnocchi-placeholder');
+      let placeholder = utils.findByClass(component, 'gnocchi-placeholder');
       expect(utils.getDOMNode(placeholder).textContent).to.equal('black sabbath');
     });
 
     it('should render options', () => {
-      var options = utils.findAllByClass(component, 'gnocchi-select-option');
+      let options = utils.findAllByClass(component, 'gnocchi-select-option');
 
-      var option1 = utils.getDOMNode(options[0]);
+      let option1 = utils.getDOMNode(options[0]);
       expect(option1.textContent).to.equal('ozzy');
       expect(option1.getAttribute('data-value')).to.equal('ozzy');
 
-      var option2 = utils.getDOMNode(options[1]);
+      let option2 = utils.getDOMNode(options[1]);
       expect(option2.textContent).to.equal('Tommy Iommi');
       expect(option2.getAttribute('data-value')).to.equal('tommy');
 
-      var option3 = utils.getDOMNode(options[2]);
+      let option3 = utils.getDOMNode(options[2]);
       expect(option3.textContent).to.equal('Billy Ward');
       expect(option3.getAttribute('data-value')).to.equal('Bill Ward');
 
-      var option4 = utils.getDOMNode(options[3]);
+      let option4 = utils.getDOMNode(options[3]);
       expect(option4.textContent).to.equal('Geezer Butler');
       expect(option4.getAttribute('data-value')).to.equal('Geezer Butler');
     });
 
     describe('should set selected option', () => {
       it('when it is a string', () => {
-        var component = utils.render(GnocchiSelect, {
+        let component = utils.render(GnocchiSelect, {
           selected: 'the wizard',
           options: ['the wizard']
         });
@@ -64,7 +64,7 @@ describe('Select component', () => {
       });
 
       it('when it is an object', () => {
-        var component = utils.render(GnocchiSelect, {
+        let component = utils.render(GnocchiSelect, {
           selected: 'nib',
           options: [{value: 'nib', label: 'N.I.B.'}]
         });
@@ -77,18 +77,18 @@ describe('Select component', () => {
       before(() => createSelect({empty: true, options: ['ozzy', 'tommy']}));
 
       it('should be included among the other options', () => {
-        var options = utils.findAllByClass(component, 'gnocchi-select-option');
+        let options = utils.findAllByClass(component, 'gnocchi-select-option');
         expect(options).to.have.length(3);
       });
 
       it('should be placed at the first position', () => {
-        var options = utils.findAllByClass(component, 'gnocchi-select-option');
-        var emptyOption = utils.findByClass(component, 'gnocchi-select-option-empty');
+        let options = utils.findAllByClass(component, 'gnocchi-select-option');
+        let emptyOption = utils.findByClass(component, 'gnocchi-select-option-empty');
         expect(options[0]).to.equal(emptyOption);
       });
 
       it('should has an empty label', () => {
-        var emptyOption = utils.findByClass(component, 'gnocchi-select-option-empty');
+        let emptyOption = utils.findByClass(component, 'gnocchi-select-option-empty');
         expect(utils.getDOMNode(emptyOption).textContent).to.be.empty;
       });
 
@@ -96,7 +96,7 @@ describe('Select component', () => {
         before(() => createSelect({empty: 'none', options: ['ozzy', 'tommy']}));
 
         it('should set label with the string', () => {
-          var emptyOption = utils.findByClass(component, 'gnocchi-select-option-empty');
+          let emptyOption = utils.findByClass(component, 'gnocchi-select-option-empty');
           expect(utils.getDOMNode(emptyOption).textContent).to.equal('none');
         });
       });
@@ -191,8 +191,8 @@ describe('Select component', () => {
     });
 
     describe('#triggerChange()', () => {
-      var selectedValue;
-      var changeCount = 0;
+      let selectedValue;
+      let changeCount = 0;
 
       it('should not try to fire handler if it does not exist', () => {
         component.triggerChange(0, 1);
@@ -244,7 +244,7 @@ describe('Select component', () => {
 
     describe('#getOptionValue', () => {
       it('should return value when option is an object', () => {
-        var option = {value: 'my value', label: 'my label'};
+        let option = {value: 'my value', label: 'my label'};
         expect(component.getOptionValue(option)).to.equal('my value');
       });
 
@@ -255,7 +255,7 @@ describe('Select component', () => {
 
     describe('#getOptionLabel', () => {
       it('should return label when option is an object', () => {
-        var option = {value: 'my value', label: 'my label'};
+        let option = {value: 'my value', label: 'my label'};
         expect(component.getOptionLabel(option)).to.equal('my label');
       });
 

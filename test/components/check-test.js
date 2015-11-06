@@ -1,7 +1,7 @@
-const expect = require('chai').expect;
-const utils = require('../utils');
-const GnocchiCheck = require('../../src/lib/components/check.jsx');
-const keys = require('../../src/lib/helpers/keycodes');
+import { expect } from 'chai';
+import utils from '../utils';
+import GnocchiCheck from '../../src/lib/components/check';
+import keys from '../../src/lib/helpers/keycodes';
 
 
 describe('Check component', () => {

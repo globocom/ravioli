@@ -1,6 +1,6 @@
-var expect = require('chai').expect;
-var utils = require('../utils');
-var GnocchiNumber = require('../../src/lib/components/number.jsx');
+import { expect } from 'chai';
+import utils from '../utils';
+import GnocchiNumber from '../../src/lib/components/number';
 
 
 describe('Number component', () => {

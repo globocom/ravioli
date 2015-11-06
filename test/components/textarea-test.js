@@ -1,7 +1,6 @@
-/* global require, describe, before, it */
-var expect = require('chai').expect;
-var utils = require('../utils');
-var GnocchiTextarea = require('../../src/lib/components/textarea.jsx');
+import { expect } from 'chai';
+import utils from '../utils';
+import GnocchiTextarea from '../../src/lib/components/textarea';
 
 
 describe('GnocchiTextarea', () => {

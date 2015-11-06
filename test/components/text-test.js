@@ -1,7 +1,7 @@
-var expect = require('chai').expect;
-var utils = require('../utils');
-var GnocchiText = require('../../src/lib/components/text.jsx');
-var GnocchiCounter = require('../../src/lib/components/counter.jsx');
+import { expect } from 'chai';
+import utils from '../utils';
+import GnocchiText from '../../src/lib/components/text';
+import GnocchiCounter from '../../src/lib/components/counter';
 
 
 describe('Text component', () => {
