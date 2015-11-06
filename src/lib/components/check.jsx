@@ -1,6 +1,8 @@
 import React from 'react';
+import classnames from 'classnames';
 import GnocchiIcon from './icon';
 import propsfilter from '../helpers/propsfilter';
+import keys from '../helpers/keycodes';
 
 
 export default class GnocchiCheck extends React.Component {
@@ -13,6 +15,13 @@ export default class GnocchiCheck extends React.Component {
     event.preventDefault();
   }
 
+  handleControl(event){
+    if(event.which === keys.SPACE){
+      event.preventDefault();
+      this.toggle();
+    }
+  }
+
   toggle(){
     let newValue = !this.state.checked;
     if(this.props.onChange) this.props.onChange(newValue);
@@ -21,8 +30,9 @@ export default class GnocchiCheck extends React.Component {
 
   render(){
     let otherAttrs = propsfilter(this.props, GnocchiCheck.propTypes);
-    let className = 'gnocchi-check-box';
-    if(this.state.checked) className += ' gnocchi--is-checked';
+    let className = classnames('gnocchi-check-box', {
+      'gnocchi--is-checked': this.state.checked
+    });
 
     return (
       <div {...otherAttrs} className='gnocchi-check'>
@@ -30,6 +40,7 @@ export default class GnocchiCheck extends React.Component {
           className={className}
           tabIndex='0'
           onClick={this.toggle.bind(this)}
+          onKeyDown={this.handleControl.bind(this)}
           onMouseDown={this.preventFocusOnClick}>
           {this.state.checked ? <GnocchiIcon type='check'/> : ''}
         </div>

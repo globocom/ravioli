@@ -1,6 +1,7 @@
 const expect = require('chai').expect;
 const utils = require('../utils');
 const GnocchiCheck = require('../../src/lib/components/check.jsx');
+const keys = require('../../src/lib/helpers/keycodes');
 
 
 describe('Check component', () => {
@@ -98,8 +99,30 @@ describe('Check component', () => {
     });
   });
 
-  describe.skip('User interaction', () => {
+  describe('User interaction', () => {
+    let checkboxNode;
+
     before(() => createCheck());
     after(() => destroyCheck());
+
+    describe('Keyboard control', () => {
+      before(() => {
+        checkboxNode = utils.findByClass(component, 'gnocchi-check-box');
+      });
+
+      it('should check when pressing spacebar', () => {
+        component.setState({ checked: false });
+        utils.keyDown(checkboxNode, { which: keys.SPACE });
+        expect(component.state.checked).to.be.true;
+        expect(checkboxNode.className).to.contains('gnocchi--is-checked');
+      });
+
+      it('should uncheck when pressing spacebar', () => {
+        component.setState({ checked: true });
+        utils.keyDown(checkboxNode, { which: keys.SPACE });
+        expect(component.state.checked).to.be.false;
+        expect(checkboxNode.className).to.not.contains('gnocchi--is-checked');
+      });
+    });
   });
 });

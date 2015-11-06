@@ -17,7 +17,6 @@ export default class GnocchiNumber extends React.Component {
     const float = this.props.float;
 
     if((key < keys.N0 || key > keys.N9) && (float && key !== keys.DOT)){
-      console.log('prevent', key, event.keyCode);
       event.preventDefault();
     }
   }
