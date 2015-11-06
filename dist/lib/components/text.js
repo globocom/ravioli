@@ -24,6 +24,10 @@ var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
+var _icon = require('./icon');
+
+var _icon2 = _interopRequireDefault(_icon);
+
 var _counter = require('./counter');
 
 var _counter2 = _interopRequireDefault(_counter);
@@ -54,7 +58,8 @@ var GnocchiText = (function (_React$Component) {
     value: function render() {
       var otherAttrs = (0, _helpersPropsfilter2['default'])(this.props, GnocchiText.propTypes);
       var className = (0, _classnames2['default'])('gnocchi-text-wrapper', {
-        'gnocchi-text--has-counter': this.props.counter
+        'gnocchi--is-required': this.props.required,
+        'gnocchi--has-counter': this.props.counter
       });
 
       return _react2['default'].createElement(
@@ -63,11 +68,17 @@ var GnocchiText = (function (_React$Component) {
         _react2['default'].createElement('input', {
           className: 'gnocchi-text',
           type: 'text',
-          value: this.state.value,
+          value: this.props.value,
           placeholder: this.props.placeholder,
           onChange: this.handleChange.bind(this) }),
+        this.renderRequiredIcon(),
         this.renderCounter()
       );
+    }
+  }, {
+    key: 'renderRequiredIcon',
+    value: function renderRequiredIcon() {
+      if (this.props.required && !this.state.value) return _react2['default'].createElement(_icon2['default'], { type: 'warn', className: 'gnocchi-text-required-icon' });
     }
   }, {
     key: 'renderCounter',
@@ -75,7 +86,7 @@ var GnocchiText = (function (_React$Component) {
       if (this.props.counter) return _react2['default'].createElement(_counter2['default'], {
         value: this.state.value,
         max: this.props.counterMax,
-        subtract: this.props.counter === 'sub' });
+        subtract: this.props.counter === 'subtract' });
     }
   }]);
 

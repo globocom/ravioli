@@ -15,7 +15,8 @@ var Styleguide = React.createClass({
           null,
           'Text input'
         ),
-        React.createElement(Gnocchi.Text, null)
+        React.createElement(Gnocchi.Text, null),
+        React.createElement(Gnocchi.Text, { required: true, counter: 'subtract', counterMax: 10 })
       ),
       React.createElement(
         'section',
@@ -35,7 +36,9 @@ var Styleguide = React.createClass({
           null,
           'Number input'
         ),
-        React.createElement(Gnocchi.Number, null)
+        React.createElement(Gnocchi.Number, null),
+        React.createElement(Gnocchi.Number, { min: 0, max: 5, placeholder: '0 to 5' }),
+        React.createElement(Gnocchi.Number, { float: true, placeholder: '#.#' })
       ),
       React.createElement(
         'section',

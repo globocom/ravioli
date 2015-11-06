@@ -43,13 +43,24 @@ var GnocchiNumber = (function (_React$Component) {
     _classCallCheck(this, GnocchiNumber);
 
     _get(Object.getPrototypeOf(GnocchiNumber.prototype), 'constructor', this).call(this, props);
-    this.state = { value: this.convertValue(props.value) };
+
+    var _parse = this.parse(props.value);
+
+    var value = _parse.value;
+    var display = _parse.display;
+
+    this.state = { value: this.truncate(value), display: this.truncate(value) };
   }
 
   _createClass(GnocchiNumber, [{
     key: 'handleTyping',
     value: function handleTyping(event) {
-      if (event.which < _helpersKeycodes2['default'].N0 || event.which > _helpersKeycodes2['default'].N9) event.preventDefault();
+      var key = event.which;
+      var float = this.props.float;
+
+      if ((key < _helpersKeycodes2['default'].N0 || key > _helpersKeycodes2['default'].N9) && (float && key !== _helpersKeycodes2['default'].DOT)) {
+        event.preventDefault();
+      }
     }
   }, {
     key: 'handleControl',
@@ -59,27 +70,68 @@ var GnocchiNumber = (function (_React$Component) {
   }, {
     key: 'increment',
     value: function increment() {
-      this.setValue(this.state.value + 1);
+      var value = Number(this.state.value);
+      this.setValue(this.props.float ? this.floatsum(value, 1) : value + 1);
     }
   }, {
     key: 'decrement',
     value: function decrement() {
-      this.setValue(this.state.value - 1);
+      var value = Number(this.state.value);
+      this.setValue(this.props.float ? this.floatsum(value, -1) : value - 1);
+    }
+  }, {
+    key: 'floatsum',
+    value: function floatsum(number, delta) {
+      var sum = number + delta;
+
+      if (sum % 1 !== 0) {
+        var precision = number.toString().split('.')[1].length;
+        sum = sum.toFixed(precision);
+      }
+
+      return sum;
     }
   }, {
     key: 'setValue',
     value: function setValue(newValue) {
-      newValue = this.convertValue(newValue);
+      var _parse2 = this.parse(newValue);
 
-      if (this.props.onChange && newValue !== this.state.value) this.props.onChange.call(null, newValue);
+      var value = _parse2.value;
+      var display = _parse2.display;
 
-      this.setState({ value: newValue });
+      if (this.validate(value)) {
+        if (this.props.onChange && value !== this.state.value) this.props.onChange.call(null, value);
+
+        this.setState({ value: value, display: display });
+      }
     }
   }, {
-    key: 'convertValue',
-    value: function convertValue(value) {
-      value = parseInt(value, 10);
-      return isNaN(value) ? '' : value;
+    key: 'validate',
+    value: function validate(value) {
+      return !(value < this.props.min || value > this.props.max);
+    }
+  }, {
+    key: 'parse',
+    value: function parse(value) {
+      var string = value.toString();
+      var number = parseFloat(string);
+
+      var display = string;
+      value = number;
+
+      if (string === '.') {
+        value = 0;
+        display = '0.';
+      } else if (isNaN(number)) value = display = '';
+
+      return { value: value, display: display };
+    }
+  }, {
+    key: 'truncate',
+    value: function truncate(value) {
+      if (value < this.props.min) return this.props.min;
+      if (value > this.props.max) return this.props.max;
+      return value;
     }
   }, {
     key: 'render',
@@ -90,7 +142,7 @@ var GnocchiNumber = (function (_React$Component) {
         'div',
         _extends({}, otherAttrs, { className: 'gnocchi-number' }),
         _react2['default'].createElement(_text2['default'], {
-          value: this.state.value,
+          value: this.state.display,
           placeholder: this.props.placeholder,
           onKeyPress: this.handleTyping.bind(this),
           onKeyDown: this.handleControl.bind(this),
@@ -121,11 +173,15 @@ exports['default'] = GnocchiNumber;
 GnocchiNumber.propTypes = {
   placeholder: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number]),
   value: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number]),
-  onChange: _react2['default'].PropTypes.func
+  onChange: _react2['default'].PropTypes.func,
+  float: _react2['default'].PropTypes.bool,
+  min: _react2['default'].PropTypes.number,
+  max: _react2['default'].PropTypes.number
 };
 
 GnocchiNumber.defaultProps = {
   placeholder: '#',
-  value: ''
+  value: '',
+  float: false
 };
 module.exports = exports['default'];

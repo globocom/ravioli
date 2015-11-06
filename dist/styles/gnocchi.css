@@ -359,7 +359,8 @@ a.gnocchi-button {
 .gnocchi-button-highlight {
   border-color: currentColor;
 }
-.gnocchi-button-lowlight {
+.gnocchi-button-lowlight,
+.gnocchi-button[disabled] {
   color: #ccc;
 }
 .gnocchi-button-fit {
@@ -533,6 +534,26 @@ a.gnocchi-button {
 .gnocchi-text-wrapper {
   position: relative;
 }
+.gnocchi--has-counter .gnocchi-text,
+.gnocchi--has-counter .gnocchi-textarea {
+  padding-right: 45px;
+}
+.gnocchi--is-required .gnocchi-text::-webkit-input-placeholder,
+.gnocchi--is-required .gnocchi-textarea::-webkit-input-placeholder {
+  text-indent: 20px;
+}
+.gnocchi--is-required .gnocchi-text::-moz-placeholder,
+.gnocchi--is-required .gnocchi-textarea::-moz-placeholder {
+  text-indent: 20px;
+}
+.gnocchi--is-required .gnocchi-text:-ms-input-placeholder,
+.gnocchi--is-required .gnocchi-textarea:-ms-input-placeholder {
+  text-indent: 20px;
+}
+.gnocchi--is-required .gnocchi-text::placeholder,
+.gnocchi--is-required .gnocchi-textarea::placeholder {
+  text-indent: 20px;
+}
 .gnocchi-text::-webkit-input-placeholder,
 .gnocchi-textarea::-webkit-input-placeholder {
   color: #b9b9b9;
@@ -547,6 +568,13 @@ a.gnocchi-button {
 }
 .gnocchi-text::placeholder,
 .gnocchi-textarea::placeholder {
+  color: #b9b9b9;
+}
+.gnocchi-text-required-icon,
+.gnocchi-textarea-required-icon {
+  position: absolute;
+  top: 12px;
+  left: 12px;
   color: #b9b9b9;
 }
 .gnocchi-textarea {

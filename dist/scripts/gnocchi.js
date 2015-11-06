@@ -114,6 +114,10 @@ var _react = (typeof window !== "undefined" ? window['React'] : typeof global !=
 
 var _react2 = _interopRequireDefault(_react);
 
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
 var _icon = require('./icon');
 
 var _icon2 = _interopRequireDefault(_icon);
@@ -121,6 +125,10 @@ var _icon2 = _interopRequireDefault(_icon);
 var _helpersPropsfilter = require('../helpers/propsfilter');
 
 var _helpersPropsfilter2 = _interopRequireDefault(_helpersPropsfilter);
+
+var _helpersKeycodes = require('../helpers/keycodes');
+
+var _helpersKeycodes2 = _interopRequireDefault(_helpersKeycodes);
 
 var GnocchiCheck = (function (_React$Component) {
   _inherits(GnocchiCheck, _React$Component);
@@ -138,6 +146,14 @@ var GnocchiCheck = (function (_React$Component) {
       event.preventDefault();
     }
   }, {
+    key: 'handleControl',
+    value: function handleControl(event) {
+      if (event.which === _helpersKeycodes2['default'].SPACE) {
+        event.preventDefault();
+        this.toggle();
+      }
+    }
+  }, {
     key: 'toggle',
     value: function toggle() {
       var newValue = !this.state.checked;
@@ -148,8 +164,9 @@ var GnocchiCheck = (function (_React$Component) {
     key: 'render',
     value: function render() {
       var otherAttrs = (0, _helpersPropsfilter2['default'])(this.props, GnocchiCheck.propTypes);
-      var className = 'gnocchi-check-box';
-      if (this.state.checked) className += ' gnocchi--is-checked';
+      var className = (0, _classnames2['default'])('gnocchi-check-box', {
+        'gnocchi--is-checked': this.state.checked
+      });
 
       return _react2['default'].createElement(
         'div',
@@ -160,6 +177,7 @@ var GnocchiCheck = (function (_React$Component) {
             className: className,
             tabIndex: '0',
             onClick: this.toggle.bind(this),
+            onKeyDown: this.handleControl.bind(this),
             onMouseDown: this.preventFocusOnClick },
           this.state.checked ? _react2['default'].createElement(_icon2['default'], { type: 'check' }) : ''
         ),
@@ -195,7 +213,7 @@ GnocchiCheck.defaultProps = {
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../helpers/propsfilter":11,"./icon":4}],3:[function(require,module,exports){
+},{"../helpers/keycodes":10,"../helpers/propsfilter":11,"./icon":4,"classnames":12}],3:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -301,6 +319,10 @@ var _react = (typeof window !== "undefined" ? window['React'] : typeof global !=
 
 var _react2 = _interopRequireDefault(_react);
 
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
 var _helpersClasslist = require('../helpers/classlist');
 
 var _helpersClasslist2 = _interopRequireDefault(_helpersClasslist);
@@ -322,7 +344,7 @@ var GnocchiIcon = (function (_React$Component) {
     key: 'render',
     value: function render() {
       var otherAttrs = (0, _helpersPropsfilter2['default'])(this.props, GnocchiIcon.propTypes);
-      var className = (0, _helpersClasslist2['default'])('gnocchi-icon', this.props.type);
+      var className = (0, _classnames2['default'])(this.props.className, (0, _helpersClasslist2['default'])('gnocchi-icon', this.props.type));
 
       return _react2['default'].createElement('i', _extends({}, otherAttrs, { className: className }));
     }
@@ -334,12 +356,13 @@ var GnocchiIcon = (function (_React$Component) {
 exports['default'] = GnocchiIcon;
 
 GnocchiIcon.propTypes = {
-  type: _react2['default'].PropTypes.string.isRequired
+  type: _react2['default'].PropTypes.string.isRequired,
+  className: _react2['default'].PropTypes.string
 };
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../helpers/classlist":9,"../helpers/propsfilter":11}],5:[function(require,module,exports){
+},{"../helpers/classlist":9,"../helpers/propsfilter":11,"classnames":12}],5:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -386,13 +409,24 @@ var GnocchiNumber = (function (_React$Component) {
     _classCallCheck(this, GnocchiNumber);
 
     _get(Object.getPrototypeOf(GnocchiNumber.prototype), 'constructor', this).call(this, props);
-    this.state = { value: this.convertValue(props.value) };
+
+    var _parse = this.parse(props.value);
+
+    var value = _parse.value;
+    var display = _parse.display;
+
+    this.state = { value: this.truncate(value), display: this.truncate(value) };
   }
 
   _createClass(GnocchiNumber, [{
     key: 'handleTyping',
     value: function handleTyping(event) {
-      if (event.which < _helpersKeycodes2['default'].N0 || event.which > _helpersKeycodes2['default'].N9) event.preventDefault();
+      var key = event.which;
+      var float = this.props.float;
+
+      if ((key < _helpersKeycodes2['default'].N0 || key > _helpersKeycodes2['default'].N9) && (float && key !== _helpersKeycodes2['default'].DOT)) {
+        event.preventDefault();
+      }
     }
   }, {
     key: 'handleControl',
@@ -402,27 +436,68 @@ var GnocchiNumber = (function (_React$Component) {
   }, {
     key: 'increment',
     value: function increment() {
-      this.setValue(this.state.value + 1);
+      var value = Number(this.state.value);
+      this.setValue(this.props.float ? this.floatsum(value, 1) : value + 1);
     }
   }, {
     key: 'decrement',
     value: function decrement() {
-      this.setValue(this.state.value - 1);
+      var value = Number(this.state.value);
+      this.setValue(this.props.float ? this.floatsum(value, -1) : value - 1);
+    }
+  }, {
+    key: 'floatsum',
+    value: function floatsum(number, delta) {
+      var sum = number + delta;
+
+      if (sum % 1 !== 0) {
+        var precision = number.toString().split('.')[1].length;
+        sum = sum.toFixed(precision);
+      }
+
+      return sum;
     }
   }, {
     key: 'setValue',
     value: function setValue(newValue) {
-      newValue = this.convertValue(newValue);
+      var _parse2 = this.parse(newValue);
 
-      if (this.props.onChange && newValue !== this.state.value) this.props.onChange.call(null, newValue);
+      var value = _parse2.value;
+      var display = _parse2.display;
 
-      this.setState({ value: newValue });
+      if (this.validate(value)) {
+        if (this.props.onChange && value !== this.state.value) this.props.onChange.call(null, value);
+
+        this.setState({ value: value, display: display });
+      }
     }
   }, {
-    key: 'convertValue',
-    value: function convertValue(value) {
-      value = parseInt(value, 10);
-      return isNaN(value) ? '' : value;
+    key: 'validate',
+    value: function validate(value) {
+      return !(value < this.props.min || value > this.props.max);
+    }
+  }, {
+    key: 'parse',
+    value: function parse(value) {
+      var string = value.toString();
+      var number = parseFloat(string);
+
+      var display = string;
+      value = number;
+
+      if (string === '.') {
+        value = 0;
+        display = '0.';
+      } else if (isNaN(number)) value = display = '';
+
+      return { value: value, display: display };
+    }
+  }, {
+    key: 'truncate',
+    value: function truncate(value) {
+      if (value < this.props.min) return this.props.min;
+      if (value > this.props.max) return this.props.max;
+      return value;
     }
   }, {
     key: 'render',
@@ -433,7 +508,7 @@ var GnocchiNumber = (function (_React$Component) {
         'div',
         _extends({}, otherAttrs, { className: 'gnocchi-number' }),
         _react2['default'].createElement(_text2['default'], {
-          value: this.state.value,
+          value: this.state.display,
           placeholder: this.props.placeholder,
           onKeyPress: this.handleTyping.bind(this),
           onKeyDown: this.handleControl.bind(this),
@@ -464,12 +539,16 @@ exports['default'] = GnocchiNumber;
 GnocchiNumber.propTypes = {
   placeholder: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number]),
   value: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number]),
-  onChange: _react2['default'].PropTypes.func
+  onChange: _react2['default'].PropTypes.func,
+  float: _react2['default'].PropTypes.bool,
+  min: _react2['default'].PropTypes.number,
+  max: _react2['default'].PropTypes.number
 };
 
 GnocchiNumber.defaultProps = {
   placeholder: '#',
-  value: ''
+  value: '',
+  float: false
 };
 module.exports = exports['default'];
 
@@ -766,6 +845,10 @@ var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
+var _icon = require('./icon');
+
+var _icon2 = _interopRequireDefault(_icon);
+
 var _counter = require('./counter');
 
 var _counter2 = _interopRequireDefault(_counter);
@@ -796,7 +879,8 @@ var GnocchiText = (function (_React$Component) {
     value: function render() {
       var otherAttrs = (0, _helpersPropsfilter2['default'])(this.props, GnocchiText.propTypes);
       var className = (0, _classnames2['default'])('gnocchi-text-wrapper', {
-        'gnocchi-text--has-counter': this.props.counter
+        'gnocchi--is-required': this.props.required,
+        'gnocchi--has-counter': this.props.counter
       });
 
       return _react2['default'].createElement(
@@ -805,11 +889,17 @@ var GnocchiText = (function (_React$Component) {
         _react2['default'].createElement('input', {
           className: 'gnocchi-text',
           type: 'text',
-          value: this.state.value,
+          value: this.props.value,
           placeholder: this.props.placeholder,
           onChange: this.handleChange.bind(this) }),
+        this.renderRequiredIcon(),
         this.renderCounter()
       );
+    }
+  }, {
+    key: 'renderRequiredIcon',
+    value: function renderRequiredIcon() {
+      if (this.props.required && !this.state.value) return _react2['default'].createElement(_icon2['default'], { type: 'warn', className: 'gnocchi-text-required-icon' });
     }
   }, {
     key: 'renderCounter',
@@ -817,7 +907,7 @@ var GnocchiText = (function (_React$Component) {
       if (this.props.counter) return _react2['default'].createElement(_counter2['default'], {
         value: this.state.value,
         max: this.props.counterMax,
-        subtract: this.props.counter === 'sub' });
+        subtract: this.props.counter === 'subtract' });
     }
   }]);
 
@@ -838,7 +928,7 @@ GnocchiText.defaultProps = {
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../helpers/propsfilter":11,"./counter":3,"classnames":12}],8:[function(require,module,exports){
+},{"../helpers/propsfilter":11,"./counter":3,"./icon":4,"classnames":12}],8:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -931,20 +1021,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = {
-  BACKSPACE: 8,
-  TAB: 9,
   ENTER: 13,
-  SHIFT: 16,
-  CTRL: 17,
-  ALT: 18,
-  CAPSLOCK: 20,
   ESC: 27,
   SPACE: 32,
   LEFT: 37,
   UP: 38,
   RIGHT: 39,
   DOWN: 40,
-  DELETE: 46,
+  DOT: 46,
   N0: 48,
   N1: 49,
   N2: 50,

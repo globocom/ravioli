@@ -20,6 +20,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
 var _helpersClasslist = require('../helpers/classlist');
 
 var _helpersClasslist2 = _interopRequireDefault(_helpersClasslist);
@@ -41,7 +45,7 @@ var GnocchiIcon = (function (_React$Component) {
     key: 'render',
     value: function render() {
       var otherAttrs = (0, _helpersPropsfilter2['default'])(this.props, GnocchiIcon.propTypes);
-      var className = (0, _helpersClasslist2['default'])('gnocchi-icon', this.props.type);
+      var className = (0, _classnames2['default'])(this.props.className, (0, _helpersClasslist2['default'])('gnocchi-icon', this.props.type));
 
       return _react2['default'].createElement('i', _extends({}, otherAttrs, { className: className }));
     }
@@ -53,6 +57,7 @@ var GnocchiIcon = (function (_React$Component) {
 exports['default'] = GnocchiIcon;
 
 GnocchiIcon.propTypes = {
-  type: _react2['default'].PropTypes.string.isRequired
+  type: _react2['default'].PropTypes.string.isRequired,
+  className: _react2['default'].PropTypes.string
 };
 module.exports = exports['default'];

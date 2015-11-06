@@ -20,6 +20,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
 var _icon = require('./icon');
 
 var _icon2 = _interopRequireDefault(_icon);
@@ -27,6 +31,10 @@ var _icon2 = _interopRequireDefault(_icon);
 var _helpersPropsfilter = require('../helpers/propsfilter');
 
 var _helpersPropsfilter2 = _interopRequireDefault(_helpersPropsfilter);
+
+var _helpersKeycodes = require('../helpers/keycodes');
+
+var _helpersKeycodes2 = _interopRequireDefault(_helpersKeycodes);
 
 var GnocchiCheck = (function (_React$Component) {
   _inherits(GnocchiCheck, _React$Component);
@@ -44,6 +52,14 @@ var GnocchiCheck = (function (_React$Component) {
       event.preventDefault();
     }
   }, {
+    key: 'handleControl',
+    value: function handleControl(event) {
+      if (event.which === _helpersKeycodes2['default'].SPACE) {
+        event.preventDefault();
+        this.toggle();
+      }
+    }
+  }, {
     key: 'toggle',
     value: function toggle() {
       var newValue = !this.state.checked;
@@ -54,8 +70,9 @@ var GnocchiCheck = (function (_React$Component) {
     key: 'render',
     value: function render() {
       var otherAttrs = (0, _helpersPropsfilter2['default'])(this.props, GnocchiCheck.propTypes);
-      var className = 'gnocchi-check-box';
-      if (this.state.checked) className += ' gnocchi--is-checked';
+      var className = (0, _classnames2['default'])('gnocchi-check-box', {
+        'gnocchi--is-checked': this.state.checked
+      });
 
       return _react2['default'].createElement(
         'div',
@@ -66,6 +83,7 @@ var GnocchiCheck = (function (_React$Component) {
             className: className,
             tabIndex: '0',
             onClick: this.toggle.bind(this),
+            onKeyDown: this.handleControl.bind(this),
             onMouseDown: this.preventFocusOnClick },
           this.state.checked ? _react2['default'].createElement(_icon2['default'], { type: 'check' }) : ''
         ),
