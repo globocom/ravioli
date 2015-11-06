@@ -29,6 +29,8 @@ module.exports = {
   filterAll: ReactTestUtils.findAllInRenderedTree,
   click: ReactTestUtils.Simulate.click,
   change: ReactTestUtils.Simulate.change,
+  focus: ReactTestUtils.Simulate.focus,
+  keyDown: ReactTestUtils.Simulate.keyDown,
 
   keydown: function(element, code){
     return ReactTestUtils.Simulate.keyDown(element, {which: code});
