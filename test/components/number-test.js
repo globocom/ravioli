@@ -109,7 +109,44 @@ describe('Number component', () => {
     after(() => destroyNumber());
 
     describe('#validate()', () => {
-      after(() => createNumber());
+      it('should allow empty string only', () => {
+        expect(component.validate('')).to.be.true;
+        expect(component.validate('dasdas')).to.be.false;
+      });
+
+      it('should validate integers', () => {
+        expect(component.validate('0')).to.be.true;
+        expect(component.validate('123')).to.be.true;
+        expect(component.validate('3213sadasdas')).to.be.false;
+        expect(component.validate('0.')).to.be.false;
+        expect(component.validate('2.2323')).to.be.false;
+      });
+
+      it('should validate negative integers', () => {
+        expect(component.validate('-0')).to.be.true;
+        expect(component.validate('-123')).to.be.true;
+        expect(component.validate('--321312')).to.be.false;
+        expect(component.validate('-3wdds')).to.be.false;
+        expect(component.validate('-3.312')).to.be.false;
+      });
+
+      it('should validate floats', () => {
+        expect(component.validate('0.', true)).to.be.true;
+        expect(component.validate('0.4', true)).to.be.true;
+        expect(component.validate('0.423423', true)).to.be.true;
+        expect(component.validate('3123123.333', true)).to.be.true;
+        expect(component.validate('312', true)).to.be.true;
+        expect(component.validate('3123....3213', true)).to.be.false;
+        expect(component.validate('33.32.13', true)).to.be.false;
+      });
+
+      it('should validate negative floats', () => {
+        expect(component.validate('-0.', true)).to.be.true;
+        expect(component.validate('-23.32131', true)).to.be.true;
+        expect(component.validate('--23.', true)).to.be.false;
+        expect(component.validate('--23.32131', true)).to.be.false;
+        expect(component.validate('--23.32dsada', true)).to.be.false;
+      });
 
       it('should validate without min and max', () => {
         createNumber();
@@ -195,21 +232,26 @@ describe('Number component', () => {
         expect(component.parse(0)).to.deep.equal({value: 0, display: '0'});
       });
 
-      it('should return dotted string', () => {
-        expect(component.parse('.')).to.deep.equal({value: 0, display: '0.'});
-        expect(component.parse('0.')).to.deep.equal({value: 0, display: '0.'});
-        expect(component.parse('123.')).to.deep.equal({value: 123, display: '123.'});
-      });
+      context('with float option', () => {
+        before(() => createNumber({ float: true }));
+        after(() => createNumber());
 
-      it('should return float string', () => {
-        expect(component.parse('0.5')).to.deep.equal({value: 0.5, display: '0.5'});
-        expect(component.parse('1.33333')).to.deep.equal({value: 1.33333, display: '1.33333'});
-        expect(component.parse('-0.5')).to.deep.equal({value: -0.5, display: '-0.5'});
-        expect(component.parse('-3.333')).to.deep.equal({value: -3.333, display: '-3.333'});
-        expect(component.parse(0.5)).to.deep.equal({value: 0.5, display: '0.5'});
-        expect(component.parse(1.33333)).to.deep.equal({value: 1.33333, display: '1.33333'});
-        expect(component.parse(-0.5)).to.deep.equal({value: -0.5, display: '-0.5'});
-        expect(component.parse(-3.333)).to.deep.equal({value: -3.333, display: '-3.333'});
+        it('should return dotted string', () => {
+          expect(component.parse('.')).to.deep.equal({value: 0, display: '0.'});
+          expect(component.parse('0.')).to.deep.equal({value: 0, display: '0.'});
+          expect(component.parse('123.')).to.deep.equal({value: 123, display: '123.'});
+        });
+
+        it('should return float string', () => {
+          expect(component.parse('0.5')).to.deep.equal({value: 0.5, display: '0.5'});
+          expect(component.parse('1.33333')).to.deep.equal({value: 1.33333, display: '1.33333'});
+          expect(component.parse('-0.5')).to.deep.equal({value: -0.5, display: '-0.5'});
+          expect(component.parse('-3.333')).to.deep.equal({value: -3.333, display: '-3.333'});
+          expect(component.parse(0.5)).to.deep.equal({value: 0.5, display: '0.5'});
+          expect(component.parse(1.33333)).to.deep.equal({value: 1.33333, display: '1.33333'});
+          expect(component.parse(-0.5)).to.deep.equal({value: -0.5, display: '-0.5'});
+          expect(component.parse(-3.333)).to.deep.equal({value: -3.333, display: '-3.333'});
+        });
       });
     });
 

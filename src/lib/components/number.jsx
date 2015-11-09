@@ -14,9 +14,13 @@ export default class GnocchiNumber extends React.Component {
 
   handleTyping(event){
     const key = event.which;
-    const float = this.props.float;
 
-    if((key < keys.N0 || key > keys.N9) && (float && key !== keys.DOT)){
+    if(this.props.float){
+      if(key !== keys.DOT && (key < keys.N0 || key > keys.N9))
+        event.preventDefault();
+      else if(key === keys.DOT && event.target.value.indexOf('.') !== -1)
+        event.preventDefault();
+    } else if(key < keys.N0 || key > keys.N9){
       event.preventDefault();
     }
   }
@@ -50,7 +54,7 @@ export default class GnocchiNumber extends React.Component {
   setValue(newValue){
     let { value, display } = this.parse(newValue);
 
-    if(this.validate(value)){
+    if(this.validate(value, this.props.float)){
       if(this.props.onChange && value !== this.state.value)
         this.props.onChange.call(null, value);
 
@@ -58,8 +62,11 @@ export default class GnocchiNumber extends React.Component {
     }
   }
 
-  validate(value){
-    return !(value < this.props.min || value > this.props.max);
+  validate(value, float = false){
+    if(value === '') return true;
+    let isValid = !isNaN(value);
+    if(!float) isValid = isValid && value.toString().indexOf('.') === -1;
+    return isValid && !(value < this.props.min || value > this.props.max);
   }
 
   parse(value){
