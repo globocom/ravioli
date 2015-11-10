@@ -409,16 +409,16 @@ var GnocchiNumber = (function (_React$Component) {
     _classCallCheck(this, GnocchiNumber);
 
     _get(Object.getPrototypeOf(GnocchiNumber.prototype), 'constructor', this).call(this, props);
-
-    var _parse = this.parse(props.value);
-
-    var value = _parse.value;
-    var display = _parse.display;
-
-    this.state = { value: this.truncate(value), display: this.truncate(value) };
+    this.state = this.initState(props.value);
   }
 
   _createClass(GnocchiNumber, [{
+    key: 'initState',
+    value: function initState(value) {
+      value = this.parse(value).value;
+      return { value: this.truncate(value), display: this.truncate(value) };
+    }
+  }, {
     key: 'handleTyping',
     value: function handleTyping(event) {
       var key = event.which;
@@ -461,10 +461,10 @@ var GnocchiNumber = (function (_React$Component) {
   }, {
     key: 'setValue',
     value: function setValue(newValue) {
-      var _parse2 = this.parse(newValue);
+      var _parse = this.parse(newValue);
 
-      var value = _parse2.value;
-      var display = _parse2.display;
+      var value = _parse.value;
+      var display = _parse.display;
 
       if (this.validate(value, this.props.float)) {
         if (this.props.onChange && value !== this.state.value) this.props.onChange.call(null, value);
@@ -504,6 +504,11 @@ var GnocchiNumber = (function (_React$Component) {
       if (value < this.props.min) return this.props.min;
       if (value > this.props.max) return this.props.max;
       return value;
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(props) {
+      this.setState(this.initState(props.value));
     }
   }, {
     key: 'render',

@@ -8,8 +8,12 @@ import keys from '../helpers/keycodes';
 export default class GnocchiNumber extends React.Component {
   constructor(props){
     super(props);
-    let { value, display } = this.parse(props.value);
-    this.state = { value: this.truncate(value), display: this.truncate(value) };
+    this.state = this.initState(props.value);
+  }
+
+  initState(value){
+    value = this.parse(value).value;
+    return { value: this.truncate(value), display: this.truncate(value) };
   }
 
   handleTyping(event){
@@ -89,6 +93,10 @@ export default class GnocchiNumber extends React.Component {
     if(value < this.props.min) return this.props.min;
     if(value > this.props.max) return this.props.max;
     return value;
+  }
+
+  componentWillReceiveProps(props){
+    this.setState(this.initState(props.value));
   }
 
   render(){
