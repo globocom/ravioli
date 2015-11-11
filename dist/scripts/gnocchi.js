@@ -886,6 +886,11 @@ var GnocchiText = (function (_React$Component) {
       if (this.props.onChange) this.props.onChange.call(null, newValue);
     }
   }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(props) {
+      this.setState({ value: props.value });
+    }
+  }, {
     key: 'render',
     value: function render() {
       var otherAttrs = (0, _helpersPropsfilter2['default'])(this.props, GnocchiText.propTypes);

@@ -539,6 +539,8 @@ a.gnocchi-button {
   font-size: 14px;
   top: 10px;
   left: 12px;
+  cursor: text;
+  pointer-events: none;
 }
 .gnocchi-text-wrapper.gnocchi--is-required .gnocchi-placeholder {
   text-indent: 20px;
@@ -553,6 +555,7 @@ a.gnocchi-button {
   top: 12px;
   left: 12px;
   color: #b9b9b9;
+  pointer-events: none;
 }
 .gnocchi-textarea {
   height: auto;
