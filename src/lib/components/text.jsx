@@ -30,9 +30,9 @@ export default class GnocchiText extends React.Component {
           className='gnocchi-text'
           type='text'
           value={this.props.value}
-          placeholder={this.props.placeholder}
           onChange={this.handleChange.bind(this)}/>
         {this.renderRequiredIcon()}
+        {this.renderPlaceholder()}
         {this.renderCounter()}
       </div>
     );
@@ -41,6 +41,11 @@ export default class GnocchiText extends React.Component {
   renderRequiredIcon(){
     if(this.props.required && !this.state.value)
       return <GnocchiIcon type='warn' className='gnocchi-text-required-icon'/>;
+  }
+
+  renderPlaceholder(){
+    if(this.props.placeholder && !this.state.value)
+      return <span className='gnocchi-placeholder'>{this.props.placeholder}</span>;
   }
 
   renderCounter(){

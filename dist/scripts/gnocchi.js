@@ -901,9 +901,9 @@ var GnocchiText = (function (_React$Component) {
           className: 'gnocchi-text',
           type: 'text',
           value: this.props.value,
-          placeholder: this.props.placeholder,
           onChange: this.handleChange.bind(this) }),
         this.renderRequiredIcon(),
+        this.renderPlaceholder(),
         this.renderCounter()
       );
     }
@@ -911,6 +911,15 @@ var GnocchiText = (function (_React$Component) {
     key: 'renderRequiredIcon',
     value: function renderRequiredIcon() {
       if (this.props.required && !this.state.value) return _react2['default'].createElement(_icon2['default'], { type: 'warn', className: 'gnocchi-text-required-icon' });
+    }
+  }, {
+    key: 'renderPlaceholder',
+    value: function renderPlaceholder() {
+      if (this.props.placeholder && !this.state.value) return _react2['default'].createElement(
+        'span',
+        { className: 'gnocchi-placeholder' },
+        this.props.placeholder
+      );
     }
   }, {
     key: 'renderCounter',

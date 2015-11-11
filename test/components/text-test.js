@@ -10,22 +10,35 @@ describe('Text component', () => {
   const createText = opts => component = utils.render(GnocchiText, opts);
   const destroyText = () => component = null;
 
-  describe('Initialization', () => {
+  describe.only('Initialization', () => {
     before(() => {
       utils.mockDOM();
-      createText({placeholder: 'pink floyd', value: 'echoes'});
     });
 
     after(() => destroyText());
 
+    it('should not set value', () => {
+      createText();
+      let node = utils.findByTag(component, 'input');
+      expect(node.getAttribute('value')).to.be.null;
+    });
+
+    it('should not set placeholder', () => {
+      createText({ placeholder: '' });
+      let node = utils.findAllByClass(component, 'gnocchi-placeholder');
+      expect(node).to.have.length(0);
+    });
+
     it('should set value', () => {
+      createText({ value: 'echoes' });
       let node = utils.findByTag(component, 'input');
       expect(node.getAttribute('value')).to.equal('echoes');
     });
 
     it('should set placeholder', () => {
-      let node = utils.findByTag(component, 'input');
-      expect(node.getAttribute('placeholder')).to.equal('pink floyd');
+      createText({ placeholder: 'pink floyd' });
+      let node = utils.findByClass(component, 'gnocchi-placeholder');
+      expect(node).to.have.property('textContent', 'pink floyd');
     });
 
     context('with counter', () => {
