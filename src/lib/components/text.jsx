@@ -17,6 +17,10 @@ export default class GnocchiText extends React.Component {
     if(this.props.onChange) this.props.onChange.call(null, newValue);
   }
 
+  componentWillReceiveProps(props){
+    this.setState({ value: props.value });
+  }
+
   render(){
     const otherAttrs = propsfilter(this.props, GnocchiText.propTypes);
     let className = classnames('gnocchi-text-wrapper', {

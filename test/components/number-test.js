@@ -24,12 +24,20 @@ describe('Number component', () => {
 
     after(() => destroyNumber());
 
-    it('should set placeholder', () => {
-      expect(textinput.getAttribute('placeholder')).to.equal('bob dylan');
+    it('should set value', () => {
+      createNumber({value: 100});
+      expect(textinput.value).to.equal('100');
     });
 
-    it('should set value', () => {
-      expect(textinput.value).to.equal('100');
+    it('should set placeholder', () => {
+      createNumber({placeholder: 'bob dylan'});
+      expect(utils.findByClass(component, 'gnocchi-placeholder'))
+        .to.have.property('textContent', 'bob dylan');
+    });
+
+    it('should not set placeholder when there is value set', () => {
+      createNumber({value: 100, placeholder: 'bob dylan'});
+      expect(utils.findAllByClass(component, 'gnocchi-placeholder')).to.be.empty;
     });
 
     context('with additional html attributes', () => {

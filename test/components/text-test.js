@@ -10,11 +10,8 @@ describe('Text component', () => {
   const createText = opts => component = utils.render(GnocchiText, opts);
   const destroyText = () => component = null;
 
-  describe.only('Initialization', () => {
-    before(() => {
-      utils.mockDOM();
-    });
-
+  describe('Initialization', () => {
+    before(() => utils.mockDOM());
     after(() => destroyText());
 
     it('should not set value', () => {
