@@ -3,7 +3,9 @@ import classnames from 'classnames';
 
 
 export default class GnocchiCounter extends React.Component {
-  count(string, max, subtract = false){
+  count(value, max, subtract = false){
+    let string = value.toString();
+
     if(subtract){
       if(isNaN(parseInt(max, 10)))
         throw new Error('GnocchiCounter: `max` must be a number');
@@ -25,7 +27,10 @@ export default class GnocchiCounter extends React.Component {
 }
 
 GnocchiCounter.propTypes = {
-  value: React.PropTypes.string,
+  value: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.number
+  ]),
   max: React.PropTypes.number,
   subtract: React.PropTypes.bool
 };

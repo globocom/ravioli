@@ -23,6 +23,14 @@ describe('Counter component', () => {
       expect(utils.getDOMNode(component).textContent).to.equal('4');
     });
 
+    it('should set inital value when using numbers', () => {
+      createCounter({ value: 0 });
+      expect(utils.getDOMNode(component).textContent).to.equal('1');
+
+      createCounter({ value: 123 });
+      expect(utils.getDOMNode(component).textContent).to.equal('3');
+    });
+
     it('should set exceeded status', () => {
       createCounter({ value: 'dire straits', max: 10 });
       expect(utils.getDOMNode(component).className).to.contain('exceeded');
