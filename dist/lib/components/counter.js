@@ -33,8 +33,10 @@ var GnocchiCounter = (function (_React$Component) {
 
   _createClass(GnocchiCounter, [{
     key: 'count',
-    value: function count(string, max) {
+    value: function count(value, max) {
       var subtract = arguments.length <= 2 || arguments[2] === undefined ? false : arguments[2];
+
+      var string = value.toString();
 
       if (subtract) {
         if (isNaN(parseInt(max, 10))) throw new Error('GnocchiCounter: `max` must be a number');
@@ -66,7 +68,7 @@ var GnocchiCounter = (function (_React$Component) {
 exports['default'] = GnocchiCounter;
 
 GnocchiCounter.propTypes = {
-  value: _react2['default'].PropTypes.string,
+  value: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number]),
   max: _react2['default'].PropTypes.number,
   subtract: _react2['default'].PropTypes.bool
 };

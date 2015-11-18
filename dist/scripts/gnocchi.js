@@ -250,8 +250,10 @@ var GnocchiCounter = (function (_React$Component) {
 
   _createClass(GnocchiCounter, [{
     key: 'count',
-    value: function count(string, max) {
+    value: function count(value, max) {
       var subtract = arguments.length <= 2 || arguments[2] === undefined ? false : arguments[2];
+
+      var string = value.toString();
 
       if (subtract) {
         if (isNaN(parseInt(max, 10))) throw new Error('GnocchiCounter: `max` must be a number');
@@ -283,7 +285,7 @@ var GnocchiCounter = (function (_React$Component) {
 exports['default'] = GnocchiCounter;
 
 GnocchiCounter.propTypes = {
-  value: _react2['default'].PropTypes.string,
+  value: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number]),
   max: _react2['default'].PropTypes.number,
   subtract: _react2['default'].PropTypes.bool
 };
@@ -891,6 +893,11 @@ var GnocchiText = (function (_React$Component) {
       this.setState({ value: props.value });
     }
   }, {
+    key: 'empty',
+    value: function empty(value) {
+      return value === null || value === undefined || value === '';
+    }
+  }, {
     key: 'render',
     value: function render() {
       var otherAttrs = (0, _helpersPropsfilter2['default'])(this.props, GnocchiText.propTypes);
@@ -915,12 +922,12 @@ var GnocchiText = (function (_React$Component) {
   }, {
     key: 'renderRequiredIcon',
     value: function renderRequiredIcon() {
-      if (this.props.required && !this.state.value) return _react2['default'].createElement(_icon2['default'], { type: 'warn', className: 'gnocchi-text-required-icon' });
+      if (this.props.required && this.empty(this.state.value)) return _react2['default'].createElement(_icon2['default'], { type: 'warn', className: 'gnocchi-text-required-icon' });
     }
   }, {
     key: 'renderPlaceholder',
     value: function renderPlaceholder() {
-      if (this.props.placeholder && !this.state.value) return _react2['default'].createElement(
+      if (this.props.placeholder && this.empty(this.state.value)) return _react2['default'].createElement(
         'span',
         { className: 'gnocchi-placeholder' },
         this.props.placeholder

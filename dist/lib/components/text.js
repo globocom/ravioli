@@ -59,6 +59,11 @@ var GnocchiText = (function (_React$Component) {
       this.setState({ value: props.value });
     }
   }, {
+    key: 'empty',
+    value: function empty(value) {
+      return value === null || value === undefined || value === '';
+    }
+  }, {
     key: 'render',
     value: function render() {
       var otherAttrs = (0, _helpersPropsfilter2['default'])(this.props, GnocchiText.propTypes);
@@ -83,12 +88,12 @@ var GnocchiText = (function (_React$Component) {
   }, {
     key: 'renderRequiredIcon',
     value: function renderRequiredIcon() {
-      if (this.props.required && !this.state.value) return _react2['default'].createElement(_icon2['default'], { type: 'warn', className: 'gnocchi-text-required-icon' });
+      if (this.props.required && this.empty(this.state.value)) return _react2['default'].createElement(_icon2['default'], { type: 'warn', className: 'gnocchi-text-required-icon' });
     }
   }, {
     key: 'renderPlaceholder',
     value: function renderPlaceholder() {
-      if (this.props.placeholder && !this.state.value) return _react2['default'].createElement(
+      if (this.props.placeholder && this.empty(this.state.value)) return _react2['default'].createElement(
         'span',
         { className: 'gnocchi-placeholder' },
         this.props.placeholder
