@@ -22,8 +22,7 @@ describe('Text component', () => {
 
     it('should not set placeholder', () => {
       createText({ placeholder: '' });
-      let node = utils.findAllByClass(component, 'gnocchi-placeholder');
-      expect(node).to.have.length(0);
+      expect(utils.findAllByClass(component, 'gnocchi-placeholder')).to.be.empty;
     });
 
     it('should set value', () => {
@@ -36,6 +35,13 @@ describe('Text component', () => {
       createText({ placeholder: 'pink floyd' });
       let node = utils.findByClass(component, 'gnocchi-placeholder');
       expect(node).to.have.property('textContent', 'pink floyd');
+    });
+
+    it('should not set placeholder if value is number zero', () => {
+      createText({ value: 0 });
+      let node = utils.findByTag(component, 'input');
+      expect(node.getAttribute('value')).to.equal('0');
+      expect(utils.findAllByClass(component, 'gnocchi-placeholder')).to.be.empty;
     });
 
     context('with counter', () => {
@@ -66,6 +72,12 @@ describe('Text component', () => {
 
       it('should hide required icon when value is set', () => {
         component.setState({ value: 'something' });
+        let icon = utils.findAllByClass(component, 'gnocchi-text-required-icon');
+        expect(icon).to.be.empty;
+      });
+
+      it('should hide required icon when value is zero', () => {
+        component.setState({ value: 0 });
         let icon = utils.findAllByClass(component, 'gnocchi-text-required-icon');
         expect(icon).to.be.empty;
       });

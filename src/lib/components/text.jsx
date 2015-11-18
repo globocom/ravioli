@@ -21,6 +21,10 @@ export default class GnocchiText extends React.Component {
     this.setState({ value: props.value });
   }
 
+  empty(value){
+    return value === null || value === undefined || value === '';
+  }
+
   render(){
     const otherAttrs = propsfilter(this.props, GnocchiText.propTypes);
     let className = classnames('gnocchi-text-wrapper', {
@@ -43,12 +47,12 @@ export default class GnocchiText extends React.Component {
   }
 
   renderRequiredIcon(){
-    if(this.props.required && !this.state.value)
+    if(this.props.required && this.empty(this.state.value))
       return <GnocchiIcon type='warn' className='gnocchi-text-required-icon'/>;
   }
 
   renderPlaceholder(){
-    if(this.props.placeholder && !this.state.value)
+    if(this.props.placeholder && this.empty(this.state.value))
       return <span className='gnocchi-placeholder'>{this.props.placeholder}</span>;
   }
 
