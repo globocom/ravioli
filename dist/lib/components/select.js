@@ -8,7 +8,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -32,13 +32,13 @@ var _helpersKeycodes = require('../helpers/keycodes');
 
 var _helpersKeycodes2 = _interopRequireDefault(_helpersKeycodes);
 
-var GnocchiSelect = (function (_React$Component) {
-  _inherits(GnocchiSelect, _React$Component);
+var RavioliSelect = (function (_React$Component) {
+  _inherits(RavioliSelect, _React$Component);
 
-  function GnocchiSelect(props) {
-    _classCallCheck(this, GnocchiSelect);
+  function RavioliSelect(props) {
+    _classCallCheck(this, RavioliSelect);
 
-    _get(Object.getPrototypeOf(GnocchiSelect.prototype), 'constructor', this).call(this, props);
+    _get(Object.getPrototypeOf(RavioliSelect.prototype), 'constructor', this).call(this, props);
 
     this.state = {
       open: false,
@@ -47,7 +47,7 @@ var GnocchiSelect = (function (_React$Component) {
     };
   }
 
-  _createClass(GnocchiSelect, [{
+  _createClass(RavioliSelect, [{
     key: 'getOptionValue',
     value: function getOptionValue(option) {
       return option.value === undefined ? option : option.value;
@@ -154,9 +154,9 @@ var GnocchiSelect = (function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var otherAttrs = (0, _helpersPropsfilter2['default'])(this.props, GnocchiSelect.propTypes);
-      var className = 'gnocchi-select';
-      if (this.state.open) className += ' gnocchi--is-open';
+      var otherAttrs = (0, _helpersPropsfilter2['default'])(this.props, RavioliSelect.propTypes);
+      var className = 'ravioli-select';
+      if (this.state.open) className += ' ravioli--is-open';
 
       return _react2['default'].createElement(
         'div',
@@ -168,21 +168,21 @@ var GnocchiSelect = (function (_React$Component) {
           onMouseLeave: this.unfocusOption.bind(this) }),
         _react2['default'].createElement(
           'div',
-          { className: 'gnocchi-text', onClick: this.toggle.bind(this) },
+          { className: 'ravioli-text', onClick: this.toggle.bind(this) },
           _react2['default'].createElement(
             'div',
-            { className: 'gnocchi-select-display' },
+            { className: 'ravioli-select-display' },
             this.renderDisplay(this.state.selectedOption)
           ),
           _react2['default'].createElement(
             'div',
-            { className: 'gnocchi-select-button' },
+            { className: 'ravioli-select-button' },
             _react2['default'].createElement(_icon2['default'], { type: this.state.open ? 'arrow-up' : 'arrow-down' })
           )
         ),
         _react2['default'].createElement(
           'ul',
-          { className: 'gnocchi-select-list' },
+          { className: 'ravioli-select-list' },
           this.renderEmptyOption(this.props.empty),
           this.props.options.map(this.renderOption.bind(this))
         )
@@ -195,16 +195,16 @@ var GnocchiSelect = (function (_React$Component) {
       if (selected) return this.getOptionLabel(selected);
       return _react2['default'].createElement(
         'span',
-        { className: 'gnocchi-placeholder' },
+        { className: 'ravioli-placeholder' },
         this.props.placeholder
       );
     }
   }, {
     key: 'renderOption',
     value: function renderOption(option, i) {
-      var className = 'gnocchi-select-option';
-      if (i === this.state.focusedOption) className += ' gnocchi--is-focused';
-      if (i === this.state.selectedOption) className += ' gnocchi--is-selected';
+      var className = 'ravioli-select-option';
+      if (i === this.state.focusedOption) className += ' ravioli--is-focused';
+      if (i === this.state.selectedOption) className += ' ravioli--is-selected';
 
       return _react2['default'].createElement(
         'li',
@@ -222,8 +222,8 @@ var GnocchiSelect = (function (_React$Component) {
     key: 'renderEmptyOption',
     value: function renderEmptyOption(emptyOption) {
       if (emptyOption) {
-        var className = 'gnocchi-select-option gnocchi-select-option-empty';
-        if (this.state.focusedOption === 'empty') className += ' gnocchi--is-focused';
+        var className = 'ravioli-select-option ravioli-select-option-empty';
+        if (this.state.focusedOption === 'empty') className += ' ravioli--is-focused';
 
         return _react2['default'].createElement(
           'li',
@@ -237,12 +237,12 @@ var GnocchiSelect = (function (_React$Component) {
     }
   }]);
 
-  return GnocchiSelect;
+  return RavioliSelect;
 })(_react2['default'].Component);
 
-exports['default'] = GnocchiSelect;
+exports['default'] = RavioliSelect;
 
-GnocchiSelect.propTypes = {
+RavioliSelect.propTypes = {
   empty: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.bool, _react2['default'].PropTypes.string, _react2['default'].PropTypes.number]),
   placeholder: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number]),
   selected: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number]),
@@ -252,7 +252,7 @@ GnocchiSelect.propTypes = {
   })]))
 };
 
-GnocchiSelect.defaultProps = {
+RavioliSelect.defaultProps = {
   empty: false,
   options: [],
   placeholder: 'Select something'

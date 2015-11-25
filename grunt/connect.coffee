@@ -2,6 +2,6 @@ module.exports = (grunt) ->
   grunt.config 'connect',
     dev:
       options:
-        port: 8888
+        port: 7777
         base: ['dist', 'docs']
         keepalive: true

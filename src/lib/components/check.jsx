@@ -1,11 +1,11 @@
 import React from 'react';
 import classnames from 'classnames';
-import GnocchiIcon from './icon';
+import RavioliIcon from './icon';
 import propsfilter from '../helpers/propsfilter';
 import keys from '../helpers/keycodes';
 
 
-export default class GnocchiCheck extends React.Component {
+export default class RavioliCheck extends React.Component {
   constructor(props){
     super(props);
     this.state = { checked: props.checked };
@@ -29,20 +29,20 @@ export default class GnocchiCheck extends React.Component {
   }
 
   render(){
-    let otherAttrs = propsfilter(this.props, GnocchiCheck.propTypes);
-    let className = classnames('gnocchi-check-box', {
-      'gnocchi--is-checked': this.state.checked
+    let otherAttrs = propsfilter(this.props, RavioliCheck.propTypes);
+    let className = classnames('ravioli-check-box', {
+      'ravioli--is-checked': this.state.checked
     });
 
     return (
-      <div {...otherAttrs} className='gnocchi-check'>
+      <div {...otherAttrs} className='ravioli-check'>
         <div
           className={className}
           tabIndex='0'
           onClick={this.toggle.bind(this)}
           onKeyDown={this.handleControl.bind(this)}
           onMouseDown={this.preventFocusOnClick}>
-          {this.state.checked ? <GnocchiIcon type='check'/> : ''}
+          {this.state.checked ? <RavioliIcon type='check'/> : ''}
         </div>
         {this.renderLabel()}
       </div>
@@ -52,7 +52,7 @@ export default class GnocchiCheck extends React.Component {
   renderLabel(){
     if(this.props.label){
       return (
-        <span className='gnocchi-check-label' onClick={this.toggle.bind(this)}>
+        <span className='ravioli-check-label' onClick={this.toggle.bind(this)}>
           {this.props.label}
         </span>
       );
@@ -60,7 +60,7 @@ export default class GnocchiCheck extends React.Component {
   }
 }
 
-GnocchiCheck.propTypes = {
+RavioliCheck.propTypes = {
   checked: React.PropTypes.bool,
   label: React.PropTypes.oneOfType([
     React.PropTypes.string,
@@ -68,6 +68,6 @@ GnocchiCheck.propTypes = {
   ])
 };
 
-GnocchiCheck.defaultProps = {
+RavioliCheck.defaultProps = {
   checked: false
 };

@@ -1,11 +1,11 @@
 import React from 'react';
-import GnocchiText from './text';
-import GnocchiIcon from './icon';
+import RavioliText from './text';
+import RavioliIcon from './icon';
 import propsfilter from '../helpers/propsfilter';
 import keys from '../helpers/keycodes';
 
 
-export default class GnocchiNumber extends React.Component {
+export default class RavioliNumber extends React.Component {
   constructor(props){
     super(props);
     this.state = this.initState(props.value);
@@ -100,22 +100,22 @@ export default class GnocchiNumber extends React.Component {
   }
 
   render(){
-    const otherAttrs = propsfilter(this.props, GnocchiNumber.propTypes);
+    const otherAttrs = propsfilter(this.props, RavioliNumber.propTypes);
 
     return (
-      <div {...otherAttrs} className='gnocchi-number'>
-        <GnocchiText
+      <div {...otherAttrs} className='ravioli-number'>
+        <RavioliText
           value={this.state.display}
           placeholder={this.props.placeholder}
           onKeyPress={this.handleTyping.bind(this)}
           onKeyDown={this.handleControl.bind(this)}
           onChange={this.setValue.bind(this)}/>
-        <div className='gnocchi-number-buttons'>
-          <div className='gnocchi-number-up' onClick={this.increment.bind(this)}>
-            <GnocchiIcon type='arrow-up'/>
+        <div className='ravioli-number-buttons'>
+          <div className='ravioli-number-up' onClick={this.increment.bind(this)}>
+            <RavioliIcon type='arrow-up'/>
           </div>
-          <div className='gnocchi-number-down' onClick={this.decrement.bind(this)}>
-            <GnocchiIcon type='arrow-down'/>
+          <div className='ravioli-number-down' onClick={this.decrement.bind(this)}>
+            <RavioliIcon type='arrow-down'/>
           </div>
         </div>
       </div>
@@ -123,7 +123,7 @@ export default class GnocchiNumber extends React.Component {
   }
 }
 
-GnocchiNumber.propTypes = {
+RavioliNumber.propTypes = {
   placeholder: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.number
@@ -138,7 +138,7 @@ GnocchiNumber.propTypes = {
   max: React.PropTypes.number
 };
 
-GnocchiNumber.defaultProps = {
+RavioliNumber.defaultProps = {
   placeholder: '#',
   value: '',
   float: false

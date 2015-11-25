@@ -2,13 +2,13 @@ import React from 'react';
 import propsfilter from '../helpers/propsfilter';
 
 
-export default class GnocchiTextarea extends React.Component {
+export default class RavioliTextarea extends React.Component {
   render(){
-    const otherAttrs = propsfilter(this.props, GnocchiTextarea.propTypes);
+    const otherAttrs = propsfilter(this.props, RavioliTextarea.propTypes);
 
     return (
       <textarea {...otherAttrs}
-        className='gnocchi-textarea'
+        className='ravioli-textarea'
         rows={this.props.lines}
         placeholder={this.props.placeholder}>
       </textarea>
@@ -16,7 +16,7 @@ export default class GnocchiTextarea extends React.Component {
   }
 }
 
-GnocchiTextarea.propTypes = {
+RavioliTextarea.propTypes = {
   lines: React.PropTypes.number,
   placeholder: React.PropTypes.oneOfType([
     React.PropTypes.string,
@@ -24,7 +24,7 @@ GnocchiTextarea.propTypes = {
   ])
 };
 
-GnocchiTextarea.defaultProps = {
+RavioliTextarea.defaultProps = {
   lines: 4,
   placeholder: 'Type something'
 };

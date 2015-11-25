@@ -1,6 +1,6 @@
 /* global require, module, window */
 
-var Gnocchi = {
+var Ravioli = {
   Button: require('./components/button'),
   Check: require('./components/check'),
   Number: require('./components/number'),
@@ -9,6 +9,6 @@ var Gnocchi = {
   Textarea: require('./components/textarea')
 };
 
-module.exports = Gnocchi;
+module.exports = Ravioli;
 
-if(typeof window !== 'undefined') window.Gnocchi = Gnocchi;
+if(typeof window !== 'undefined') window.Ravioli = Ravioli;

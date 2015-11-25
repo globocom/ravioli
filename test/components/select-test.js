@@ -1,12 +1,12 @@
 import { expect } from 'chai';
 import utils from '../utils';
-import GnocchiSelect from '../../src/lib/components/select';
+import RavioliSelect from '../../src/lib/components/select';
 
 
 describe('Select component', () => {
   let component;
 
-  const createSelect = opts => component = utils.render(GnocchiSelect, opts);
+  const createSelect = opts => component = utils.render(RavioliSelect, opts);
   const destroySelect = () => component = null;
 
   describe('Initialization', () => {
@@ -29,12 +29,12 @@ describe('Select component', () => {
     });
 
     it('should render placeholder', () => {
-      let placeholder = utils.findByClass(component, 'gnocchi-placeholder');
+      let placeholder = utils.findByClass(component, 'ravioli-placeholder');
       expect(utils.getDOMNode(placeholder).textContent).to.equal('black sabbath');
     });
 
     it('should render options', () => {
-      let options = utils.findAllByClass(component, 'gnocchi-select-option');
+      let options = utils.findAllByClass(component, 'ravioli-select-option');
 
       let option1 = utils.getDOMNode(options[0]);
       expect(option1.textContent).to.equal('ozzy');
@@ -55,7 +55,7 @@ describe('Select component', () => {
 
     describe('should set selected option', () => {
       it('when it is a string', () => {
-        let component = utils.render(GnocchiSelect, {
+        let component = utils.render(RavioliSelect, {
           selected: 'the wizard',
           options: ['the wizard']
         });
@@ -64,7 +64,7 @@ describe('Select component', () => {
       });
 
       it('when it is an object', () => {
-        let component = utils.render(GnocchiSelect, {
+        let component = utils.render(RavioliSelect, {
           selected: 'nib',
           options: [{value: 'nib', label: 'N.I.B.'}]
         });
@@ -77,18 +77,18 @@ describe('Select component', () => {
       before(() => createSelect({empty: true, options: ['ozzy', 'tommy']}));
 
       it('should be included among the other options', () => {
-        let options = utils.findAllByClass(component, 'gnocchi-select-option');
+        let options = utils.findAllByClass(component, 'ravioli-select-option');
         expect(options).to.have.length(3);
       });
 
       it('should be placed at the first position', () => {
-        let options = utils.findAllByClass(component, 'gnocchi-select-option');
-        let emptyOption = utils.findByClass(component, 'gnocchi-select-option-empty');
+        let options = utils.findAllByClass(component, 'ravioli-select-option');
+        let emptyOption = utils.findByClass(component, 'ravioli-select-option-empty');
         expect(options[0]).to.equal(emptyOption);
       });
 
       it('should has an empty label', () => {
-        let emptyOption = utils.findByClass(component, 'gnocchi-select-option-empty');
+        let emptyOption = utils.findByClass(component, 'ravioli-select-option-empty');
         expect(utils.getDOMNode(emptyOption).textContent).to.be.empty;
       });
 
@@ -96,7 +96,7 @@ describe('Select component', () => {
         before(() => createSelect({empty: 'none', options: ['ozzy', 'tommy']}));
 
         it('should set label with the string', () => {
-          let emptyOption = utils.findByClass(component, 'gnocchi-select-option-empty');
+          let emptyOption = utils.findByClass(component, 'ravioli-select-option-empty');
           expect(utils.getDOMNode(emptyOption).textContent).to.equal('none');
         });
       });

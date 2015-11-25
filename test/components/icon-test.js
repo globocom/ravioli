@@ -1,12 +1,12 @@
 import { expect } from 'chai';
 import utils from '../utils';
-import GnocchiIcon from '../../src/lib/components/icon';
+import RavioliIcon from '../../src/lib/components/icon';
 
 
 describe('Icon component', () => {
   let component;
 
-  const createIcon = opts => component = utils.render(GnocchiIcon, opts);
+  const createIcon = opts => component = utils.render(RavioliIcon, opts);
   const destroyIcon = () => component = null;
 
   before(() => {
@@ -22,7 +22,7 @@ describe('Icon component', () => {
 
   it('should render icon', () => {
     let classes = utils.getDOMNode(component).className;
-    expect(classes).to.equal('gnocchi-icon gnocchi-icon-bob-dylan');
+    expect(classes).to.equal('ravioli-icon ravioli-icon-bob-dylan');
   });
 
   it('should set additional html attributes', () => {

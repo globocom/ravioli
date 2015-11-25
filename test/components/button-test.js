@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import utils from '../utils';
-import GnocchiButton from '../../src/lib/components/button';
+import RavioliButton from '../../src/lib/components/button';
 
 
 describe('Button component', () => {
@@ -8,7 +8,7 @@ describe('Button component', () => {
 
   before(() => {
     utils.mockDOM();
-    component = utils.render(GnocchiButton, {
+    component = utils.render(RavioliButton, {
       label: 'the beatles',
       icon: 'arrow-right',
       classes: 'john, paul, george, ringo',
@@ -22,16 +22,16 @@ describe('Button component', () => {
   });
 
   it('should add icon', () => {
-    let icon = utils.findByClass(component, 'gnocchi-icon-arrow-right');
+    let icon = utils.findByClass(component, 'ravioli-icon-arrow-right');
     expect(icon).to.exist;
   });
 
   it('should set modifier classes', () => {
     expect(utils.getDOMNode(component).className)
-      .to.contains('gnocchi-button-john')
-      .and.to.contains('gnocchi-button-paul')
-      .and.to.contains('gnocchi-button-george')
-      .and.to.contains('gnocchi-button-ringo');
+      .to.contains('ravioli-button-john')
+      .and.to.contains('ravioli-button-paul')
+      .and.to.contains('ravioli-button-george')
+      .and.to.contains('ravioli-button-ringo');
   });
 
   it('should set custom classes', () => {
@@ -46,7 +46,7 @@ describe('Button component', () => {
   });
 
   context('with link prop', () => {
-    before(() => component = utils.render(GnocchiButton, {
+    before(() => component = utils.render(RavioliButton, {
       link: 'http://ilovecoffee.com/'
     }));
 
@@ -61,7 +61,7 @@ describe('Button component', () => {
   });
 
   context('with additional html attributes', () => {
-    before(() => component = utils.render(GnocchiButton, {
+    before(() => component = utils.render(RavioliButton, {
       label: 'the beatles',
       icon: 'arrow-right',
       rel: 'something',

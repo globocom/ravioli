@@ -8,7 +8,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _get = function get(_x2, _x3, _x4) { var _again = true; _function: while (_again) { var object = _x2, property = _x3, receiver = _x4; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x2 = parent; _x3 = property; _x4 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _get = function get(_x2, _x3, _x4) { var _again = true; _function: while (_again) { var object = _x2, property = _x3, receiver = _x4; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x2 = parent; _x3 = property; _x4 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -36,17 +36,17 @@ var _helpersKeycodes = require('../helpers/keycodes');
 
 var _helpersKeycodes2 = _interopRequireDefault(_helpersKeycodes);
 
-var GnocchiNumber = (function (_React$Component) {
-  _inherits(GnocchiNumber, _React$Component);
+var RavioliNumber = (function (_React$Component) {
+  _inherits(RavioliNumber, _React$Component);
 
-  function GnocchiNumber(props) {
-    _classCallCheck(this, GnocchiNumber);
+  function RavioliNumber(props) {
+    _classCallCheck(this, RavioliNumber);
 
-    _get(Object.getPrototypeOf(GnocchiNumber.prototype), 'constructor', this).call(this, props);
+    _get(Object.getPrototypeOf(RavioliNumber.prototype), 'constructor', this).call(this, props);
     this.state = this.initState(props.value);
   }
 
-  _createClass(GnocchiNumber, [{
+  _createClass(RavioliNumber, [{
     key: 'initState',
     value: function initState(value) {
       value = this.parse(value).value;
@@ -147,11 +147,11 @@ var GnocchiNumber = (function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var otherAttrs = (0, _helpersPropsfilter2['default'])(this.props, GnocchiNumber.propTypes);
+      var otherAttrs = (0, _helpersPropsfilter2['default'])(this.props, RavioliNumber.propTypes);
 
       return _react2['default'].createElement(
         'div',
-        _extends({}, otherAttrs, { className: 'gnocchi-number' }),
+        _extends({}, otherAttrs, { className: 'ravioli-number' }),
         _react2['default'].createElement(_text2['default'], {
           value: this.state.display,
           placeholder: this.props.placeholder,
@@ -160,15 +160,15 @@ var GnocchiNumber = (function (_React$Component) {
           onChange: this.setValue.bind(this) }),
         _react2['default'].createElement(
           'div',
-          { className: 'gnocchi-number-buttons' },
+          { className: 'ravioli-number-buttons' },
           _react2['default'].createElement(
             'div',
-            { className: 'gnocchi-number-up', onClick: this.increment.bind(this) },
+            { className: 'ravioli-number-up', onClick: this.increment.bind(this) },
             _react2['default'].createElement(_icon2['default'], { type: 'arrow-up' })
           ),
           _react2['default'].createElement(
             'div',
-            { className: 'gnocchi-number-down', onClick: this.decrement.bind(this) },
+            { className: 'ravioli-number-down', onClick: this.decrement.bind(this) },
             _react2['default'].createElement(_icon2['default'], { type: 'arrow-down' })
           )
         )
@@ -176,12 +176,12 @@ var GnocchiNumber = (function (_React$Component) {
     }
   }]);
 
-  return GnocchiNumber;
+  return RavioliNumber;
 })(_react2['default'].Component);
 
-exports['default'] = GnocchiNumber;
+exports['default'] = RavioliNumber;
 
-GnocchiNumber.propTypes = {
+RavioliNumber.propTypes = {
   placeholder: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number]),
   value: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number]),
   onChange: _react2['default'].PropTypes.func,
@@ -190,7 +190,7 @@ GnocchiNumber.propTypes = {
   max: _react2['default'].PropTypes.number
 };
 
-GnocchiNumber.defaultProps = {
+RavioliNumber.defaultProps = {
   placeholder: '#',
   value: '',
   float: false

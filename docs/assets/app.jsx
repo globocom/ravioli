@@ -4,31 +4,31 @@ var Styleguide = React.createClass({
       <main>
         <section>
           <h3>Text input</h3>
-          <Gnocchi.Text/>
-          <Gnocchi.Text required={true} counter='subtract' counterMax={10}/>
+          <Ravioli.Text/>
+          <Ravioli.Text required={true} counter='subtract' counterMax={10}/>
         </section>
 
         <section>
           <h3>Textarea</h3>
-          <Gnocchi.Textarea/>
+          <Ravioli.Textarea/>
         </section>
 
         <section>
           <h3>Number input</h3>
-          <Gnocchi.Number/>
-          <Gnocchi.Number min={0} max={5} placeholder='0 to 5'/>
-          <Gnocchi.Number float={true} placeholder='#.#'/>
+          <Ravioli.Number/>
+          <Ravioli.Number min={0} max={5} placeholder='0 to 5'/>
+          <Ravioli.Number float={true} placeholder='#.#'/>
         </section>
 
         <section>
           <h3>Select</h3>
-          <Gnocchi.Select
+          <Ravioli.Select
             options={[
               {value: 123, label: 'dasdsadsadasdsa'},
               {value: 'sswws', label: 1234567890},
               'sffffffff',
               1234]}/>
-          <Gnocchi.Select
+          <Ravioli.Select
             placeholder='Select something (or not)'
             empty='empty label'
             options={[1,2,3]}/>
@@ -36,18 +36,18 @@ var Styleguide = React.createClass({
 
         <section>
           <h3>Checkbox</h3>
-          <Gnocchi.Check label='Check me'/>
+          <Ravioli.Check label='Check me'/>
         </section>
 
         <section>
           <h3>Button</h3>
-          <Gnocchi.Button label='Default'/>
-          <Gnocchi.Button label='With icon' icon='arrow-right'/>
-          <Gnocchi.Button label='Action' classes='action'/>
-          <Gnocchi.Button label='Highlight' classes='highlight'/>
-          <Gnocchi.Button label='Lowlight' classes='lowlight'/>
-          <Gnocchi.Button label='Fit' classes='fit'/>
-          <Gnocchi.Button label='Link' classes='fit' link='http://google.com'/>
+          <Ravioli.Button label='Default'/>
+          <Ravioli.Button label='With icon' icon='arrow-right'/>
+          <Ravioli.Button label='Action' classes='action'/>
+          <Ravioli.Button label='Highlight' classes='highlight'/>
+          <Ravioli.Button label='Lowlight' classes='lowlight'/>
+          <Ravioli.Button label='Fit' classes='fit'/>
+          <Ravioli.Button label='Link' classes='fit' link='http://google.com'/>
         </section>
       </main>
     );

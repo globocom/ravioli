@@ -1,14 +1,14 @@
 import { expect } from 'chai';
 import utils from '../utils';
-import GnocchiTextarea from '../../src/lib/components/textarea';
+import RavioliTextarea from '../../src/lib/components/textarea';
 
 
-describe('GnocchiTextarea', () => {
+describe('RavioliTextarea', () => {
   let component;
 
   before(() => {
     utils.mockDOM();
-    component = utils.render(GnocchiTextarea, {
+    component = utils.render(RavioliTextarea, {
       placeholder: 'led zeppelin',
       lines: 10
     });
@@ -25,7 +25,7 @@ describe('GnocchiTextarea', () => {
   });
 
   context('with additional html attributes', () => {
-    before(() => component = utils.render(GnocchiTextarea, {
+    before(() => component = utils.render(RavioliTextarea, {
       placeholder: 'led zeppelin',
       lines: 10,
       rel: 'something',

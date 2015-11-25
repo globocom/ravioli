@@ -1,13 +1,13 @@
 import { expect } from 'chai';
 import utils from '../utils';
-import GnocchiText from '../../src/lib/components/text';
-import GnocchiCounter from '../../src/lib/components/counter';
+import RavioliText from '../../src/lib/components/text';
+import RavioliCounter from '../../src/lib/components/counter';
 
 
 describe('Text component', () => {
   let component;
 
-  const createText = opts => component = utils.render(GnocchiText, opts);
+  const createText = opts => component = utils.render(RavioliText, opts);
   const destroyText = () => component = null;
 
   describe('Initialization', () => {
@@ -22,7 +22,7 @@ describe('Text component', () => {
 
     it('should not set placeholder', () => {
       createText({ placeholder: '' });
-      expect(utils.findAllByClass(component, 'gnocchi-placeholder')).to.be.empty;
+      expect(utils.findAllByClass(component, 'ravioli-placeholder')).to.be.empty;
     });
 
     it('should set value', () => {
@@ -33,7 +33,7 @@ describe('Text component', () => {
 
     it('should set placeholder', () => {
       createText({ placeholder: 'pink floyd' });
-      let node = utils.findByClass(component, 'gnocchi-placeholder');
+      let node = utils.findByClass(component, 'ravioli-placeholder');
       expect(node).to.have.property('textContent', 'pink floyd');
     });
 
@@ -41,7 +41,7 @@ describe('Text component', () => {
       createText({ value: 0 });
       let node = utils.findByTag(component, 'input');
       expect(node.getAttribute('value')).to.equal('0');
-      expect(utils.findAllByClass(component, 'gnocchi-placeholder')).to.be.empty;
+      expect(utils.findAllByClass(component, 'ravioli-placeholder')).to.be.empty;
     });
 
     context('with counter', () => {
@@ -49,11 +49,11 @@ describe('Text component', () => {
 
       it('should set has-counter class', () => {
         let node = utils.getDOMNode(component);
-        expect(node.className).to.contain('gnocchi--has-counter');
+        expect(node.className).to.contain('ravioli--has-counter');
       });
 
       it('should include counter', () => {
-        expect(utils.findByType(component, GnocchiCounter)).to.exist;
+        expect(utils.findByType(component, RavioliCounter)).to.exist;
       });
     });
 
@@ -62,23 +62,23 @@ describe('Text component', () => {
 
       it('should set required class', () => {
         let node = utils.getDOMNode(component);
-        expect(node.className).to.contain('gnocchi--is-required');
+        expect(node.className).to.contain('ravioli--is-required');
       });
 
       it('should render required icon', () => {
-        let icon = utils.findByClass(component, 'gnocchi-text-required-icon');
+        let icon = utils.findByClass(component, 'ravioli-text-required-icon');
         expect(icon).to.exist;
       });
 
       it('should hide required icon when value is set', () => {
         component.setState({ value: 'something' });
-        let icon = utils.findAllByClass(component, 'gnocchi-text-required-icon');
+        let icon = utils.findAllByClass(component, 'ravioli-text-required-icon');
         expect(icon).to.be.empty;
       });
 
       it('should hide required icon when value is zero', () => {
         component.setState({ value: 0 });
-        let icon = utils.findAllByClass(component, 'gnocchi-text-required-icon');
+        let icon = utils.findAllByClass(component, 'ravioli-text-required-icon');
         expect(icon).to.be.empty;
       });
     });

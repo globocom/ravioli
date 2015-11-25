@@ -8,7 +8,7 @@
 	font-style:normal;
 }
 
-.gnocchi-icon {
+.ravioli-icon {
 	font-family:"icons";
 	display:inline-block;
 	vertical-align:middle;
@@ -27,81 +27,81 @@
 /* Icons */
 
 
-.gnocchi-icon-arrow-down:before {
+.ravioli-icon-arrow-down:before {
 	content:"\f101";
 }
 
 
-.gnocchi-icon-arrow-left:before {
+.ravioli-icon-arrow-left:before {
 	content:"\f102";
 }
 
 
-.gnocchi-icon-arrow-right:before {
+.ravioli-icon-arrow-right:before {
 	content:"\f103";
 }
 
 
-.gnocchi-icon-arrow-up:before {
+.ravioli-icon-arrow-up:before {
 	content:"\f104";
 }
 
 
-.gnocchi-icon-check:before {
+.ravioli-icon-check:before {
 	content:"\f105";
 }
 
 
-.gnocchi-icon-cross-circle:before {
+.ravioli-icon-cross-circle:before {
 	content:"\f106";
 }
 
 
-.gnocchi-icon-cross:before {
+.ravioli-icon-cross:before {
 	content:"\f107";
 }
 
 
-.gnocchi-icon-drag:before {
+.ravioli-icon-drag:before {
 	content:"\f108";
 }
 
 
-.gnocchi-icon-image:before {
+.ravioli-icon-image:before {
 	content:"\f109";
 }
 
 
-.gnocchi-icon-info:before {
+.ravioli-icon-info:before {
 	content:"\f10a";
 }
 
 
-.gnocchi-icon-outside:before {
+.ravioli-icon-outside:before {
 	content:"\f10b";
 }
 
 
-.gnocchi-icon-play-circle:before {
+.ravioli-icon-play-circle:before {
 	content:"\f10c";
 }
 
 
-.gnocchi-icon-plus-circle:before {
+.ravioli-icon-plus-circle:before {
 	content:"\f10d";
 }
 
 
-.gnocchi-icon-plus:before {
+.ravioli-icon-plus:before {
 	content:"\f10e";
 }
 
 
-.gnocchi-icon-search:before {
+.ravioli-icon-search:before {
 	content:"\f10f";
 }
 
 
-.gnocchi-icon-warn:before {
+.ravioli-icon-warn:before {
 	content:"\f110";
 }

@@ -1,8 +1,8 @@
-.gnocchi-text-wrapper
+.ravioli-text-wrapper
   @extends $container
   position relative
 
-  .gnocchi-placeholder
+  .ravioli-placeholder
     position absolute
     font-size 14px
     top 10px
@@ -10,11 +10,11 @@
     cursor text
     pointer-events none
 
-  &.gnocchi--is-required
-    .gnocchi-placeholder
+  &.ravioli--is-required
+    .ravioli-placeholder
       text-indent 20px
 
-.gnocchi-text
+.ravioli-text
   @extends $reset
   @extends $container
   @extends $box
@@ -22,7 +22,7 @@
   @extends $typography
   @extends $focus
 
-  .gnocchi--has-counter &
+  .ravioli--has-counter &
     padding-right 45px
 
   &-required-icon

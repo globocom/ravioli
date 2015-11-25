@@ -4,19 +4,19 @@ import classlist from '../helpers/classlist';
 import propsfilter from '../helpers/propsfilter';
 
 
-export default class GnocchiIcon extends React.Component {
+export default class RavioliIcon extends React.Component {
   render(){
-    const otherAttrs = propsfilter(this.props, GnocchiIcon.propTypes);
+    const otherAttrs = propsfilter(this.props, RavioliIcon.propTypes);
     const className = classnames(
       this.props.className,
-      classlist('gnocchi-icon', this.props.type)
+      classlist('ravioli-icon', this.props.type)
     );
 
     return <i {...otherAttrs} className={className}></i>;
   }
 }
 
-GnocchiIcon.propTypes = {
+RavioliIcon.propTypes = {
   type: React.PropTypes.string.isRequired,
   className: React.PropTypes.string
 };

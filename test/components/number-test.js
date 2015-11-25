@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import utils from '../utils';
-import GnocchiNumber from '../../src/lib/components/number';
+import RavioliNumber from '../../src/lib/components/number';
 
 
 describe('Number component', () => {
@@ -8,7 +8,7 @@ describe('Number component', () => {
   let textinput;
 
   const createNumber = opts => {
-    component = utils.render(GnocchiNumber, opts);
+    component = utils.render(RavioliNumber, opts);
     textinput = utils.findByTag(component, 'input');
   };
 
@@ -31,13 +31,13 @@ describe('Number component', () => {
 
     it('should set placeholder', () => {
       createNumber({placeholder: 'bob dylan'});
-      expect(utils.findByClass(component, 'gnocchi-placeholder'))
+      expect(utils.findByClass(component, 'ravioli-placeholder'))
         .to.have.property('textContent', 'bob dylan');
     });
 
     it('should not set placeholder when there is value set', () => {
       createNumber({value: 100, placeholder: 'bob dylan'});
-      expect(utils.findAllByClass(component, 'gnocchi-placeholder')).to.be.empty;
+      expect(utils.findAllByClass(component, 'ravioli-placeholder')).to.be.empty;
     });
 
     context('with additional html attributes', () => {
@@ -356,7 +356,7 @@ describe('Number component', () => {
     after(() => destroyNumber());
 
     it('should increment when click on up button', () => {
-      let button = utils.findByClass(component, 'gnocchi-number-up');
+      let button = utils.findByClass(component, 'ravioli-number-up');
       component.setValue('');
       utils.click(button);
       expect(component.state.value).to.equal(1);
@@ -364,7 +364,7 @@ describe('Number component', () => {
     });
 
     it('should decrement when click on down button', () => {
-      let button = utils.findByClass(component, 'gnocchi-number-down');
+      let button = utils.findByClass(component, 'ravioli-number-down');
       component.setValue('');
       utils.click(button);
       expect(component.state.value).to.equal(-1);
@@ -372,7 +372,7 @@ describe('Number component', () => {
     });
 
     it('should increment when press up key', () => {
-      let textinput = utils.findByClass(component, 'gnocchi-text');
+      let textinput = utils.findByClass(component, 'ravioli-text');
       component.setValue('');
       utils.keydown(textinput, 38);
       expect(component.state.value).to.equal(1);
@@ -380,7 +380,7 @@ describe('Number component', () => {
     });
 
     it('should decrement when press down key', () => {
-      let textinput = utils.findByClass(component, 'gnocchi-text');
+      let textinput = utils.findByClass(component, 'ravioli-text');
       component.setValue('');
       utils.keydown(textinput, 40);
       expect(component.state.value).to.equal(-1);
@@ -388,7 +388,7 @@ describe('Number component', () => {
     });
 
     it('should update when input numbers on field', () => {
-      let textinput = utils.findByClass(component, 'gnocchi-text');
+      let textinput = utils.findByClass(component, 'ravioli-text');
       component.setValue('');
       textinput.value = 1;
       utils.change(textinput);
@@ -397,7 +397,7 @@ describe('Number component', () => {
     });
 
     it('should do nothing when input non numbers on field', () => {
-      let textinput = utils.findByClass(component, 'gnocchi-text');
+      let textinput = utils.findByClass(component, 'ravioli-text');
       component.setValue('');
       textinput.value = 'not a number';
       utils.change(textinput);
@@ -410,7 +410,7 @@ describe('Number component', () => {
       after(() => destroyNumber());
 
       it('should not increment when click on up button', () => {
-        let button = utils.findByClass(component, 'gnocchi-number-up');
+        let button = utils.findByClass(component, 'ravioli-number-up');
         component.setValue(10);
         utils.click(button);
         expect(component.state.value).to.equal(10);
@@ -418,7 +418,7 @@ describe('Number component', () => {
       });
 
       it('should not decrement when click on down button', () => {
-        let button = utils.findByClass(component, 'gnocchi-number-down');
+        let button = utils.findByClass(component, 'ravioli-number-down');
         component.setValue(-1);
         utils.click(button);
         expect(component.state.value).to.equal(-1);
@@ -426,7 +426,7 @@ describe('Number component', () => {
       });
 
       it('should not increment when press up key', () => {
-        let textinput = utils.findByClass(component, 'gnocchi-text');
+        let textinput = utils.findByClass(component, 'ravioli-text');
         component.setValue(10);
         utils.keydown(textinput, 38);
         expect(component.state.value).to.equal(10);
@@ -434,7 +434,7 @@ describe('Number component', () => {
       });
 
       it('should not decrement when press down key', () => {
-        let textinput = utils.findByClass(component, 'gnocchi-text');
+        let textinput = utils.findByClass(component, 'ravioli-text');
         component.setValue(-1);
         utils.keydown(textinput, 40);
         expect(component.state.value).to.equal(-1);
@@ -442,7 +442,7 @@ describe('Number component', () => {
       });
 
       it('should not update when input numbers on field lesser than minimum', () => {
-        let textinput = utils.findByClass(component, 'gnocchi-text');
+        let textinput = utils.findByClass(component, 'ravioli-text');
         component.setValue(5);
         textinput.value = -2;
         utils.change(textinput);
@@ -451,7 +451,7 @@ describe('Number component', () => {
       });
 
       it('should not update when input numbers on field greater than maximum', () => {
-        let textinput = utils.findByClass(component, 'gnocchi-text');
+        let textinput = utils.findByClass(component, 'ravioli-text');
         component.setValue(5);
         textinput.value = 11;
         utils.change(textinput);
@@ -465,7 +465,7 @@ describe('Number component', () => {
       after(() => destroyNumber());
 
       it('should increment when click on up button', () => {
-        let button = utils.findByClass(component, 'gnocchi-number-up');
+        let button = utils.findByClass(component, 'ravioli-number-up');
         component.setValue(-0.5);
         utils.click(button);
         expect(component.state.value).to.equal(0.5);
@@ -473,7 +473,7 @@ describe('Number component', () => {
       });
 
       it('should decrement when click on down button', () => {
-        let button = utils.findByClass(component, 'gnocchi-number-down');
+        let button = utils.findByClass(component, 'ravioli-number-down');
         component.setValue(0.5);
         utils.click(button);
         expect(component.state.value).to.equal(-0.5);
@@ -481,7 +481,7 @@ describe('Number component', () => {
       });
 
       it('should increment when press up key', () => {
-        let textinput = utils.findByClass(component, 'gnocchi-text');
+        let textinput = utils.findByClass(component, 'ravioli-text');
         component.setValue(-0.5);
         utils.keydown(textinput, 38);
         expect(component.state.value).to.equal(0.5);
@@ -489,7 +489,7 @@ describe('Number component', () => {
       });
 
       it('should decrement when press down key', () => {
-        let textinput = utils.findByClass(component, 'gnocchi-text');
+        let textinput = utils.findByClass(component, 'ravioli-text');
         component.setValue(0.5);
         utils.keydown(textinput, 40);
         expect(component.state.value).to.equal(-0.5);
@@ -497,7 +497,7 @@ describe('Number component', () => {
       });
 
       it('should put zero at the beginning when input just a dot', () => {
-        let textinput = utils.findByClass(component, 'gnocchi-text');
+        let textinput = utils.findByClass(component, 'ravioli-text');
         component.setValue('');
         textinput.value = '.';
         utils.change(textinput);
@@ -506,7 +506,7 @@ describe('Number component', () => {
       });
 
       it('should', () => {
-        let textinput = utils.findByClass(component, 'gnocchi-text');
+        let textinput = utils.findByClass(component, 'ravioli-text');
         component.setValue(0);
         textinput.value = '0.';
         utils.change(textinput);

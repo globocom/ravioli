@@ -1,13 +1,13 @@
 import { expect } from 'chai';
 import utils from '../utils';
-import GnocchiCheck from '../../src/lib/components/check';
+import RavioliCheck from '../../src/lib/components/check';
 import keys from '../../src/lib/helpers/keycodes';
 
 
 describe('Check component', () => {
   let component;
 
-  const createCheck = opts => component = utils.render(GnocchiCheck, opts);
+  const createCheck = opts => component = utils.render(RavioliCheck, opts);
   const destroyCheck = () => component = null;
 
   describe('Initialization', () => {
@@ -19,7 +19,7 @@ describe('Check component', () => {
     });
 
     it('should not render label', () => {
-      let label = utils.findAllByClass(component, 'gnocchi-check-label');
+      let label = utils.findAllByClass(component, 'ravioli-check-label');
       expect(label).to.be.empty;
     });
 
@@ -36,7 +36,7 @@ describe('Check component', () => {
       }));
 
       it('should render label', () => {
-        let label = utils.findByClass(component, 'gnocchi-check-label');
+        let label = utils.findByClass(component, 'ravioli-check-label');
         expect(label).to.exist;
         expect(label.textContent).to.equal('Eye of the tiger');
       });
@@ -107,21 +107,21 @@ describe('Check component', () => {
 
     describe('Keyboard control', () => {
       before(() => {
-        checkboxNode = utils.findByClass(component, 'gnocchi-check-box');
+        checkboxNode = utils.findByClass(component, 'ravioli-check-box');
       });
 
       it('should check when pressing spacebar', () => {
         component.setState({ checked: false });
         utils.keyDown(checkboxNode, { which: keys.SPACE });
         expect(component.state.checked).to.be.true;
-        expect(checkboxNode.className).to.contains('gnocchi--is-checked');
+        expect(checkboxNode.className).to.contains('ravioli--is-checked');
       });
 
       it('should uncheck when pressing spacebar', () => {
         component.setState({ checked: true });
         utils.keyDown(checkboxNode, { which: keys.SPACE });
         expect(component.state.checked).to.be.false;
-        expect(checkboxNode.className).to.not.contains('gnocchi--is-checked');
+        expect(checkboxNode.className).to.not.contains('ravioli--is-checked');
       });
     });
   });

@@ -1,10 +1,10 @@
 import React from 'react';
-import GnocchiIcon from './icon';
+import RavioliIcon from './icon';
 import propsfilter from '../helpers/propsfilter';
 import keys from '../helpers/keycodes';
 
 
-export default class GnocchiSelect extends React.Component {
+export default class RavioliSelect extends React.Component {
   constructor(props){
     super(props);
 
@@ -118,9 +118,9 @@ export default class GnocchiSelect extends React.Component {
   }
 
   render(){
-    const otherAttrs = propsfilter(this.props, GnocchiSelect.propTypes);
-    let className = 'gnocchi-select';
-    if(this.state.open) className += ' gnocchi--is-open';
+    const otherAttrs = propsfilter(this.props, RavioliSelect.propTypes);
+    let className = 'ravioli-select';
+    if(this.state.open) className += ' ravioli--is-open';
 
     return (
       <div {...otherAttrs}
@@ -129,15 +129,15 @@ export default class GnocchiSelect extends React.Component {
         onBlur={this.close.bind(this)}
         onKeyDown={this.onkeydown.bind(this)}
         onMouseLeave={this.unfocusOption.bind(this)}>
-        <div className='gnocchi-text' onClick={this.toggle.bind(this)}>
-          <div className='gnocchi-select-display'>
+        <div className='ravioli-text' onClick={this.toggle.bind(this)}>
+          <div className='ravioli-select-display'>
             {this.renderDisplay(this.state.selectedOption)}
           </div>
-          <div className='gnocchi-select-button'>
-            <GnocchiIcon type={this.state.open ? 'arrow-up' : 'arrow-down'}/>
+          <div className='ravioli-select-button'>
+            <RavioliIcon type={this.state.open ? 'arrow-up' : 'arrow-down'}/>
           </div>
         </div>
-        <ul className='gnocchi-select-list'>
+        <ul className='ravioli-select-list'>
           {this.renderEmptyOption(this.props.empty)}
           {this.props.options.map(this.renderOption.bind(this))}
         </ul>
@@ -148,13 +148,13 @@ export default class GnocchiSelect extends React.Component {
   renderDisplay(optionIndex){
     let selected = this.props.options[optionIndex];
     if(selected) return this.getOptionLabel(selected);
-    return <span className='gnocchi-placeholder'>{this.props.placeholder}</span>;
+    return <span className='ravioli-placeholder'>{this.props.placeholder}</span>;
   }
 
   renderOption(option, i){
-    let className = 'gnocchi-select-option';
-    if(i === this.state.focusedOption) className += ' gnocchi--is-focused';
-    if(i === this.state.selectedOption) className += ' gnocchi--is-selected';
+    let className = 'ravioli-select-option';
+    if(i === this.state.focusedOption) className += ' ravioli--is-focused';
+    if(i === this.state.selectedOption) className += ' ravioli--is-selected';
 
     return (
       <li
@@ -164,16 +164,16 @@ export default class GnocchiSelect extends React.Component {
         onMouseEnter={this.focusOption.bind(this, i)}
         onClick={this.selectOption.bind(this, i)}>
         {this.getOptionLabel(option)}
-        {i === this.state.selectedOption ? <GnocchiIcon type='check'/> : ''}
+        {i === this.state.selectedOption ? <RavioliIcon type='check'/> : ''}
       </li>
     );
   }
 
   renderEmptyOption(emptyOption){
     if(emptyOption){
-      let className = 'gnocchi-select-option gnocchi-select-option-empty';
+      let className = 'ravioli-select-option ravioli-select-option-empty';
       if(this.state.focusedOption === 'empty')
-        className += ' gnocchi--is-focused';
+        className += ' ravioli--is-focused';
 
       return (
         <li
@@ -187,7 +187,7 @@ export default class GnocchiSelect extends React.Component {
   }
 }
 
-GnocchiSelect.propTypes = {
+RavioliSelect.propTypes = {
   empty: React.PropTypes.oneOfType([
     React.PropTypes.bool,
     React.PropTypes.string,
@@ -219,7 +219,7 @@ GnocchiSelect.propTypes = {
   )
 };
 
-GnocchiSelect.defaultProps = {
+RavioliSelect.defaultProps = {
   empty: false,
   options: [],
   placeholder: 'Select something'

@@ -1,12 +1,12 @@
 import { expect } from 'chai';
 import utils from '../utils';
-import GnocchiCounter from '../../src/lib/components/counter';
+import RavioliCounter from '../../src/lib/components/counter';
 
 
 describe('Counter component', () => {
   let component;
 
-  const createCounter = opts => component = utils.render(GnocchiCounter, opts);
+  const createCounter = opts => component = utils.render(RavioliCounter, opts);
   const destroyCounter = () => component = null;
 
   describe('Initialization', () => {

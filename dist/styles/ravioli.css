@@ -1,5 +1,5 @@
 /**
- * Gnocchi - Gnocchi is a UI component set for form elements.
+ * Ravioli - Ravioli is a UI component set for form elements.
  *
  * @author Almir Filho <almir@almirfilho.com>
  * @version 0.0.2
@@ -12,7 +12,7 @@
 	font-style:normal;
 }
 
-.gnocchi-icon {
+.ravioli-icon {
 	font-family:"icons";
 	display:inline-block;
 	vertical-align:middle;
@@ -31,114 +31,114 @@
 /* Icons */
 
 
-.gnocchi-icon-arrow-down:before {
+.ravioli-icon-arrow-down:before {
 	content:"\f101";
 }
 
 
-.gnocchi-icon-arrow-left:before {
+.ravioli-icon-arrow-left:before {
 	content:"\f102";
 }
 
 
-.gnocchi-icon-arrow-right:before {
+.ravioli-icon-arrow-right:before {
 	content:"\f103";
 }
 
 
-.gnocchi-icon-arrow-up:before {
+.ravioli-icon-arrow-up:before {
 	content:"\f104";
 }
 
 
-.gnocchi-icon-check:before {
+.ravioli-icon-check:before {
 	content:"\f105";
 }
 
 
-.gnocchi-icon-cross-circle:before {
+.ravioli-icon-cross-circle:before {
 	content:"\f106";
 }
 
 
-.gnocchi-icon-cross:before {
+.ravioli-icon-cross:before {
 	content:"\f107";
 }
 
 
-.gnocchi-icon-drag:before {
+.ravioli-icon-drag:before {
 	content:"\f108";
 }
 
 
-.gnocchi-icon-image:before {
+.ravioli-icon-image:before {
 	content:"\f109";
 }
 
 
-.gnocchi-icon-info:before {
+.ravioli-icon-info:before {
 	content:"\f10a";
 }
 
 
-.gnocchi-icon-outside:before {
+.ravioli-icon-outside:before {
 	content:"\f10b";
 }
 
 
-.gnocchi-icon-play-circle:before {
+.ravioli-icon-play-circle:before {
 	content:"\f10c";
 }
 
 
-.gnocchi-icon-plus-circle:before {
+.ravioli-icon-plus-circle:before {
 	content:"\f10d";
 }
 
 
-.gnocchi-icon-plus:before {
+.ravioli-icon-plus:before {
 	content:"\f10e";
 }
 
 
-.gnocchi-icon-search:before {
+.ravioli-icon-search:before {
 	content:"\f10f";
 }
 
 
-.gnocchi-icon-warn:before {
+.ravioli-icon-warn:before {
 	content:"\f110";
 }
 
-.gnocchi-button:focus,
-.gnocchi-check-box:focus,
-.gnocchi-text:focus,
-.gnocchi-textarea:focus {
+.ravioli-button:focus,
+.ravioli-check-box:focus,
+.ravioli-text:focus,
+.ravioli-textarea:focus {
   border-color: currentColor;
 }
-.gnocchi-button:focus,
-.gnocchi-check-box:focus,
-.gnocchi-select:focus,
-.gnocchi-text:focus,
-.gnocchi-textarea:focus {
+.ravioli-button:focus,
+.ravioli-check-box:focus,
+.ravioli-select:focus,
+.ravioli-text:focus,
+.ravioli-textarea:focus {
   outline: none;
   outline-offset: 0;
 }
-.gnocchi-button:hover,
-.gnocchi-number-up:hover,
-.gnocchi-number-down:hover,
-.gnocchi-select-button:hover {
+.ravioli-button:hover,
+.ravioli-number-up:hover,
+.ravioli-number-down:hover,
+.ravioli-select-button:hover {
   color: #666;
 }
-.gnocchi-button:active,
-.gnocchi-number-up:active,
-.gnocchi-number-down:active,
-.gnocchi-select-button:active {
+.ravioli-button:active,
+.ravioli-number-up:active,
+.ravioli-number-down:active,
+.ravioli-select-button:active {
   color: #999;
 }
-.gnocchi-button,
-.gnocchi-text,
-.gnocchi-textarea {
+.ravioli-button,
+.ravioli-text,
+.ravioli-textarea {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -152,60 +152,60 @@
   font-size: inherit;
   color: inherit;
 }
-.gnocchi-button,
-.gnocchi-check,
-.gnocchi-select,
-.gnocchi-text-wrapper,
-.gnocchi-text,
-.gnocchi-textarea {
+.ravioli-button,
+.ravioli-check,
+.ravioli-select,
+.ravioli-text-wrapper,
+.ravioli-text,
+.ravioli-textarea {
   box-sizing: border-box;
   display: block;
   width: 100%;
   height: 40px;
 }
-.gnocchi-button,
-.gnocchi-check-box,
-.gnocchi-select-option,
-.gnocchi-text,
-.gnocchi-textarea {
+.ravioli-button,
+.ravioli-check-box,
+.ravioli-select-option,
+.ravioli-text,
+.ravioli-textarea {
   box-sizing: border-box;
   background: #fff;
   border: 1px solid #e9e9e9;
   border-radius: 4px;
 }
-.gnocchi-button,
-.gnocchi-check,
-.gnocchi-select-option,
-.gnocchi-text,
-.gnocchi-textarea {
+.ravioli-button,
+.ravioli-check,
+.ravioli-select-option,
+.ravioli-text,
+.ravioli-textarea {
   padding: 9px 12px;
 }
-.gnocchi-button,
-.gnocchi-check,
-.gnocchi-select,
-.gnocchi-text,
-.gnocchi-textarea {
+.ravioli-button,
+.ravioli-check,
+.ravioli-select,
+.ravioli-text,
+.ravioli-textarea {
   font-size: 14px;
   line-height: 160%;
   color: #333;
 }
-.gnocchi-button::-moz-selection,
-.gnocchi-check::-moz-selection,
-.gnocchi-select::-moz-selection,
-.gnocchi-text::-moz-selection,
-.gnocchi-textarea::-moz-selection {
+.ravioli-button::-moz-selection,
+.ravioli-check::-moz-selection,
+.ravioli-select::-moz-selection,
+.ravioli-text::-moz-selection,
+.ravioli-textarea::-moz-selection {
   color: #fff;
   background-color: #333;
 }
-.gnocchi-button::selection,
-.gnocchi-check::selection,
-.gnocchi-select::selection,
-.gnocchi-text::selection,
-.gnocchi-textarea::selection {
+.ravioli-button::selection,
+.ravioli-check::selection,
+.ravioli-select::selection,
+.ravioli-text::selection,
+.ravioli-textarea::selection {
   color: #fff;
   background-color: #333;
 }
-.gnocchi-placeholder {
+.ravioli-placeholder {
   color: #b9b9b9;
 }
 .gg-row {
@@ -315,7 +315,7 @@
   font-weight: lighter;
   color: #818181;
 }
-.gnocchi-button {
+.ravioli-button {
   line-height: 100%;
   text-align: center;
   text-decoration: none;
@@ -325,85 +325,85 @@
       -ms-user-select: none;
           user-select: none;
 }
-a.gnocchi-button {
+a.ravioli-button {
   line-height: 35px;
   padding-top: 0;
   padding-bottom: 0;
 }
-.gnocchi-button > * {
+.ravioli-button > * {
   vertical-align: middle;
 }
-.gnocchi-button .gnocchi-icon {
+.ravioli-button .ravioli-icon {
   font-size: 18px;
   position: relative;
   top: 1px;
 }
-.gnocchi-button * + .gnocchi-icon {
+.ravioli-button * + .ravioli-icon {
   margin-left: 6px;
 }
-.gnocchi-button-action {
+.ravioli-button-action {
   color: #fff;
   background-color: #333;
   border-color: #333;
 }
-.gnocchi-button-action:hover {
+.ravioli-button-action:hover {
   color: #fff;
   background-color: #666;
   border-color: #666;
 }
-.gnocchi-button-action:active {
+.ravioli-button-action:active {
   color: #fff;
   background-color: #999;
   border-color: #999;
 }
-.gnocchi-button-highlight {
+.ravioli-button-highlight {
   border-color: currentColor;
 }
-.gnocchi-button-lowlight,
-.gnocchi-button[disabled] {
+.ravioli-button-lowlight,
+.ravioli-button[disabled] {
   color: #ccc;
 }
-.gnocchi-button-fit {
+.ravioli-button-fit {
   display: inline-block;
   width: auto;
 }
-.gnocchi-check {
+.ravioli-check {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
 }
-.gnocchi-check-box {
+.ravioli-check-box {
   display: inline-block;
   width: 21px;
   height: 21px;
   vertical-align: middle;
 }
-.gnocchi-check-box.gnocchi--is-checked {
+.ravioli-check-box.ravioli--is-checked {
   color: #fff;
   background-color: #333;
   border-color: #333;
 }
-.gnocchi-check-box.gnocchi--is-checked:focus {
+.ravioli-check-box.ravioli--is-checked:focus {
   border-color: #fff;
 }
-.gnocchi-check-box .gnocchi-icon {
+.ravioli-check-box .ravioli-icon {
   position: relative;
   display: block;
   top: -1px;
   left: -3px;
   font-size: 21px;
 }
-.gnocchi-check-label {
+.ravioli-check-label {
   position: relative;
   top: 1px;
   vertical-align: middle;
   cursor: default;
 }
-.gnocchi-check-box + .gnocchi-check-label {
+.ravioli-check-box + .ravioli-check-label {
   margin-left: 10px;
 }
-.gnocchi-counter {
+.ravioli-counter {
   position: absolute;
   top: 0;
   right: 0;
@@ -412,23 +412,23 @@ a.gnocchi-button {
   line-height: 41px;
   color: #b9b9b9;
 }
-.gnocchi-counter--is-exceeded {
+.ravioli-counter--is-exceeded {
   color: #f00;
 }
-.gnocchi-number-up,
-.gnocchi-number-down {
+.ravioli-number-up,
+.ravioli-number-down {
   width: 100%;
   height: 50%;
   text-align: center;
   color: #333;
 }
-.gnocchi-number {
+.ravioli-number {
   position: relative;
 }
-.gnocchi-number .gnocchi-text {
+.ravioli-number .ravioli-text {
   padding-right: 40px;
 }
-.gnocchi-number-buttons {
+.ravioli-number-buttons {
   position: absolute;
   top: 0;
   right: 0;
@@ -440,17 +440,17 @@ a.gnocchi-button {
       -ms-user-select: none;
           user-select: none;
 }
-.gnocchi-number-up .gnocchi-icon,
-.gnocchi-number-down .gnocchi-icon {
+.ravioli-number-up .ravioli-icon,
+.ravioli-number-down .ravioli-icon {
   position: relative;
 }
-.gnocchi-number-up .gnocchi-icon {
+.ravioli-number-up .ravioli-icon {
   top: 1px;
 }
-.gnocchi-number-down .gnocchi-icon {
+.ravioli-number-down .ravioli-icon {
   bottom: 3px;
 }
-.gnocchi-select {
+.ravioli-select {
   position: relative;
   height: auto;
   cursor: default;
@@ -459,23 +459,23 @@ a.gnocchi-button {
       -ms-user-select: none;
           user-select: none;
 }
-.gnocchi-select:focus .gnocchi-text {
+.ravioli-select:focus .ravioli-text {
   border-color: #333;
 }
-.gnocchi-select.gnocchi--is-open .gnocchi-text {
+.ravioli-select.ravioli--is-open .ravioli-text {
   border-radius: 4px 4px 0 0;
   border-bottom-color: #fff;
 }
-.gnocchi-select .gnocchi-text {
+.ravioli-select .ravioli-text {
   position: relative;
   padding-right: 34px;
 }
-.gnocchi-select-display {
+.ravioli-select-display {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-.gnocchi-select-button {
+.ravioli-select-button {
   position: absolute;
   top: 0;
   right: 0;
@@ -484,23 +484,23 @@ a.gnocchi-button {
   font-size: 14px;
   text-align: center;
 }
-.gnocchi-select-button .gnocchi-icon {
+.ravioli-select-button .ravioli-icon {
   position: relative;
   top: 50%;
   -webkit-transform: translateY(-70%);
           transform: translateY(-70%);
 }
-.gnocchi-select-list {
+.ravioli-select-list {
   position: absolute;
   display: none;
   min-width: 100%;
   list-style: none;
   z-index: 1;
 }
-.gnocchi--is-open .gnocchi-select-list {
+.ravioli--is-open .ravioli-select-list {
   display: block;
 }
-.gnocchi-select-option {
+.ravioli-select-option {
   position: relative;
   min-height: 40px;
   background-color: #fff;
@@ -509,32 +509,32 @@ a.gnocchi-button {
   border-radius: 0;
   white-space: nowrap;
 }
-.gnocchi-select-option:last-child {
+.ravioli-select-option:last-child {
   border-bottom-width: 1px;
   border-radius: 0 0 4px 4px;
 }
-:focus .gnocchi-select-option {
+:focus .ravioli-select-option {
   border-color: #333;
 }
-.gnocchi-select-option.gnocchi--is-focused {
+.ravioli-select-option.ravioli--is-focused {
   color: #fff;
   background-color: #333;
 }
-.gnocchi-select-option.gnocchi--is-selected {
+.ravioli-select-option.ravioli--is-selected {
   font-weight: bold;
 }
-.gnocchi-select-option .gnocchi-icon {
+.ravioli-select-option .ravioli-icon {
   font-size: 16px;
   margin-left: 6px;
   vertical-align: sub;
 }
-.gnocchi-select-option-empty {
+.ravioli-select-option-empty {
   font-style: italic;
 }
-.gnocchi-text-wrapper {
+.ravioli-text-wrapper {
   position: relative;
 }
-.gnocchi-text-wrapper .gnocchi-placeholder {
+.ravioli-text-wrapper .ravioli-placeholder {
   position: absolute;
   font-size: 14px;
   top: 10px;
@@ -542,21 +542,21 @@ a.gnocchi-button {
   cursor: text;
   pointer-events: none;
 }
-.gnocchi-text-wrapper.gnocchi--is-required .gnocchi-placeholder {
+.ravioli-text-wrapper.ravioli--is-required .ravioli-placeholder {
   text-indent: 20px;
 }
-.gnocchi--has-counter .gnocchi-text,
-.gnocchi--has-counter .gnocchi-textarea {
+.ravioli--has-counter .ravioli-text,
+.ravioli--has-counter .ravioli-textarea {
   padding-right: 45px;
 }
-.gnocchi-text-required-icon,
-.gnocchi-textarea-required-icon {
+.ravioli-text-required-icon,
+.ravioli-textarea-required-icon {
   position: absolute;
   top: 12px;
   left: 12px;
   color: #b9b9b9;
   pointer-events: none;
 }
-.gnocchi-textarea {
+.ravioli-textarea {
   height: auto;
 }

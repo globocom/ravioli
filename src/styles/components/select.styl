@@ -1,4 +1,4 @@
-.gnocchi-select
+.ravioli-select
   @extends $container
   @extends $typography
   @extends $no-focus
@@ -8,15 +8,15 @@
   user-select none
 
   &:focus
-    .gnocchi-text
+    .ravioli-text
       border-color #333
 
-  &.gnocchi--is-open
-    .gnocchi-text
+  &.ravioli--is-open
+    .ravioli-text
       border-radius 4px 4px 0 0
       border-bottom-color white
 
-  .gnocchi-text
+  .ravioli-text
     position relative
     padding-right 34px
 
@@ -36,7 +36,7 @@
     font-size 14px
     text-align center
 
-    .gnocchi-icon
+    .ravioli-icon
       position relative
       top 50%
       transform translateY(-70%)
@@ -48,7 +48,7 @@
     list-style none
     z-index 1
 
-    .gnocchi--is-open &
+    .ravioli--is-open &
       display block
 
   &-option
@@ -69,14 +69,14 @@
     :focus &
       border-color #333
 
-    &.gnocchi--is-focused
+    &.ravioli--is-focused
       color white
       background-color #333
 
-    &.gnocchi--is-selected
+    &.ravioli--is-selected
       font-weight bold
 
-    .gnocchi-icon
+    .ravioli-icon
       font-size 16px
       margin-left 6px
       vertical-align sub

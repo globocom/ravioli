@@ -1,8 +1,8 @@
 {
-  "name": "gnocchi",
-  "title": "Gnocchi",
+  "name": "ravioli",
+  "title": "Ravioli",
   "version": "0.0.2",
-  "description": "Gnocchi is a UI component set for form elements.",
+  "description": "Ravioli is a UI component set for form elements.",
   "main": "./dist/lib/main.js",
   "scripts": {
     "test": "grunt test",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/almirfilho/gnocchi.git"
+    "url": "git+ssh://git@bitbucket.org/almirfilho/ravioli.git"
   },
   "keywords": [
     "ui",
@@ -26,7 +26,7 @@
     "github": "almirfilho"
   },
   "license": "MIT",
-  "homepage": "https://bitbucket.org/almirfilho/gnocchi#readme",
+  "homepage": "https://bitbucket.org/almirfilho/ravioli#readme",
   "engines": {
     "node": ">=4.0.0"
   },

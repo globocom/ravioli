@@ -15,8 +15,8 @@ var Styleguide = React.createClass({
           null,
           'Text input'
         ),
-        React.createElement(Gnocchi.Text, null),
-        React.createElement(Gnocchi.Text, { required: true, counter: 'subtract', counterMax: 10 })
+        React.createElement(Ravioli.Text, null),
+        React.createElement(Ravioli.Text, { required: true, counter: 'subtract', counterMax: 10 })
       ),
       React.createElement(
         'section',
@@ -26,7 +26,7 @@ var Styleguide = React.createClass({
           null,
           'Textarea'
         ),
-        React.createElement(Gnocchi.Textarea, null)
+        React.createElement(Ravioli.Textarea, null)
       ),
       React.createElement(
         'section',
@@ -36,9 +36,9 @@ var Styleguide = React.createClass({
           null,
           'Number input'
         ),
-        React.createElement(Gnocchi.Number, null),
-        React.createElement(Gnocchi.Number, { min: 0, max: 5, placeholder: '0 to 5' }),
-        React.createElement(Gnocchi.Number, { float: true, placeholder: '#.#' })
+        React.createElement(Ravioli.Number, null),
+        React.createElement(Ravioli.Number, { min: 0, max: 5, placeholder: '0 to 5' }),
+        React.createElement(Ravioli.Number, { float: true, placeholder: '#.#' })
       ),
       React.createElement(
         'section',
@@ -48,9 +48,9 @@ var Styleguide = React.createClass({
           null,
           'Select'
         ),
-        React.createElement(Gnocchi.Select, {
+        React.createElement(Ravioli.Select, {
           options: [{ value: 123, label: 'dasdsadsadasdsa' }, { value: 'sswws', label: 1234567890 }, 'sffffffff', 1234] }),
-        React.createElement(Gnocchi.Select, {
+        React.createElement(Ravioli.Select, {
           placeholder: 'Select something (or not)',
           empty: 'empty label',
           options: [1, 2, 3] })
@@ -63,7 +63,7 @@ var Styleguide = React.createClass({
           null,
           'Checkbox'
         ),
-        React.createElement(Gnocchi.Check, { label: 'Check me' })
+        React.createElement(Ravioli.Check, { label: 'Check me' })
       ),
       React.createElement(
         'section',
@@ -73,13 +73,13 @@ var Styleguide = React.createClass({
           null,
           'Button'
         ),
-        React.createElement(Gnocchi.Button, { label: 'Default' }),
-        React.createElement(Gnocchi.Button, { label: 'With icon', icon: 'arrow-right' }),
-        React.createElement(Gnocchi.Button, { label: 'Action', classes: 'action' }),
-        React.createElement(Gnocchi.Button, { label: 'Highlight', classes: 'highlight' }),
-        React.createElement(Gnocchi.Button, { label: 'Lowlight', classes: 'lowlight' }),
-        React.createElement(Gnocchi.Button, { label: 'Fit', classes: 'fit' }),
-        React.createElement(Gnocchi.Button, { label: 'Link', classes: 'fit', link: 'http://google.com' })
+        React.createElement(Ravioli.Button, { label: 'Default' }),
+        React.createElement(Ravioli.Button, { label: 'With icon', icon: 'arrow-right' }),
+        React.createElement(Ravioli.Button, { label: 'Action', classes: 'action' }),
+        React.createElement(Ravioli.Button, { label: 'Highlight', classes: 'highlight' }),
+        React.createElement(Ravioli.Button, { label: 'Lowlight', classes: 'lowlight' }),
+        React.createElement(Ravioli.Button, { label: 'Fit', classes: 'fit' }),
+        React.createElement(Ravioli.Button, { label: 'Link', classes: 'fit', link: 'http://google.com' })
       )
     );
   }

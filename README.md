@@ -1,6 +1,6 @@
-# Gnocchi
+# Ravioli
 
-Gnocchi is a UI component set for form elements.
+Ravioli is a UI component set for form elements.
 It is highly componentized, plugable, scalable, asynchronous, non blocking io,
 event oriented, reactive, extensible and gamified as a service distributed in
 the cloud like a boss.

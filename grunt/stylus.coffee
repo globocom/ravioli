@@ -5,5 +5,5 @@ module.exports = (grunt) ->
         compress: false
       files: [
         src: 'src/styles/main.styl'
-        dest: 'dist/styles/gnocchi.css'
+        dest: 'dist/styles/ravioli.css'
       ]

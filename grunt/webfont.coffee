@@ -11,5 +11,5 @@ module.exports = (grunt) ->
         embed: true
         htmlDemo: false
         templateOptions:
-          baseClass: 'gnocchi-icon'
-          classPrefix: 'gnocchi-icon-'
+          baseClass: 'ravioli-icon'
+          classPrefix: 'ravioli-icon-'
