@@ -5,7 +5,6 @@ module.exports = (grunt) ->
   grunt.registerTask 'dev',     ['compile', 'watch']
   grunt.registerTask 'run',     'concurrent'
   grunt.registerTask 'help',    'availabletasks'
-  grunt.registerTask 'publish', 'shell:publish'
   grunt.registerTask 'default', 'help'
 
   # general --------------------------------------------------------------------
