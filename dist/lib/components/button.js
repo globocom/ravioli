@@ -75,6 +75,6 @@ RavioliButton.propTypes = {
   icon: _react2['default'].PropTypes.string,
   classes: _react2['default'].PropTypes.string,
   className: _react2['default'].PropTypes.string,
-  label: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number])
+  label: _react2['default'].PropTypes.node
 };
 module.exports = exports['default'];
