@@ -1,7 +1,7 @@
 {
   "name": "ravioli",
   "title": "Ravioli",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Ravioli is an UI component set for form elements.",
   "main": "./dist/lib/main.js",
   "scripts": {
