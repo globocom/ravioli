@@ -1,4 +1,11 @@
 var Styleguide = React.createClass({
+
+  getInitialState: function () {
+    return {
+
+    };
+  },
+
   render: function(){
     return (
       <main>
@@ -31,7 +38,15 @@ var Styleguide = React.createClass({
           <Ravioli.Select
             placeholder='Select something (or not)'
             empty='empty label'
-            options={[1,2,3]}/>
+            options={[1, 2, 3]}/>
+          <Ravioli.Select
+            placeholder='Select a dev (with default value)'
+            empty='empty label'
+            options={[
+              {value: 1, label: 'Almir Filho'},
+              {value: 2, label: 'Artur Sousa'},
+              {value: 3, label: 'Rafael Gonçalves'}]}
+            value={2} />
         </section>
 
         <section>

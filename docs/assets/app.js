@@ -3,6 +3,10 @@
 var Styleguide = React.createClass({
   displayName: 'Styleguide',
 
+  getInitialState: function getInitialState() {
+    return {};
+  },
+
   render: function render() {
     return React.createElement(
       'main',
@@ -53,7 +57,12 @@ var Styleguide = React.createClass({
         React.createElement(Ravioli.Select, {
           placeholder: 'Select something (or not)',
           empty: 'empty label',
-          options: [1, 2, 3] })
+          options: [1, 2, 3] }),
+        React.createElement(Ravioli.Select, {
+          placeholder: 'Select a dev (with default value)',
+          empty: 'empty label',
+          options: [{ value: 1, label: 'Almir Filho' }, { value: 2, label: 'Artur Sousa' }, { value: 3, label: 'Rafael Gonçalves' }],
+          value: 2 })
       ),
       React.createElement(
         'section',
