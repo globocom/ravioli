@@ -321,6 +321,37 @@ describe('Select component', () => {
         });
       });
     });
+
+    describe('#initValue', () => {
+      context('when value is the first option', () => {
+        before(() => {
+          createSelect({
+            options: ['paranoid', 'ironman'],
+            value: 'paranoid'
+          });
+        });
+
+        it('should initialize state selectedOption with 0', () => {
+          expect(component.state.selectedOption).to.equal(0);
+        });
+      });
+
+      context('when value is the last option', () => {
+        before(() => {
+          createSelect({
+            options: [
+              {value: 'paranoid', label: 'Paranoid'},
+              {value: 'ironman', label: 'Ironman'}
+            ],
+            value: 'ironman'
+          });
+        });
+
+        it('should initialize state selectedOption with 1', () => {
+          expect(component.state.selectedOption).to.equal(1);
+        });
+      });
+    });
   });
 
   describe.skip('User interaction', () => {

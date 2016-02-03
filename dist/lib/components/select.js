@@ -45,6 +45,10 @@ var RavioliSelect = (function (_React$Component) {
       focusedOption: null,
       selectedOption: this.getOptionIndex(props.selected)
     };
+
+    if (props.value !== null) {
+      this.state.selectedOption = this.getOptionIndex(props.value);
+    }
   }
 
   _createClass(RavioliSelect, [{
@@ -249,12 +253,14 @@ RavioliSelect.propTypes = {
   options: _react2['default'].PropTypes.arrayOf(_react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number, _react2['default'].PropTypes.shape({
     value: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number]),
     label: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number])
-  })]))
+  })])),
+  value: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number])
 };
 
 RavioliSelect.defaultProps = {
   empty: false,
   options: [],
-  placeholder: 'Select something'
+  placeholder: 'Select something',
+  value: null
 };
 module.exports = exports['default'];
