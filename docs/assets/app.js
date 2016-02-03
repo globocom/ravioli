@@ -3,29 +3,6 @@
 var Styleguide = React.createClass({
   displayName: 'Styleguide',
 
-  getInitialState: function getInitialState() {
-    return {
-      tech: 2
-    };
-  },
-
-  // onChangeDev: function(value){
-  //   console.log(value);
-
-  //   switch(value){
-  //     case 1:
-  //       this.setState({ tech: 1 });
-  //     case 2:
-  //       this.setState({ tech: 2 });
-  //     case 3:
-  //       this.setState({ tech: 2 });
-  //     default:
-  //       this.setState({ tech: null });
-  //   }
-
-  //   // console.log(value, this.state.tech);
-  // },
-
   render: function render() {
     return React.createElement(
       'main',
