@@ -1,11 +1,5 @@
 var Styleguide = React.createClass({
 
-  getInitialState: function () {
-    return {
-
-    };
-  },
-
   render: function(){
     return (
       <main>
