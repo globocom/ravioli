@@ -13,10 +13,6 @@ export default class RavioliSelect extends React.Component {
       focusedOption: null,
       selectedOption: this.getOptionIndex(props.selected)
     };
-
-    if(props.value !== null){
-      this.state.selectedOption = this.getOptionIndex(props.value);
-    }
   }
 
   getOptionValue(option){
@@ -220,16 +216,11 @@ RavioliSelect.propTypes = {
         ])
       })
     ])
-  ),
-  value: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.number
-  ])
+  )
 };
 
 RavioliSelect.defaultProps = {
   empty: false,
   options: [],
-  placeholder: 'Select something',
-  value: null
+  placeholder: 'Select something'
 };
