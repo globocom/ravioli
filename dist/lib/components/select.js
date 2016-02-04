@@ -48,6 +48,11 @@ var RavioliSelect = (function (_React$Component) {
   }
 
   _createClass(RavioliSelect, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(props) {
+      this.setState({ selectedOption: this.getOptionIndex(props.selected) });
+    }
+  }, {
     key: 'getOptionValue',
     value: function getOptionValue(option) {
       return option.value === undefined ? option : option.value;

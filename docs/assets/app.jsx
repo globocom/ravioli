@@ -31,7 +31,7 @@ var Styleguide = React.createClass({
           <Ravioli.Select
             placeholder='Select something (or not)'
             empty='empty label'
-            options={[1,2,3]}/>
+            options={[1, 2, 3]}/>
         </section>
 
         <section>

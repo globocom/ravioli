@@ -15,6 +15,10 @@ export default class RavioliSelect extends React.Component {
     };
   }
 
+  componentWillReceiveProps(props){
+    this.setState({ selectedOption: this.getOptionIndex(props.selected) });
+  }
+
   getOptionValue(option){
     return option.value === undefined ? option : option.value;
   }
